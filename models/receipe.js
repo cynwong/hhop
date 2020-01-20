@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const recipe = sequelize.define('recipe', {
     ingredients: {
@@ -6,24 +5,24 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: true,
-        notEmpty: true
-      }
+        notEmpty: true,
+      },
     },
     method: {
       type: DataTypes.JSON,
       allowNull: false,
       validate: {
         notNull: true,
-        notEmpty: true
-      }
+        notEmpty: true,
+      },
     },
     is_private: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false,
       validate: {
-        notNull: true
-      }
+        notNull: true,
+      },
     },
     creditTo: {
       type: DataTypes.STRING(255),
@@ -33,18 +32,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(255),
       allowNull: true,
       validate: {
-        is: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/gi,
-      }
+        is: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/gi,
+      },
     },
     photo: {
       type: DataTypes.TEXT,
-      allowNull: true
-    }
+      allowNull: true,
+    },
   }, {});
-  recipe.associate = function (models) {
+  recipe.associate = (models) => {
     recipe.hasMany(models.favourite, {
-      onDelete: "RESTRICT",
-      onUpdate: "CASCADE"
+      onDelete: 'RESTRICT',
+      onUpdate: 'CASCADE',
     });
   };
   return recipe;

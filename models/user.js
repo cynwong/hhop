@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (sequelize, DataTypes) => {
   const user = sequelize.define('user', {
     username: {
@@ -7,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notEmpty: true,
-        notNull: true
-      }
+        notNull: true,
+      },
     },
     password: {
       type: DataTypes.STRING(255),
@@ -16,36 +15,37 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [8, 16],
         notEmpty: true,
-        notNull: true
-      }
+        notNull: true,
+      },
     },
     first_name: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: true,
     },
     last_name: {
       type: DataTypes.STRING(255),
       allowNull: false,
       validate: {
         notEmpty: true,
-        notNull: true
-      }
+        notNull: true,
+      },
     },
     email: {
       type: DataTypes.STRING(255),
-      allowNull:false,
+      allowNull: false,
       validate: {
         isEmail: true,
         notEmpty: true,
-        notNull: true
-      }
-    }
+        notNull: true,
+      },
+    },
   });
 
+  // eslint-disable-next-line func-names
   user.associate = function (models) {
     user.hasMany(models.favourite, {
-      onDelete: "RESTRICT",
-      onUpdate: "CASCADE"
+      onDelete: 'RESTRICT',
+      onUpdate: 'CASCADE',
     });
   };
   return user;

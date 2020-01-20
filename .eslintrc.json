@@ -7,7 +7,6 @@
     "extends": [
         "airbnb-base"
     ],
-    "func-names": ["error", "as-needed"],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -16,5 +15,6 @@
         "ecmaVersion": 2018
     },
     "rules": {
+        "func-names": ["error", "never" ]
     }
 }
