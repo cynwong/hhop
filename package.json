@@ -1,7 +1,7 @@
 {
-  "name": "icookbook",
+  "name": "mycookbook",
   "version": "1.0.0",
-  "description": "A receipe repository where users can log their receipe",
+  "description": "A recipe repository where users can log their recipes",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
