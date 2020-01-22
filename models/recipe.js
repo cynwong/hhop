@@ -1,6 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
   const recipe = sequelize.define('recipe', {
-
     title: {
       type: DataTypes.STRING(255),
       allowNull: false,
@@ -9,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
       },
     },
-
     ingredients: {
       type: DataTypes.JSON,
       allowNull: false,
