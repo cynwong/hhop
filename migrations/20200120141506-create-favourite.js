@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('favourites', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable("favourites", {
     userId: {
       type: Sequelize.INTEGER,
       primaryKey: true,
@@ -9,5 +9,5 @@ module.exports = {
       primaryKey: true,
     },
   }),
-  down: (queryInterface) => queryInterface.dropTable('favourites'),
+  down: (queryInterface) => queryInterface.dropTable("favourites"),
 };
