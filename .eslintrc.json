@@ -15,6 +15,7 @@
         "ecmaVersion": 2018
     },
     "rules": {
-        "func-names": ["error", "never" ]
+        "func-names": ["error", "never" ],
+        "quotes": ["error", "double"]
     }
 }
