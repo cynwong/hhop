@@ -6,6 +6,14 @@ module.exports = {
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
+    title: {
+      type: Sequelize.STRING(255),
+      allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: true,
+      },
+    },
     ingredients: {
       type: Sequelize.JSON,
       allowNull: false,
