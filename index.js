@@ -24,4 +24,5 @@ app.use("assets", express.static("public/assets"));
 
 app.get("/", (_, res) => res.render("index"));
 
+// eslint-disable-next-line no-console
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
