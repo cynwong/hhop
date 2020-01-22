@@ -1,18 +1,12 @@
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('favourites', {
-    id: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
+    userId: {
       type: Sequelize.INTEGER,
+      primaryKey: true,
     },
-    createdAt: {
-      allowNull: false,
-      type: Sequelize.DATE,
-    },
-    updatedAt: {
-      allowNull: false,
-      type: Sequelize.DATE,
+    recipeId: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
     },
   }),
   down: (queryInterface) => queryInterface.dropTable('favourites'),
