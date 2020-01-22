@@ -19,8 +19,4 @@ app.use(express.static('public/assets'));
 
 // require("./routes/api-routes.js")(app);
 
-<<<<<<< HEAD
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
-=======
-app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
->>>>>>> master
