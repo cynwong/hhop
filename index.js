@@ -28,7 +28,7 @@ app.get("/api/users", userRoutes);
 app.get("api/favourites", favouriteRoute);
 app.get("/api/recipe", recipeRoute);
 
-// misc routes redirect back to homepage. 
+// misc routes redirect back to homepage.
 app.get("/*", (_, res) => res.redirect("/"));
 
 // eslint-disable-next-line no-console
