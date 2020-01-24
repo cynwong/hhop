@@ -1,9 +1,3 @@
-// *****************************************************************************
-// Server.js - This file is the initial starting point for the Node/Express server.
-//
-// ******************************************************************************
-// *** Dependencies
-// =============================================================
 const express = require("express");
 const exphbs = require("express-handlebars");
 
@@ -31,12 +25,11 @@ app.get("/", (_, res) => res.render("index"));
 
 // apis
 app.get("/api/users", userRoutes);
-app.get('api/favourites', favouriteRoute);
+app.get("api/favourites", favouriteRoute);
 app.get("/api/recipe", recipeRoute);
+
+// misc routes redirect back to homepage. 
+app.get("/*", (_, res) => res.redirect("/"));
 
 // eslint-disable-next-line no-console
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
-
-app.get("...", function () {
-  console.log("hello");
-});
