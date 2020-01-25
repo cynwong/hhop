@@ -15,7 +15,9 @@
         "ecmaVersion": 2018
     },
     "rules": {
-        "func-names": ["error", "never" ],
-        "quotes": ["error", "double"]
+        "func-names": ["warn", "never" ],
+        "quotes": ["warn", "double"],
+        "prefer-arrow-callback": ["warn"],
+        "strict": ["warn" , "global"]
     }
 }

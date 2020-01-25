@@ -49,6 +49,15 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {});
   recipe.associate = (models) => {
+    recipe.belongsTo(models.user, {
+      foreignKey: {
+        name: "authorId",
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
+      onDelete: "RESTRICT",
+      onUpdate: "CASCADE",
+    });
     recipe.hasMany(models.favourite, {
       onDelete: "RESTRICT",
       onUpdate: "CASCADE",
