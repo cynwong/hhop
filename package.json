@@ -7,7 +7,10 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "lint": "eslint \"**/*.js\" --quiet",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "createdb": "sequelize db:create db_cookbook", 
+    "migrate": "sequelize db:migrate",
+    "seed": "sequelize-cli db:seed:undo:all && sequelize-cli db:seed:all"
   },
   "repository": {
     "type": "git",
