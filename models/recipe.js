@@ -1,6 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const recipe = sequelize.define('recipe', {
-
+  const recipe = sequelize.define("recipe", {
     title: {
       type: DataTypes.STRING(255),
       allowNull: false,
@@ -9,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
       },
     },
-
     ingredients: {
       type: DataTypes.JSON,
       allowNull: false,
@@ -51,9 +49,18 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {});
   recipe.associate = (models) => {
+    recipe.belongsTo(models.user, {
+      foreignKey: {
+        name: "authorId",
+        allowNull: false,
+        type: DataTypes.INTEGER,
+      },
+      onDelete: "RESTRICT",
+      onUpdate: "CASCADE",
+    });
     recipe.hasMany(models.favourite, {
-      onDelete: 'RESTRICT',
-      onUpdate: 'CASCADE',
+      onDelete: "RESTRICT",
+      onUpdate: "CASCADE",
     });
   };
   return recipe;

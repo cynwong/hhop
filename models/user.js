@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const user = sequelize.define('user', {
+  const user = sequelize.define("user", {
     username: {
       type: DataTypes.STRING(255),
       unique: true,
@@ -43,9 +43,13 @@ module.exports = (sequelize, DataTypes) => {
 
   // eslint-disable-next-line func-names
   user.associate = function (models) {
+    user.hasMany(models.recipe, {
+      onDelete: "RESTRICT",
+      onUpdate: "CASCADE",
+    });
     user.hasMany(models.favourite, {
-      onDelete: 'RESTRICT',
-      onUpdate: 'CASCADE',
+      onDelete: "RESTRICT",
+      onUpdate: "CASCADE",
     });
   };
   return user;
