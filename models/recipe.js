@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     ingredients: {
-      type: DataTypes.JSON,
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         notNull: true,
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     method: {
-      type: DataTypes.JSON,
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         notNull: true,

@@ -15,7 +15,7 @@ module.exports = {
       },
     },
     ingredients: {
-      type: Sequelize.JSON,
+      type: Sequelize.TEXT,
       allowNull: false,
       validate: {
         notNull: true,
@@ -23,7 +23,7 @@ module.exports = {
       },
     },
     method: {
-      type: Sequelize.JSON,
+      type: Sequelize.TEXT,
       allowNull: false,
       validate: {
         notNull: true,
