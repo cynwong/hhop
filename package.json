@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "generate:style": "sass --watch public/assets/scss:public/assets/css",
     "lint": "eslint \"**/*.js\" --quiet",
     "test": "npm run lint",
     "createdb": "sequelize db:create db_cookbook", 
@@ -26,6 +27,8 @@
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "mysql2": "^2.1.0",
+    "nodemon": "^2.0.2",
+    "sass": "^1.25.0",
     "sequelize": "^5.21.3"
   },
   "devDependencies": {
