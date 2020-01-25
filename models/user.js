@@ -43,6 +43,10 @@ module.exports = (sequelize, DataTypes) => {
 
   // eslint-disable-next-line func-names
   user.associate = function (models) {
+    user.hasMany(models.recipe, {
+      onDelete: "RESTRICT",
+      onUpdate: "CASCADE",
+    });
     user.hasMany(models.favourite, {
       onDelete: "RESTRICT",
       onUpdate: "CASCADE",
