@@ -13,12 +13,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Set Handlebars.
-
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("hbs", exphbs({
+  defaultLayout: "main",
+  extname: "hbs", // shorten the handlebars extension
+}));
 app.set("view engine", "handlebars");
 
 // add static folder.
-app.use("assets", express.static("public/assets"));
+app.use(express.static("public"));
+
+// add route for handlebars template
+app.get("/", (_, res) => res.render("index.hbs"));
+app.get("/signup", (_, res) => res.render("signup.hbs"));
+app.get("/login", (_, res) => res.render("login.hbs"));
 
 // Home page
 app.get("/", (_, res) => res.render("index"));
