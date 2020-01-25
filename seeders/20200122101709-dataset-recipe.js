@@ -1,6 +1,6 @@
 
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.bulkInsert('recipe', [
+  up: (queryInterface) => queryInterface.bulkInsert('recipe', [
     {
       title: 'Mango Salsa Salmon',
       ingredients:
@@ -119,5 +119,5 @@ module.exports = {
       photo: 'IHpXGCbuPKEuJMbJ8A0JkeUe67zwHi2',
     },
   ]),
-  down: (queryInterface, Sequelize) => queryInterface.bulkDelete('recipe', null, {}),
+  down: (queryInterface) => queryInterface.bulkDelete('recipe', null, {}),
 };
