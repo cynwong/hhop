@@ -40,5 +40,5 @@ $(document).ready(() => {
     checkInput();
   }
 
-  $(document).on("submit", "signup-form", signin);
+  $(document).on("submit", "#signup-form", signin);
 });
