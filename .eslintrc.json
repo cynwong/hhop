@@ -14,8 +14,9 @@
         "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
-        "ecmaVersion": 2018
+        "ecmaVersion": 2018 
     },
+    "parser": "babel-eslint",
     "rules": {
         "func-names": ["warn", "never" ],
         "quotes": ["warn", "double"],
