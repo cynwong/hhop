@@ -27,9 +27,8 @@ app.get("/", (_, res) => res.render("./main/index.hbs"));
 app.get("/signup", (_, res) => res.render("./main/signup.hbs"));
 app.get("/login", (_, res) => res.render("./main/login.hbs"));
 app.get("/user", (_, res) => res.render("./main/user.hbs"));
-
-// Home page
-app.get("/", (_, res) => res.render("index"));
+app.get("/search", (_, res) => res.render("./main/search.hbs"));
+app.get("/recipe", (_, res) => res.render("./main/recipe.hbs"));
 
 // apis
 app.get("/api/users", userRoutes);
