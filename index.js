@@ -23,9 +23,10 @@ app.set("view engine", "handlebars");
 app.use(express.static("public"));
 
 // add route for handlebars template
-app.get("/", (_, res) => res.render("index.hbs"));
-app.get("/signup", (_, res) => res.render("signup.hbs"));
-app.get("/login", (_, res) => res.render("login.hbs"));
+app.get("/", (_, res) => res.render("./main/index.hbs"));
+app.get("/signup", (_, res) => res.render("./main/signup.hbs"));
+app.get("/login", (_, res) => res.render("./main/login.hbs"));
+app.get("/user", (_, res) => res.render("./main/user.hbs"));
 
 // Home page
 app.get("/", (_, res) => res.render("index"));
