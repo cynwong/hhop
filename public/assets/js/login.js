@@ -27,5 +27,5 @@ $(document).ready(() => {
     event.preventDefault();
     checkPwEm();
   }
-  $(document).on("submit", "signup-form", tryLogin);
+  $(document).on("submit", "#signup-form", tryLogin);
 });

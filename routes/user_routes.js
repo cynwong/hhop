@@ -22,7 +22,7 @@ router.get("/api/login", (req, res) => {
   });
 });
 
-
+// --- POST ---
 router.post("/api/signup", (req, res) => {
   users.findOne({
     where: {
@@ -44,12 +44,6 @@ router.post("/api/signup", (req, res) => {
     res.json(dbusers);
   });
 });
-
-// --- POST ---
-// router.post("<<Route>>", (req, res) => {
-
-// });
-
 
 // --- PUT ---
 // router.put("<<ROUTE>>", (req, res) => {
