@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 8080;
 const userRoutes = require("./routes/user_routes");
 const favouriteRoute = require("./routes/favourite_routes");
 const recipeRoute = require("./routes/recipe_routes");
+// const hbsRoute = require("./routes/hbs_routes");
 
 // Parse application body as JSON
 app.use(express.urlencoded({ extended: true }));
@@ -29,6 +30,7 @@ app.get("/login", (_, res) => res.render("./main/login.hbs"));
 app.get("/user", (_, res) => res.render("./main/user.hbs"));
 app.get("/search", (_, res) => res.render("./main/search.hbs"));
 app.get("/recipe", (_, res) => res.render("./main/recipe.hbs"));
+app.get("/user", (_, res) => res.render("./main/user.hbs"));
 
 // apis
 app.get("/api/users", userRoutes);
