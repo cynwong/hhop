@@ -6,7 +6,7 @@ const router = require("express").Router();
 
 // --- GET Routes ---
 // route "/recipe" : Recipe page
-router.get("/", (_, res) => res.render("recipe", {
+router.get("/", (_, res) => res.render("view_recipe", {
   title: "Recipe Lovers!",
   isMain: true,
   isSearch: true,
