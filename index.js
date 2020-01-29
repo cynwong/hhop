@@ -1,13 +1,43 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const path = require("path");
+const passport = require("passport");
+const flash = require("flash");
+const session = require("express-session");
+
+const { forwardAuthenticated } = require("./config/auth");
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+// Passport configuration
+require("./config/passport")(passport);
+
 // Parse application body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Express Session
+app.use(session({
+  secret: "secret",
+  resave: true,
+  saveUninitialized: true,
+}));
+
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Flash
+app.use(flash());
+
+// Express Global Variables
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  res.locals.errors = req.flash("errors");
+  next();
+});
 
 // Set Handlebars.
 app.engine(".hbs", exphbs({
@@ -23,7 +53,7 @@ app.use(express.static("public"));
 
 // --- add routes ---
 // root route : Home page.
-app.get("/", (_, res) => res.render("index", {
+app.get("/", forwardAuthenticated, (_, res) => res.render("index", {
   title: "Recipe Lovers!",
   isMain: true,
 }));
