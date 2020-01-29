@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       {{#each recipes }}
-        {{> recipe_card this.dataValues}}
+        {{> recipe_card recipe=this.recipe}}
       {{/each}}
     </div>
   </div>
