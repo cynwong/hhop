@@ -22,7 +22,6 @@ app.set("views", path.resolve(__dirname, "views"));
 app.use(express.static("public"));
 
 // --- add routes ---
-
 // root route : Home page.
 app.get("/", (_, res) => res.render("index", {
   title: "Recipe Lovers!",
@@ -37,5 +36,6 @@ app.use("/recipe", require("./routes/recipe_routes"));
 // misc routes redirect back to homepage.
 app.get("/*", (_, res) => res.redirect("/"));
 
+// Run the server
 // eslint-disable-next-line no-console
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
