@@ -1,13 +1,13 @@
 $(document).ready(() => {
   const email = $("#email").val().trim();
   const password = $("#password").val().trim();
-  const alertext = $("#alertext");
+  const alertText = $("#alert-text");
 
   function validation(res) {
     if (res) {
       window.location.href = "/user";
     } else {
-      alertext.text("Please enter the correct email and password!");
+      alertText.text("Please enter the correct email and password!");
       email.val("");
       password.val("");
     }

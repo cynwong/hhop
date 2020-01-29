@@ -119,14 +119,14 @@ input[type=checkbox]:not(old):checked + label > span:before{
     color: #555; 
 }
 
-.loginhere {
+.login {
     color: #555;
     font-weight: 500;
     text-align: center;
     margin-top: 91px;
     margin-bottom: 5px;
 }
-.loginhere-link {
+.link-login {
     font-weight: 700;
     color: $black-color;
 }
