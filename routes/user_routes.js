@@ -1,19 +1,39 @@
-// for /api/users routes
+// for /users routes
 
 const router = require("express").Router();
 
-// please uncomment this
-const users = require("../models").user;
+const Users = require("../models").user;
 
 // --- GET Routes ---
-router.get("/api/login", (req, res) => {
-  users.findOne({
+
+// route "/user" : User dashboard page.
+router.get("/", (_, res) => res.render("user", {
+  title: "Recipe Lovers!: User dashboard",
+  isMain: true,
+}));
+
+// route "/user/register" : User Registration page.
+router.get("/register", (_, res) => res.render("signup", {
+  title: "Recipe Lovers!: Register new user",
+  isLogin: true,
+}));
+
+// route "/user/login" : User log-in page
+router.get("/login", (_, res) => res.render("login", {
+  title: "Recipe Lovers!: User login",
+  isLogin: true,
+}));
+
+
+// --- POST ---
+router.post("/login", (req, res) => {
+  Users.findOne({
     where: {
       email: req.body.email,
       password: req.body.password,
     },
-  }).then((dbusers) => {
-    if (dbusers.length === 0) {
+  }).then((user) => {
+    if (user.length === 0) {
       // send status 400
       res.json(false);
     } else {
@@ -21,27 +41,25 @@ router.get("/api/login", (req, res) => {
     }
   });
 });
-
-// --- POST ---
 router.post("/api/signup", (req, res) => {
-  users.findOne({
+  Users.findOne({
     where: {
       email: req.body.email,
     },
-  }).then((dbusers) => {
-    if (dbusers.length === 0) {
+  }).then((user) => {
+    if (user.length === 0) {
       res.json(true);
     } else {
       // send status 400
       res.json(false);
     }
   });
-  users.create({
+  Users.create({
     username: req.body.nameInput,
     email: req.body.email,
     password: req.body.password,
-  }).then((dbusers) => {
-    res.json(dbusers);
+  }).then((user) => {
+    res.json(user);
   });
 });
 
