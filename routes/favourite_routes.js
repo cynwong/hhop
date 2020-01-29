@@ -1,5 +1,4 @@
 // for /api/favourite routes
-const sequelize = require("sequelize");
 const router = require("express").Router();
 
 const models = require("../models");
@@ -18,13 +17,11 @@ router.get("/", async (req, res) => {
       require: true,
     },
   });
-  const recipes = favs.map(({ dataValues }) => {
-    return {
-      userId: dataValues.userId,
-      recipeId: dataValues.recipeId,
-      recipe: dataValues.recipe.dataValues,
-    };
-  });
+  const recipes = favs.map(({ dataValues }) => ({
+    userId: dataValues.userId,
+    recipeId: dataValues.recipeId,
+    recipe: dataValues.recipe.dataValues,
+  }));
   res.render("view_favourites", {
     title: "Recipe Lover!: View favourites",
     recipes,
