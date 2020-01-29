@@ -1,6 +1,8 @@
-# CookBook
+# Recipe lover
 
-## Instruction 
+Recipe lover is a blogging tool to save recipes.
+
+## Instruction
 
 ### Installation
 
@@ -20,4 +22,14 @@
 
 ```sh
   npm run seed
+```
+
+### Usage
+
+```sh
+  npm start
+  # OR to run watch
+  npm run dev
+
+  # go to <hostname>:8080(e.g. localhost:8080) on your browser.
 ```
