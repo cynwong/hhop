@@ -24,16 +24,15 @@ router.get("/login", (_, res) => res.render("login", {
   isLogin: true,
 }));
 
-
-// --- POST ---
+// --- http Request - POST ---
 router.post("/login", (req, res) => {
   Users.findOne({
     where: {
       email: req.body.email,
       password: req.body.password,
     },
-  }).then((user) => {
-    if (user.length === 0) {
+  }).then((dbusers) => {
+    if (dbusers.length === 0) {
       // send status 400
       res.json(false);
     } else {
@@ -41,7 +40,8 @@ router.post("/login", (req, res) => {
     }
   });
 });
-router.post("/api/signup", (req, res) => {
+
+router.post("/register", (req, res) => {
   Users.findOne({
     where: {
       email: req.body.email,
