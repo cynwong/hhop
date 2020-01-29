@@ -9,6 +9,7 @@ const Recipe = models.recipe;
 // --- GET Routes ---
 router.get("/", async (req, res) => {
   const favs = await Favourites.findAll({
+    attributes: [],
     where: {
       userId: 1,
     },
@@ -18,8 +19,6 @@ router.get("/", async (req, res) => {
     },
   });
   const recipes = favs.map(({ dataValues }) => ({
-    userId: dataValues.userId,
-    recipeId: dataValues.recipeId,
     recipe: dataValues.recipe.dataValues,
   }));
   res.render("view_favourites", {
