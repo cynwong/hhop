@@ -27,13 +27,32 @@ app.set("views", path.resolve(__dirname, "views"));
 app.use(express.static("public"));
 
 // add route for handlebars template
-app.get("/", (_, res) => res.render("./main/index.hbs"));
-app.get("/signup", (_, res) => res.render("./main/signup.hbs"));
-app.get("/login", (_, res) => res.render("./main/login.hbs"));
-app.get("/user", (_, res) => res.render("./main/user.hbs"));
-app.get("/search", (_, res) => res.render("./main/search.hbs"));
-app.get("/recipe", (_, res) => res.render("./main/recipe.hbs"));
-app.get("/user", (_, res) => res.render("./main/user.hbs"));
+app.get("/", (_, res) => res.render("index", {
+  title: "Recipe Lovers!",
+  isMain: true,
+}));
+app.get("/signup", (_, res) => res.render("signup", {
+  title: "Recipe Lovers!: Register new user",
+  isLogin: true,
+}));
+app.get("/login", (_, res) => res.render("login", {
+  title: "Recipe Lovers!: User login",
+  isLogin: true,
+}));
+app.get("/user", (_, res) => res.render("user", {
+  title: "Recipe Lovers!: User dashboard",
+  isMain: true,
+}));
+app.get("/search", (_, res) => res.render("search", {
+  title: "Recipe Lovers!: Search",
+  isMain: true,
+  isSearch: true,
+}));
+app.get("/recipe", (_, res) => res.render("recipe", {
+  title: "Recipe Lovers!",
+  isMain: true,
+  isSearch: true,
+}));
 
 // apis
 app.get("/api/users", userRoutes);
