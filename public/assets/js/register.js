@@ -1,5 +1,5 @@
 // $(document).ready(() => {
-const alertext = $("#alertext");
+const alertext = $("#alert-text");
 
 function checkUser(username, email, password) {
   $.post("/user/register", {

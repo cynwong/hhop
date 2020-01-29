@@ -1,6 +1,6 @@
 // $(document).ready(() => {
 
-const alertext = $("#alertext");
+const alertext = $("#alert-text");
 
 function validation(res) {
   if (res) {
