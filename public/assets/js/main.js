@@ -9,8 +9,8 @@ $(document).ready(() => {
       type: "GET",
       data: search,
     }).then((res) => {
-     console.log("search success");
-     console.log(res);
+      console.log("search success");
+      console.log(res);
     });
   }
 
