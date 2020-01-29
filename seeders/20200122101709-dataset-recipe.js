@@ -1,6 +1,6 @@
 
 module.exports = {
-  up: (queryInterface) => queryInterface.bulkInsert("recipe", [
+  up: (queryInterface) => queryInterface.bulkInsert("recipes", [
     {
       title: "Mango Salsa Salmon",
       ingredients:
@@ -137,5 +137,5 @@ module.exports = {
       updatedAt: new Date(),
     },
   ]),
-  down: (queryInterface) => queryInterface.bulkDelete("recipe", null, {}),
+  down: (queryInterface) => queryInterface.bulkDelete("recipes", null, {}),
 };
