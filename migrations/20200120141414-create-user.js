@@ -6,11 +6,12 @@ module.exports = {
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
-    username: {
+    email: {
       type: Sequelize.STRING(255),
-      unique: true,
       allowNull: false,
+      unique: true,
       validate: {
+        isEmail: true,
         notEmpty: true,
         notNull: true,
       },
@@ -24,23 +25,10 @@ module.exports = {
         notNull: true,
       },
     },
-    first_name: {
-      type: Sequelize.STRING(255),
-      allowNull: true,
-    },
-    last_name: {
+    name: {
       type: Sequelize.STRING(255),
       allowNull: false,
       validate: {
-        notEmpty: true,
-        notNull: true,
-      },
-    },
-    email: {
-      type: Sequelize.STRING(255),
-      allowNull: false,
-      validate: {
-        isEmail: true,
         notEmpty: true,
         notNull: true,
       },
