@@ -11,7 +11,8 @@
     "test": "npm run lint",
     "createdb": "sequelize db:create db_cookbook",
     "migrate": "sequelize db:migrate",
-    "seed": "sequelize-cli db:seed:undo:all && sequelize-cli db:seed:all"
+    "seed": "sequelize-cli db:seed:undo:all && sequelize-cli db:seed:all",
+    "db:setup": "npm run createdb && npm run migrate && npm run seed"
   },
   "repository": {
     "type": "git",
