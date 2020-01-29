@@ -13,7 +13,7 @@ router.get("/", (_, res) => res.render("user", {
 }));
 
 // route "/user/register" : User Registration page.
-router.get("/register", (_, res) => res.render("signup", {
+router.get("/register", (_, res) => res.render("register_user", {
   title: "Recipe Lovers!: Register new user",
   isLogin: true,
 }));
