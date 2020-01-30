@@ -4,7 +4,7 @@ module.exports = {
     {
       id: 1,
       email: "testuser@gmail.com",
-      password: "testuser",
+      password: "$2b$10$DLFqdSVcQ7QWLpmI327mbe40ohL2uE2LUP02mk/nWFFSzKZTVGQ4W",
       name: "Test User",
       createdAt: new Date(),
       updatedAt: new Date(),
