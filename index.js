@@ -1,17 +1,17 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const path = require("path");
-const passport = require("passport");
 const flash = require("flash");
 const session = require("express-session");
 
-const { forwardAuthenticated } = require("./config/auth");
-
+// setup express app
 const app = express();
 const PORT = process.env.PORT || 8080;
 
-// Passport configuration
-require("./config/passport")(passport);
+// configure passport
+const passport = require("./config/passport");
+
+const { forwardAuthenticated } = require("./config/auth");
 
 // Parse application body as JSON
 app.use(express.urlencoded({ extended: true }));
@@ -19,7 +19,7 @@ app.use(express.json());
 
 // Express Session
 app.use(session({
-  secret: "secret",
+  secret: "secret code",
   resave: true,
   saveUninitialized: true,
 }));
