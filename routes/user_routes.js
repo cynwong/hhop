@@ -86,7 +86,7 @@ router.post("/register", async (req, res) => {
     // }
 
     // add new user
-    const user = await Users.findOne({ 
+    const user = await Users.findOne({
       where: { email },
     });
     if (user) {
