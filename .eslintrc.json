@@ -19,8 +19,9 @@
     "parser": "babel-eslint",
     "rules": {
         "func-names": ["warn", "never" ],
-        "quotes": ["warn", "double"],
+        "no-console": ["error", { "allow": ["warn", "error"] }],
         "prefer-arrow-callback": ["warn"],
+        "quotes": ["warn", "double"],
         "strict": ["warn" , "global"]
     }
 }
