@@ -1,3 +1,7 @@
+const bcrypt = require("bcrypt");
+
+const saltRound = 10;
+
 module.exports = (sequelize, DataTypes) => {
   const user = sequelize.define("user", {
     email: {
@@ -27,6 +31,23 @@ module.exports = (sequelize, DataTypes) => {
         notNull: true,
       },
     },
+  });
+
+  // add password validation
+  user.prototype.validPassword = async (password) => {
+    try {
+      const isMatch = await bcrypt.compare(password, this.password);
+      return isMatch;
+    } catch (err) {
+      return false;
+    }
+  };
+
+  // before user is created, hash the password
+  user.beforeCreate(async (info) => {
+    const u = info;
+    u.password = await bcrypt.hash(u.password, saltRound);
+    return u;
   });
 
   // eslint-disable-next-line func-names
