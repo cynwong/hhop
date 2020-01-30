@@ -38,7 +38,6 @@ $(document).ready(() => {
   //   });
   // }
   function searchRecipe(event) {
-    console.log("1");
     event.preventDefault();
     $.ajax({
       url: "/api/search",

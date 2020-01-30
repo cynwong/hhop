@@ -1,7 +1,7 @@
 module.exports = {
   DashboardPageSettings: {
     title: "Recipe Lovers!: User dashboard",
-    isMain: true
+    isMain: true,
   },
   HomePageSettings: {},
   LoginPageSettings: {
@@ -12,4 +12,4 @@ module.exports = {
     title: "Recipe Lovers!: Register new user",
     isLogin: true,
   },
-}
+};
