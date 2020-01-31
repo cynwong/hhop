@@ -22,6 +22,8 @@
         "no-console": ["error", { "allow": ["warn", "error"] }],
         "prefer-arrow-callback": ["warn"],
         "quotes": ["warn", "double"],
-        "strict": ["warn" , "global"]
+        "strict": ["warn" , "global"],
+        "linebreak-style": ["off", "unix"]
+        
     }
 }
