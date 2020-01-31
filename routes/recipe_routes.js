@@ -19,11 +19,24 @@ router.get("/search", (_, res) => res.render("search_recipe", {
   isSearch: true,
 }));
 
-// --- POST ---
-// router.post("<<Route>>", (req, res) => {
+// route "/recipe/add" : Search page
+  router.post("/add", function(req, res) {
+    console.log(req.body);
+    user.recipe.create({
+      title: req.body.title,
+      ingredients: req.body.ingredients,
+      method: req.body.method,
+      is_private: req.body.is_private,
+      creditTo: req.body.creditTo,
+      source: req.body.source,
+      photo: req.body.photo
+    })
+      .then(function(results) {
+        res.json();
+      });
+  });
 
 // });
-
 
 // --- PUT ---
 // router.put("<<ROUTE>>", (req, res) => {
