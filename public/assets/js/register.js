@@ -46,7 +46,7 @@ $(document).ready(() => {
       }
 
       // if everything ok, redirect to user login page
-      window.location.replace("/user/login");
+      return window.location.replace("/user/login");
     } catch (error) {
       // eslint-disable-next-line no-undef
       return alertUser(error.responseJSON.error);
