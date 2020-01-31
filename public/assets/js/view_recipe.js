@@ -1,5 +1,5 @@
 $(document).ready(() => {
- const alertText = $("#alert-text");
+  const alertText = $("#alert-text");
   // Update existing recipe
   //
   //
@@ -9,7 +9,7 @@ $(document).ready(() => {
     const id = listItemData.id;
     $.ajax({
       method: "DELETE",
-      url: "/api/delete/" + id
+      url: `/api/delete/${id}`,
     })
       .then((res) => {
         if (res) {
