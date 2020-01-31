@@ -3,7 +3,9 @@ const alertext = $("#alert-text");
 
 function checkUser(username, email, password) {
   $.post("/user/register", {
-    username, email, password,
+    name: username,
+    email,
+    password,
   }).then((res) => {
     if (res) {
       alertext.text("Sign up successfully! Please log in.");
