@@ -36,7 +36,23 @@ router.post("/add", (req, res) => {
 // });
 
 // --- PUT ---
-// router.put("<<ROUTE>>", (req, res) => {
+router.put("/edit", (req, res) => {
+  Recipes.update({
+    title: req.body.title,
+    ingredients: req.body.ingredients,
+    method: req.body.method,
+    is_private: req.body.is_private,
+    creditTo: req.body.creditTo,
+    source: req.body.source,
+    photo: req.body.photo,
+  }, {
+    where: {
+      id: req.body.id,
+    },
+  }).then(() => {
+    res.end();
+  });
+});
 // });
 
 // --- DELETE ---
