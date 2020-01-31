@@ -15,7 +15,13 @@ const { checkAuthenticated, forwardAuthenticated } = require("../config/auth");
 // --- GET Routes ---
 
 // route "/user" : User dashboard page.
-router.get("/", checkAuthenticated, (_, res) => res.render("user", DashboardPageSettings));
+router.get("/", checkAuthenticated, (req, res) => {
+  const pageSettings = DashboardPageSettings;
+  if (req.user) {
+    pageSettings.user = req.user;
+  }
+  return res.render("user", pageSettings);
+});
 
 // route "/user/register" : User Registration page.
 router.get("/register", forwardAuthenticated, (_, res) => res.render("register_user", RegisterUserPageSettings));
