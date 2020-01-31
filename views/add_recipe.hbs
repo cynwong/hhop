@@ -3,7 +3,7 @@
     Add a new recipe
   </h2>
   <form action="/" method="POST" id="addRecipe">
-    <div class="form-group">
+    <div class="form-group" id="newTitle">
       <label for="formGroupExampleInput">
         Title
       </label>
@@ -14,7 +14,7 @@
         placeholder="Example input"
       />
     </div>
-    <div class="form-group">
+    <div class="form-group" id="newIngredients">
       <label for="exampleFormControlTextarea1">
         Ingredients
       </label>
@@ -24,7 +24,7 @@
         rows="5"
       ></textarea>
     </div>
-    <div class="form-group">
+    <div class="form-group" id="newMethod">
       <label for="exampleFormControlTextarea1">
         Method
       </label>
@@ -34,7 +34,7 @@
         rows="6"
       ></textarea>
     </div>
-    <div class="form-group">
+    <div class="form-group" id="newCredit">
       <label for="formGroupExampleInput">
         Credit (if any)
       </label>
@@ -45,7 +45,7 @@
         placeholder="Example input"
       />
     </div>
-    <div class="form-group">
+    <div class="form-group" id="newSource">
       <label for="formGroupExampleInput">
         Source (if any)
       </label>
@@ -56,19 +56,7 @@
         placeholder="Example input"
       />
     </div>
-    <div class="form-group">
-      <label for="formGroupExampleInput2">
-        Another label
-      </label>
-      <input
-        type="text"
-        class="form-control"
-        id="formGroupExampleInput2"
-        placeholder="Another input"
-      />
-    </div>
-
-    <div class="form-group">
+    <div class="form-group" id="newImage">
       <label for="exampleFormControlFile1">
         Select Image
       </label>
@@ -78,7 +66,7 @@
         id="exampleFormControlFile1"
       />
     </div>
-    <button type="submit" class="btn btn-primary">
+    <button type="submit_Recipe" class="btn btn-primary">
       Submit
     </button>
   </form>
