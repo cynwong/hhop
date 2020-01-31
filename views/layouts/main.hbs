@@ -9,16 +9,16 @@
 
     {{!-- Stylesheets --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
     <link rel="stylesheet" href="/assets/css/main-style.css" type="text/css" />
         
     {{#if isLogin}}
-        <link rel="stylesheet" href="/assets/fonts/material-icon/css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" href="/assets/fonts/material-icon/css/material-design-iconic-font.min.css" />
         <link rel="stylesheet" href="/assets/css/login-style.css" type="text/css" />
     {{else if isSearch}}
-        <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
-        <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/assets/fonts/fontawesome/css/all.css" rel="stylesheet">
+        <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/" />
+        <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/assets/fonts/fontawesome/css/all.css" rel="stylesheet" />
         <link rel="stylesheet" href="/assets/css/searchDisp-style.css" type="text/css" />
     {{/if}}
 
@@ -49,7 +49,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    {{#if isMain }}
                     <li class="nav-item active">
                         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                     </li>
@@ -58,11 +57,11 @@
                             <span class="navbar-text">Hello, {{user.name}}.&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         </li>
                         <li class="nav-item"></li>
-                            <a class="nav-link btn btn-outline-secondary my-2 my-sm-0" href="/user/logout">Logout</a>
+                            <a class="nav-link btn btn-outline-danger my-2 my-sm-0" href="/user/logout">Logout</a>
                         </li>
                     {{else}}
                         <li class="nav-item"></li>
-                            <a class="nav-link btn btn-outline-secondary my-2 my-sm-0" href="/user/login">Login</a>
+                            <a class="nav-link btn btn-outline-danger my-2 my-sm-0" href="/user/login">Login</a>
                         </li>
                     {{/if}}
                 </ul>
@@ -81,7 +80,7 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    
+
     {{!-- body content --}}
     <main role="main">
         {{{body}}}
