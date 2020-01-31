@@ -21,13 +21,19 @@ $(document).ready(() => {
     });
   }
 
-  function submit(event) {
+  function runCheck() {
     if (title !== "" && ingredients !== "" && method !== "") {
       newRecipe()
     } else {
       alertText.text("Please check if all required information has been filled");
     }
   }
+
+  function submit(event) {
+    event.preventDefault();
+    runCheck();
+  }
+
 
   $(document).on("submit", "#newRecipe", submit);
 });
