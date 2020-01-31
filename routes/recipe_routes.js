@@ -40,15 +40,14 @@ router.post("/add", (req, res) => {
 // });
 
 // --- DELETE ---
-
-/* router.delete("/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
   Recipes.destroy({
     where: {
       id: req.params.id,
-    }
-  }).then(function (Recipe) {
-    res.json(Recipe)
+    },
+  }).then((Recipe) => {
+    res.json(Recipe);
   });
-}); */
+});
 
 module.exports = router;

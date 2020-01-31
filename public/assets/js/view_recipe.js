@@ -6,7 +6,7 @@ $(document).ready(() => {
   // Delete recipe -- Only user submitted
   function DELETE() {
     const listItemData = $(this).parent("#").parent("#").data("recipe");
-    const id = listItemData.id;
+    const { id } = listItemData;
     $.ajax({
       method: "DELETE",
       url: `/api/delete/${id}`,
