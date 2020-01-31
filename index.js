@@ -1,7 +1,6 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const path = require("path");
-const flash = require("flash");
 const session = require("express-session");
 
 // get homepage setting
@@ -28,9 +27,6 @@ app.use(session({
 // Passport
 app.use(passport.initialize());
 app.use(passport.session());
-
-// Flash
-app.use(flash());
 
 // Set Handlebars.
 app.engine(".hbs", exphbs({
