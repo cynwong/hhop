@@ -7,7 +7,7 @@ $(document).ready(() => {
   const addImage = $("#newImage").val().trim();
   const alertText = $("#alert-text");
 
-  function addRecipe() {
+  function newRecipe() {
     $.ajax({
       method: "POST",
       url: "/api/add",
@@ -23,7 +23,7 @@ $(document).ready(() => {
 
   function submit(event) {
     if (title !== "" && ingredients !== "" && method !== "") {
-      addRecipe()
+      newRecipe()
     } else {
       alertText.text("Please check if all required information has been filled");
     }
