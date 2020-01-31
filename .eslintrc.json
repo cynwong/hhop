@@ -21,6 +21,8 @@
         "func-names": ["warn", "never" ],
         "quotes": ["warn", "double"],
         "prefer-arrow-callback": ["warn"],
-        "strict": ["warn" , "global"]
+        "strict": ["warn" , "global"],
+        "linebreak-style": ["off", "unix"]
+        
     }
 }
