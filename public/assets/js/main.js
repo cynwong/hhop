@@ -3,14 +3,16 @@ $(document).ready(() => {
     event.preventDefault();
     console.log("1");
     const search = $("#searchText").val().trim();
-    console.log(search);
+    const path = "/recipe/search/";
+    // console.log(search);
     $.ajax({
-      url: "/api/search/:title",
+      url: path.concat(search),
       type: "GET",
-      data: search,
     }).then((res) => {
       console.log("search success");
-      console.log(res);
+      window.location.href = path.concat(search);;
+      console.log(window.location.href);
+      console.log("the results on client side is: ", res);
     });
   }
 
