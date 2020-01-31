@@ -3,7 +3,10 @@ module.exports = {
     title: "Recipe Lovers!: User dashboard",
     isMain: true,
   },
-  HomePageSettings: {},
+  HomePageSettings: {
+    title: "Recipe Lovers!",
+    isMain: true,
+  },
   LoginPageSettings: {
     title: "Recipe Lovers!: User login",
     isLogin: true,
