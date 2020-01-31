@@ -27,22 +27,29 @@ $(document).ready(() => {
 
     if (errors.length > 0) {
       // if errors alert the user
+      // eslint-disable-next-line no-undef
       return alertUser(errors);
     }
 
     // if validation passed, then send data to server
-    const response = await $.post("/user/register", {
-      name,
-      email,
-      password,
-    });
+    try {
+      const response = await $.post("/user/register", {
+        name,
+        email,
+        password,
+      });
 
-    if (response.error) {
-      // if error, alert the user
-      return alertUser(response.error);
+      if (response.error) {
+        // if error, alert the user
+        // eslint-disable-next-line no-undef
+        return alertUser(response.error);
+      }
+
+      // if everything ok, redirect to dashboard
+      window.location.replace("/user");
+    } catch (error) {
+      // eslint-disable-next-line no-undef
+      return alertUser(error.responseJSON.error);
     }
-
-    // if everything ok, redirect to dashboard
-    window.location.replace("/user");
   });
 });
