@@ -93,7 +93,7 @@ router.post("/register", async (req, res) => {
     //   errors.push({ msg: "Email is already registered." });
     //   return RenderRegisterWithErrors();
     // TODO: Discuss how we are going to do the error control. for this.
-      res.status(200).send(false);
+      return res.status(200).send(false);
     }
     const newUserInfo = {
       email,
@@ -104,9 +104,13 @@ router.post("/register", async (req, res) => {
     // hash the password
     // newUserInfo.password = await bcrypt.hash(password, 10);
     await Users.create(newUserInfo);
+    // return res.render("login", LoginPageSettings);
     return res.render("login", {
       ...LoginPageSettings,
       success_msg: "Successfully registered",
+    }, (err, html) => {
+      if (err) console.error(err);
+      return res.send(html);
     });
   } catch (err) {
     console.error(err);
