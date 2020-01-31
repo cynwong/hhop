@@ -1,12 +1,33 @@
-$(document).ready(function() {
+$(document).ready(() => {
+  const title = $("#newTitle").val().trim();
+  const ingredients = $("#newIngredients").val().trim();
+  const method = $("#newMethod").val().trim();
+  const credit = $("#newCredit").val().trim();
+  const source = $("#newSource").val().trim();
+  const addImage = $("#newImage").val().trim();
+  const alertText = $("#alert-text");
 
-var title = $("#newTitle").val().trim(); 
-var Ingredients = $("#newIngredients").val().trim();
-var Method = $("#newMethod").val().trim();
-var Credit = $("#newCredit").val().trim();
-var Source = $("#newSource").val().trim();
-var addImage = $("#newImage").val().trim();
+  function addRecipe() {
+    $.ajax({
+      method: "POST",
+      url: "/api/add",
+      data: {
+        title, ingredients, method, credit, source, addImage,
+      },
+    }).then((res) => {
+      if (res) {
+        alertText.text("New Recipe added Successfully");
+      }
+    });
+  }
 
-$(document).on("submit", "#newRecipe", addRecipe);
+  function submit(event) {
+    if (title !== "" && ingredients !== "" && method !== "") {
+      addRecipe()
+    } else {
+      alertText.text("Please check if all required information has been filled");
+    }
+  }
 
-}
+  $(document).on("submit", "#newRecipe", submit);
+});
