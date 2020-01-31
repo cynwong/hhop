@@ -1,5 +1,5 @@
 $(document).ready(() => {
-  // const alertText = $("#alert-text");
+ const alertText = $("#alert-text");
   // Update existing recipe
   //
   //
