@@ -14,12 +14,12 @@ router.get("/", (_, res) => res.render("view_recipe", {
   isSearch: true,
 }));
 
-// route "/recipe/search" : Search page
-// router.get("/search", (_, res) => res.render("search_recipe", {
-//   title: "Recipe Lovers!: view Search",
-//   isMain: true,
-//   isSearch: true,
-// }));
+
+router.get("/search", (_, res) => res.render("search_recipe", {
+  title: "Recipe Lovers!: view Search",
+  isMain: true,
+  isSearch: true,
+}));
 
 
 // post request for recipe search
@@ -31,19 +31,20 @@ router.get("/search/:title", async (req, res) => {
       },
     },
   });
-  console.log(result);
+  // console.log(result);
   const recipes = result.map(({ dataValues }) => ({
     id: dataValues.id,
     authorId: dataValues.authorId,
     recipe: dataValues,
   }));
-  console.log(result[0].dataValues);
+  // console.log(result[0].dataValues);
   res.render("search_recipe", {
     title: "View Search",
     result: recipes,
     isSearch: true,
   });
 });
+
 
 // --- POST ---
 // router.post("<<Route>>", (req, res) => {
