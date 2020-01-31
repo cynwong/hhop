@@ -1,4 +1,7 @@
-.signup-content {
+@use "../common/mixin";
+
+
+.signup-content, .login-content {
     background: #fff;
     padding: 50px 85px;
 }
