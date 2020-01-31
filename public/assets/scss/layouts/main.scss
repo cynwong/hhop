@@ -2,9 +2,8 @@
 @import '../common/variables.scss';
 @import '../common/extend.scss';
 
-.signup-content {
+.signup-content, .login-content {
     background: #fff;
-    // @include border-radius(10px);
     padding: 50px 85px;
 }
 .form-group {

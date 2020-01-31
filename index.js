@@ -4,14 +4,15 @@ const path = require("path");
 const flash = require("flash");
 const session = require("express-session");
 
-// setup express app
-const app = express();
-const PORT = process.env.PORT || 8080;
+// get homepage setting
+const { HomePageSettings } = require("./config/page_settings");
 
 // configure passport
 const passport = require("./config/passport");
 
-const { forwardAuthenticated } = require("./config/auth");
+// setup express app
+const app = express();
+const PORT = process.env.PORT || 8080;
 
 // Parse application body as JSON
 app.use(express.urlencoded({ extended: true }));
@@ -31,14 +32,6 @@ app.use(passport.session());
 // Flash
 app.use(flash());
 
-// Express Global Variables
-app.use((req, res, next) => {
-  res.locals.success_msg = req.flash("success_msg");
-  res.locals.error_msg = req.flash("error_msg");
-  res.locals.errors = req.flash("errors");
-  next();
-});
-
 // Set Handlebars.
 app.engine(".hbs", exphbs({
   defaultLayout: "main",
@@ -53,10 +46,13 @@ app.use(express.static("public"));
 
 // --- add routes ---
 // root route : Home page.
-app.get("/", forwardAuthenticated, (_, res) => res.render("index", {
-  title: "Recipe Lovers!",
-  isMain: true,
-}));
+app.get("/", (req, res) => {
+  const pageSettings = HomePageSettings;
+  if (req.user) {
+    pageSettings.user = req.user;
+  }
+  res.render("index", pageSettings);
+});
 
 // add /user routes
 app.use("/user", require("./routes/user_routes"));
