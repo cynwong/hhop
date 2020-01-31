@@ -13,7 +13,7 @@ router.get("/", (_, res) => res.render("view_recipe", {
 
 // route "/recipe/search" : Search page
 router.get("/search", (_, res) => res.render("search_recipe", {
-  title: "Recipe Lovers!: Search",
+  title: "Recipe Lovers!: view Search",
   isMain: true,
   isSearch: true,
 }));

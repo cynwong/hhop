@@ -32,6 +32,9 @@ app.get("/", (_, res) => res.render("index", {
 app.use("/user", require("./routes/user_routes"));
 // add /recipe routes
 app.use("/recipe", require("./routes/recipe_routes"));
+// add /favourites routes
+app.use("/favourites", require("./routes/favourite_routes"));
+
 
 // misc routes redirect back to homepage.
 app.get("/*", (_, res) => res.redirect("/"));
