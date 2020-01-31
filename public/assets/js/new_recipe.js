@@ -23,7 +23,7 @@ $(document).ready(() => {
 
   function runCheck() {
     if (title !== "" && ingredients !== "" && method !== "") {
-      newRecipe()
+      newRecipe();
     } else {
       alertText.text("Please check if all required information has been filled");
     }

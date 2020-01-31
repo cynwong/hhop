@@ -22,7 +22,7 @@
         "quotes": ["warn", "double"],
         "prefer-arrow-callback": ["warn"],
         "strict": ["warn" , "global"],
-        "linebreak-style": ["never", "unix"]
+        "linebreak-style": ["off", "unix"]
         
     }
 }
