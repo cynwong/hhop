@@ -20,6 +20,7 @@ $("#submit").on("click", (event) => {
     source: source.val().trim(),
     photo: addImage.val().trim(),
   };
+  // eslint-disable-next-line no-console
   console.log(data);
   $.ajax({
     method: "POST",
@@ -27,20 +28,10 @@ $("#submit").on("click", (event) => {
     data,
   }).then((res) => {
     if (res) {
-      alertText.text("New Recipe added Successfully");
+      alertText.text("Your new recipe has been added!");
+      setTimeout(window.location.replace("/recipe/add"), 6000);
+    } if (res.error) {
+      alertText.text("Please check if all required information has been filled");
     }
   });
 });
-
-/*   function runCheck() {
-    if (title !== "" && ingredients !== "" && method !== "") {
-      alertText.text("Please check if all required information has been filled");
-    } else {
-      return
-    }
-  function submit(event) {
-    event.preventDefault();
-    runCheck();
-  } */
-
-// $(document).on("submit", "#newRecipe", submit);
