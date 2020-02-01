@@ -18,12 +18,27 @@ body {
     height: 100vh;
     padding-top: 3rem;
     padding-bottom: 3rem;
-    // background-image: $base-color;
 }
 
 nav {
     background-image: $index-color;
+}
 
+#user-page {
+    .card, .active{
+        background-image: $index-color;
+    }
+
+    .active {
+        border-color: $midl-color;
+    }
+}
+
+#add-page {
+    padding: 60px;
+    width: auto;
+    background: url("/assets/images/sign-up.bg");
+    background-size: cover;
 }
 
 .col-md-5 {
@@ -132,8 +147,9 @@ nav {
 footer{
     font-size: 0.7rem;
     text-align: center;
+    margin-top:10px;
     a {
-        color: $index-color;
+        color: $midl-color;
     }
 }
 
