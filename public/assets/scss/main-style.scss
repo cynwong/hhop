@@ -9,7 +9,6 @@ $index-color: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f9
 // $index-color: linear-gradient(60deg, #abecd6 0%, #fbed96 100%);
 // $index-color: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
 
-
 html{
     height: 100vh;
 }
@@ -18,16 +17,32 @@ body {
     height: 100vh;
     padding-top: 3rem;
     padding-bottom: 3rem;
-    // background-image: $base-color;
+}
+
+.bg {
+    // background-image: url('/assets/images/signup-bg.jpg');
+    // background-repeat: repeat;
 }
 
 nav {
     background-image: $index-color;
-
 }
 
-.btn {
-    background-image: $dark-color;
+#user-page {
+    .card, .active{
+        background-image: $index-color;
+    }
+
+    .active {
+        border-color: $midl-color;
+    }
+}
+
+#add-page {
+    padding: 60px;
+    width: auto;
+    background: url("/assets/images/sign-up.bg");
+    background-size: cover;
 }
 
 .col-md-5 {
@@ -121,6 +136,7 @@ nav {
 
 .featurette {
     background-image: $index-color;
+    border-radius: 100px 25px 50px 50px;
 }
 
 .featurette-divider {
@@ -136,8 +152,9 @@ nav {
 footer{
     font-size: 0.7rem;
     text-align: center;
+    margin-top:10px;
     a {
-        color: $index-color;
+        color: $midl-color;
     }
 }
 
