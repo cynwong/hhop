@@ -12,17 +12,19 @@ const alertText = $("#alert-text");
 $("#submit").on("click", (event) => {
   event.preventDefault();
   // function newRecipe() {
+  const data = {
+    title: title.val().trim(),
+    ingredients: ingredients.val().trim(),
+    method: method.val().trim(),
+    creditTo: credit.val().trim(),
+    source: source.val().trim(),
+    photo: addImage.val().trim(),
+  };
+  console.log(data);
   $.ajax({
     method: "POST",
     url: "/recipe/add",
-    data: {
-      title: title.val(),
-      ingredients: ingredients.val(),
-      method: method.val(),
-      credit: credit.val(),
-      source: source.val(),
-      addImage: addImage.val(),
-    },
+    data,
   }).then((res) => {
     if (res) {
       alertText.text("New Recipe added Successfully");
