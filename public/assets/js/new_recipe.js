@@ -42,7 +42,7 @@ $(document).ready(() => {
       if (response.error) {
         return alertUser(response.error);
       }
-      return window.location.replace("/recipe/add");
+      return window.location.replace("/recipe/");
     } catch (error) {
       // eslint-disable-next-line no-undef
       return alertUser(error.responseJSON.error);
