@@ -26,8 +26,15 @@ passport.use(
   ),
 );
 
-passport.serializeUser((user, done) => done(null, user));
+passport.serializeUser(({ id }, done) => done(null, { id }));
 
-passport.deserializeUser((user, done) => done(null, user));
+passport.deserializeUser(async (user, done) => {
+  try {
+    const dbUser = await User.findByPk(user.id);
+    return done(null, dbUser);
+  } catch (error) {
+    return done(error);
+  }
+});
 
 module.exports = passport;
