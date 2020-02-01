@@ -1,9 +1,8 @@
 // for /recipe routes
 
-const { checkAuthenticated } = require("../config/auth");
-
 const router = require("express").Router();
 const Sequelize = require("sequelize");
+const { checkAuthenticated } = require("../config/auth");
 const Recipes = require("../models").recipe;
 
 const { Op } = Sequelize;
@@ -57,7 +56,6 @@ router.get("/search/:title", async (req, res) => {
 
 
 // --- POST ---
-// route "/recipe/add" : Search page
 router.post("/add", (req, res) => {
   const data = {
     title: req.body.title,
@@ -69,8 +67,14 @@ router.post("/add", (req, res) => {
     authorId: req.user.id,
   };
   Recipes.create(data).then((Res) => {
-    res.json(Res)
-      .catch((err) => res.status(500).json(err));
+    res.json(Res);
+    // .catch((err) => res.status(500).json(err));
+    try {
+      res.json(Res);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    }
   });
 });
 
