@@ -5,6 +5,7 @@ const router = require("express").Router();
 
 const Users = require("../models").user;
 const {
+  ChangePasswordPageSettings,
   DashboardPageSettings,
   LoginPageSettings,
   RegisterUserPageSettings,
@@ -14,17 +15,55 @@ const { checkAuthenticated, forwardAuthenticated } = require("../config/auth");
 
 // --- GET Routes ---
 
-// route "/user" : User dashboard page.
+// route "/user"
 router.get("/", checkAuthenticated, (req, res) => {
-  const pageSettings = DashboardPageSettings;
+  const pageSettings = { ...DashboardPageSettings };
   if (req.user) {
-    pageSettings.user = req.user;
+    pageSettings.username = req.user.name;
   }
   return res.render("user", pageSettings);
 });
 
-// route "/user/register" : User Registration page.
-router.get("/register", forwardAuthenticated, (_, res) => res.render("register_user", RegisterUserPageSettings));
+// route "/user/password"
+router.route("/password")
+  .get(checkAuthenticated, (req, res) => {
+    const pageSettings = {
+      ...ChangePasswordPageSettings,
+      username: req.user.name,
+    };
+    return res.render("change_password", pageSettings);
+  })
+  .post(async (req, res) => {
+    const errors = [];
+    const { id } = req.user;
+    const { password, rePassword } = req.body;
+
+    if (password.length < 8) {
+      errors.push({ msg: "Password must be 8-16 characters long." });
+    }
+
+    if (password !== rePassword) {
+      errors.push({ msg: "Two password must be identical." });
+    }
+    if (errors.length > 0) {
+      return res.status(401).json({
+        error: errors,
+      });
+    }
+    try {
+      await Users.update({ password },
+        {
+          where: { id },
+        });
+      return res.status(200).json({
+        success_msg: "Password is changed.",
+      });
+    } catch (error) {
+      return res.status(500).json({
+        error: [{ msg: "Something went wrong during update. Try again later." }],
+      });
+    }
+  });
 
 // route "/user/login" : User log-in page
 router.get("/login", forwardAuthenticated, (_, res) => res.render("login", LoginPageSettings));
@@ -34,6 +73,9 @@ router.get("/logout", (req, res) => {
   req.logOut();
   res.redirect("/user/login");
 });
+
+// route "/user/register" : User Registration page.
+router.get("/register", forwardAuthenticated, (_, res) => res.render("register_user", RegisterUserPageSettings));
 
 // --- http Request - POST ---
 // route "/user/login" : Login
