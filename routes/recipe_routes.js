@@ -65,6 +65,8 @@ router.put("/edit", (req, res) => {
 
 // --- DELETE ---
 router.delete("/:id", (req, res) => {
+  // add find me
+  // user.recipe.user.id = user.id
   Recipes.destroy({
     where: {
       id: req.params.id,
