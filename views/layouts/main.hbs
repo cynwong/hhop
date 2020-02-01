@@ -59,15 +59,17 @@
                         <span class="navbar-text">Hello, {{user.name}}.&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         </li>
                         <li class="nav-item"></li>
+                        <a class="nav-link btn btn-outline-danger my-2 my-sm-0" href="/recipe/add">Create</a>
+                        </li>
+                        &nbsp;
+                        &nbsp;
+                        <li class="nav-item"></li>
                         <a class="nav-link btn btn-outline-danger my-2 my-sm-0" href="/user/logout">Logout</a>
                         </li>
                         {{else}}
                         <li class="nav-item"></li>
                         <a class="nav-link btn btn-outline-danger my-2 my-sm-0" href="/user/login">Login</a>
                         </li>
-                         <li class="nav-item">
-                        <a class="nav-link" href="/recipe/add">Add Recipe</a>
-                    </li>
                     {{/if}}
                 </ul>
                 <form id="searchForm" class="form-inline mt-2 mt-md-0">
