@@ -37,12 +37,20 @@ router.get("/search/:title", async (req, res) => {
     authorId: dataValues.authorId,
     recipe: dataValues,
   }));
-  // console.log(result[0].dataValues);
-  res.render("search_recipe", {
-    title: "View Search",
-    result: recipes,
-    isSearch: true,
-  });
+  const notice = "NO RESULT";
+  if (result.length === 0) {
+    res.render("search_recipe", {
+      title: "No result",
+      noresult: notice,
+      isSearch: true,
+    });
+  } else {
+    res.render("search_recipe", {
+      title: "View Search",
+      result: recipes,
+      isSearch: true,
+    });
+  }
 });
 
 
