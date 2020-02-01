@@ -1,5 +1,7 @@
 // for /recipe routes
 
+const { checkAuthenticated } = require("../config/auth");
+
 const router = require("express").Router();
 const Sequelize = require("sequelize");
 const Recipes = require("../models").recipe;
@@ -58,25 +60,24 @@ router.get("/search/:title", async (req, res) => {
 // router.post("<<Route>>", (req, res) => {
 // route "/recipe/add" : Search page
 router.post("/add", (req, res) => {
-  console.log(req.body);
-  Recipes.create({
+  const data = {
     title: req.body.title,
     ingredients: req.body.ingredients,
     method: req.body.method,
-    is_private: req.body.is_private,
     creditTo: req.body.creditTo,
     source: req.body.source,
     photo: req.body.photo,
     authorId: req.user.id,
-  }).then((Recipe) => {
+  };
+  Recipes.create(data).then((Recipe) => {
     res.json(Recipe)
       .catch((err) => res.status(500).json(err));
   });
 });
 
-router.get("/add", (req, res) => {
+router.get("/add", checkAuthenticated, (req, res) => {
   res.render("add_recipe", {
-    isLogin: true,
+    user: req.user,
   });
 });
 
