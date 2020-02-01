@@ -1,3 +1,4 @@
+
 $(document).ready(() => {
   function searchRecipe(event) {
     event.preventDefault();
