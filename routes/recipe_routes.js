@@ -57,7 +57,6 @@ router.get("/search/:title", async (req, res) => {
 
 
 // --- POST ---
-// router.post("<<Route>>", (req, res) => {
 // route "/recipe/add" : Search page
 router.post("/add", (req, res) => {
   const data = {
@@ -69,8 +68,8 @@ router.post("/add", (req, res) => {
     photo: req.body.photo,
     authorId: req.user.id,
   };
-  Recipes.create(data).then((Recipe) => {
-    res.json(Recipe)
+  Recipes.create(data).then((Res) => {
+    res.json(Res)
       .catch((err) => res.status(500).json(err));
   });
 });
@@ -78,6 +77,7 @@ router.post("/add", (req, res) => {
 router.get("/add", checkAuthenticated, (req, res) => {
   res.render("add_recipe", {
     user: req.user,
+    isLogin: true,
   });
 });
 
