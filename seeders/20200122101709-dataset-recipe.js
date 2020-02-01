@@ -18,7 +18,6 @@ module.exports = {
           + "Mix in the mangos. Serve over the salmon steaks.\n",
       source: "https://eightportions.com/datasets/Recipes/#fn:1",
       is_private: false,
-      photo: "iA95RTZYD5k0aCdFbZWWGLvipfDukVq",
       authorId: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
