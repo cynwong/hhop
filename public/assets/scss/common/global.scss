@@ -53,7 +53,7 @@ body {
     font-weight: 400;
     font-family: 'Montserrat';
     background-image: url('../images/signup-bg.jpg');
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     @include background-size(cover);
     background-position: center center;
     padding: 115px 0;
@@ -63,7 +63,7 @@ body {
     position: relative;
     margin: 0 auto;
 }
-  
+
 .display-flex  {
     @extend display-flex;
     @include justify-content(space-between);
