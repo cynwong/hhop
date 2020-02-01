@@ -1,6 +1,9 @@
-.signup-content {
+@import '../common/mixin.scss';
+@import '../common/variables.scss';
+@import '../common/extend.scss';
+
+.signup-content, .login-content {
     background: #fff;
-    // @include border-radius(10px);
     padding: 50px 85px;
 }
 .form-group {
@@ -10,7 +13,7 @@
 .form-input {
     width: 100%;
     border: 1px solid rgb(235, 235, 235);
-    @include border-radius(5px);
+    // @include border-radius(5px);
     padding: 17px 20px;
     box-sizing: border-box;
     font-size: 14px;
@@ -58,12 +61,13 @@
     color: #fff;
     text-transform: uppercase;
     border: none;
-    background-image :    -moz-linear-gradient(to left, #74ebd5,#9face6);
-    background-image :     -ms-linear-gradient(to left, #74ebd5,#9face6);
-    background-image :      -o-linear-gradient(to left, #74ebd5,#9face6);
-    background-image : -webkit-linear-gradient(to left, #74ebd5,#9face6);
-    background-image :         linear-gradient(to left, #74ebd5,#9face6);
-    
+    // please uncomment a color choice to see which one you'd love most or you want more choices
+    background-image: linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%);;
+    // background-image: linear-gradient(to right, #c6ffdd 0%, #adfccc 0%, #fbd786 21%, #ffd574 52%, #fa8c8f 78%, #f7797d 100%);
+    // background-image: linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%);
+    // background-image: linear-gradient(to top, #e6b980 0%, #eacda3 100%);
+    // background-image: linear-gradient(60deg, #abecd6 0%, #fbed96 100%);
+    // background-image: linear-gradient(to right, #f78ca0 0%, #f9748f 19%, #fd868c 60%, #fe9a8b 100%);
 }
 input[type=checkbox]:not(old){
     width     : 2em;

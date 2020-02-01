@@ -1,32 +1,51 @@
-// $(document).ready(() => {
 
-const alertext = $("#alert-text");
+$(document).ready(() => {
+  // Login page "Log In" button onClick listener
+  $("#btn-login").click(async (event) => {
+    event.preventDefault();
 
-function validation(res) {
-  if (res) {
-    // window.location.href = "/user";
-  } else {
-    alertext.text("Please enter the correct email and password!");
-    $("#email").val("");
-    $("#password").val("");
-  }
-}
+    const errors = [];
 
-function checkPwEm(email, password) {
-  if (email !== "" && password !== "") {
-    $.post("/user/login", { email, password })
-      .then((res) => {
-        validation(res);
+    // Get elements
+    const $email = $("#email");
+    const $password = $("#password");
+
+    // Get form values
+    const email = $email.val().trim();
+    if (!email) errors.push({ msg: "Email is required." });
+
+    const password = $password.val().trim();
+    if (!password) errors.push({ msg: "Password is required." });
+
+    // reset password field
+    $password.val("");
+
+    if (errors.length > 0) {
+      // if errors, alert user
+      // eslint-disable-next-line no-undef
+      return alertUser(errors);
+    }
+
+    try {
+      const response = $.ajax({
+        url: "/user/login",
+        method: "POST",
+        data: {
+          email,
+          password,
+        },
       });
-  }
-}
+      if (response.error) {
+        // if error, alert the user
+        // eslint-disable-next-line no-undef
+        return alertUser(response.error);
+      }
 
-function tryLogin(event) {
-  event.preventDefault();
-  const email = $("#email").val().trim();
-  const password = $("#password").val().trim();
-  checkPwEm(email, password);
-}
-
-$("#signin").on("click", tryLogin);
-// });
+      // if everything ok, redirect to user dashboard page
+      return window.location.replace("/user");
+    } catch (error) {
+      // eslint-disable-next-line no-undef
+      return alertUser(error.responseJSON.error);
+    }
+  });
+});

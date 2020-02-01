@@ -1,7 +1,6 @@
-<div class="main">
-  <section class="postRecipe">
-    <div class="container" id="newRecipe">
-      <div>
+<div class="container" id="add-page">
+  <section class="login-content">
+    <div id="newRecipe">
         <h2>
           Add a new recipe
         </h2>
@@ -12,7 +11,7 @@
             </label>
             <input
               type="text"
-              class="form-control"
+              class="form-input"
               id="newTitle"
               placeholder="Enter Recipe Name"
             />
@@ -24,7 +23,7 @@
               Ingredients
             </label>
             <textarea
-              class="form-control"
+              class="form-input"
               id="newIngredients"
               rows="5"
               placeholder="Enter Recipe Ingredients"
@@ -36,7 +35,7 @@
               Method
             </label>
             <textarea
-              class="form-control"
+              class="form-input"
               id="newMethod"
               rows="6"
               placeholder="Enter steps"
@@ -47,28 +46,28 @@
             <label for="newCredit">
               Credit (if any)
             </label>
-            <input type="text" class="form-control" id="newCredit" />
+            <input type="text" class="form-input" id="newCredit" />
           </div>
 
           <div class="form-group">
             <label for="newSource">
               Source (if any)
             </label>
-            <input type="text" class="form-control" id="newSource" />
+            <input type="text" class="form-input" id="newSource" />
           </div>
 
           <div class="form-group">
             <label for="newImage">
              Add an image address
             </label>
-            <input type="text" class="form-control" id="newImage" />
+            <input type="text" class="form-input" id="newImage" />
           </div>
 
 {{!-- going with image urls --- drop dataset  --}}
 
           <button
             type="submit_Recipe"
-            class="btn btn-primary"
+            class="btn btn-warning"
             name="submit"
             id="submit"
           >
