@@ -1,10 +1,13 @@
-// for /api/favourite routes
+// for /favourite routes
 const router = require("express").Router();
 
 const { getAllFavBrief } = require("../config/db_functions");
 
 const { checkAuthenticated } = require("../config/auth");
 const { ViewMyFavourites } = require("../config/page_settings");
+
+
+const Favourites = require("../models").favourite;
 
 // --- GET Routes ---
 router.get("/", checkAuthenticated, async (req, res) => {
@@ -24,16 +27,31 @@ router.get("/", checkAuthenticated, async (req, res) => {
 });
 
 // --- POST ---
-// router.post("<<Route>>", (req, res) => {
-
-// });
-
-// --- PUT ---
-// router.put("<<ROUTE>>", (req, res) => {
-// });
+router.post("/", (req, res) => {
+});
 
 // --- DELETE ---
-// router.delete("/:id", (req, res) => {
-// });
+router.delete("/:id", async (req, res) => {
+  const recipeId = req.params.id;
+  const userId = req.user.id;
+
+  try {
+    await Favourites.destroy({
+      where: {
+        recipeId,
+        userId,
+      },
+    });
+    return res.status(200).json({
+      isSuccess: true,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      error: [
+        { msg: "Unable to remove favourite" },
+      ],
+    });
+  }
+});
 
 module.exports = router;
