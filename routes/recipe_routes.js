@@ -96,6 +96,8 @@ router.get("/edit", (req, res) => {
 });
 
 router.put("/edit", (req, res) => {
+  // add find user
+  // user.recipe.user.id = user.id
   Recipes.update({
     title: req.body.title,
     ingredients: req.body.ingredients,
@@ -118,7 +120,7 @@ router.put("/edit", (req, res) => {
 
 // --- DELETE ---
 router.delete("/:id", (req, res) => {
-  // add find me
+  // add find user
   // user.recipe.user.id = user.id
   Recipes.destroy({
     where: {
