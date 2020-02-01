@@ -1,10 +1,10 @@
 <div class="col-md-4">
 
   <div class="card mb-4 shadow">
-    <img class="card-img-top" data-src="..." alt="Recipe">
+    <img class="card-img-top" data-src={{ recipe.img }} alt="Recipe">
     <div class="card-body">
       <h5 class="card-title">
-        {{recipe.title}}
+        {{ recipe.title }}
       </h5>
       <p class="card-text">
       </p>
@@ -15,7 +15,7 @@
           <button type="button" class="btn btn-sm btn-outline-secondary">
             <i class="fab fa-gratipay"></i></button>
         </div>
-        <small class="text-muted">{{favCount}} Favourites</small>
+        <small class="text-muted">{{ favCount }} Favourites</small>
       </div>
     </div>
   </div>
