@@ -15,7 +15,13 @@ const { checkAuthenticated, forwardAuthenticated } = require("../config/auth");
 // --- GET Routes ---
 
 // route "/user" : User dashboard page.
-router.get("/", checkAuthenticated, (_, res) => res.render("user", DashboardPageSettings));
+router.get("/", checkAuthenticated, (req, res) => {
+  const pageSettings = DashboardPageSettings;
+  if (req.user) {
+    pageSettings.user = req.user;
+  }
+  return res.render("user", pageSettings);
+});
 
 // route "/user/register" : User Registration page.
 router.get("/register", forwardAuthenticated, (_, res) => res.render("register_user", RegisterUserPageSettings));
@@ -32,26 +38,30 @@ router.get("/logout", (req, res) => {
 
 // --- http Request - POST ---
 // route "/user/login" : Login
-// router.post("/login", (req, res, next) => {
-//   passport.authenticate("local", {
-//     successRedirect: "/user",
-//     failureRedirect: "/user/login",
-//     failureFlash: "Invalid username or password.",
-//   })(req, res, next);
-// });
-// router.post("/login", passport.authenticate("local", (_, res) => {
-//   // if success,
-//   res.redirect("/user");
-// }));
-router.post("/login", passport.authenticate("local",
-  {
-    failureRedirect: "/user/login",
-    failureFlash: true,
-  }),
-(req, res) => {
-  // If this function gets called, authentication was successful.
-  // `req.user` contains the authenticated user.
-  res.redirect("/user");
+router.post("/login", (req, res, next) => {
+  // check if user has authorization
+  passport.authenticate("local", (err, user) => {
+    if (err) {
+      console.error(err);
+      return next(err);
+    }
+    if (!user) {
+      return res.status(401).json({
+        error: [{ msg: "Incorrect username or password" }],
+      });
+    }
+    // log in User.
+    req.logIn(user, (logInErr) => {
+      if (logInErr) {
+        console.error(logInErr);
+        return next(logInErr);
+      }
+      return res.status(200).json({
+        success_msg: "Login successful.",
+      });
+    });
+    return null;
+  })(req, res, next);
 });
 
 router.post("/register", async (req, res) => {
@@ -61,74 +71,51 @@ router.post("/register", async (req, res) => {
       password,
       name,
     } = req.body;
-    // const errors = [];
+    const errors = [];
 
     // data validation
-    // if (!email) errors.push({ msg: "Email is required. " });
-    // if (!password) errors.push({ msg: "Password is required. " });
-    // if (!name) errors.push({ msg: "Name is required. " });
+    if (!email) errors.push({ msg: "Email is required. " });
+    if (!password) errors.push({ msg: "Password is required. " });
+    if (!name) errors.push({ msg: "Name is required. " });
 
-    // if (password.length < 8) {
-    //   errors.push({ msg: "Password must be at least 8 characters long" });
-    // }
+    if (password.length < 8) {
+      errors.push({ msg: "Password must be at least 8 characters long" });
+    }
 
-    // const RenderRegisterWithErrors = () => res.render("register_user", {
-    //   ...RegisterUserPageSettings,
-    //   errors,
-    //   name,
-    //   email,
-    //   password,
-    // });
+    if (errors.length > 0) {
+      // if there is errors, send it back to browser.
+      return res.status(400).json({
+        error: errors,
+      });
+    }
 
-    // if (errors.length > 0) {
-    //   // if there is errors
-    //   return RenderRegisterWithErrors();
-    // }
-
-    // add new user
+    // check if user already registered.
     const user = await Users.findOne({
       where: { email },
     });
     if (user) {
-    //   errors.push({ msg: "Email is already registered." });
-    //   return RenderRegisterWithErrors();
-    // TODO: Discuss how we are going to do the error control. for this.
-      return res.status(200).send(false);
+      // if user, then notify the client.
+      return res.status(400).json({
+        error: [{ msg: "User already exists." }],
+      });
     }
-    const newUserInfo = {
+
+    // add new user to db
+    await Users.create({
       email,
       name,
       password,
-    };
-
-    // hash the password
-    // newUserInfo.password = await bcrypt.hash(password, 10);
-    await Users.create(newUserInfo);
-    // return res.render("login", LoginPageSettings);
-    return res.render("login", {
-      ...LoginPageSettings,
+    });
+    // return success code back to browser
+    return res.status(200).json({
       success_msg: "Successfully registered",
-    }, (err, html) => {
-      if (err) console.error(err);
-      return res.send(html);
     });
   } catch (err) {
     console.error(err);
-    // const errors = {msg: "Something went wrong during registration. Try again later"};
-    // return res.status(500).render("user/register", {
-    //   ...RegisterUserPageSettings,
-    //   errors,
-    // });
-    return res.status(200).send(false);
+    return res.status(500).json({
+      error: [{ msg: "Something went wrong. Try again later." }],
+    });
   }
 });
-
-// --- PUT ---
-// router.put("<<ROUTE>>", (req, res) => {
-// });
-
-// --- DELETE ---
-// router.delete("/:id", (req, res) => {
-// });
 
 module.exports = router;
