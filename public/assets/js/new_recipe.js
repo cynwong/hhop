@@ -1,5 +1,3 @@
-// $(document).ready(() => {
-
 const title = $("#newTitle");
 const ingredients = $("#newIngredients");
 const method = $("#newMethod");
@@ -11,7 +9,6 @@ const alertText = $("#alert-text");
 
 $("#submit").on("click", (event) => {
   event.preventDefault();
-  // function newRecipe() {
   const data = {
     title: title.val().trim(),
     ingredients: ingredients.val().trim(),
@@ -20,8 +17,6 @@ $("#submit").on("click", (event) => {
     source: source.val().trim(),
     photo: addImage.val().trim(),
   };
-  // eslint-disable-next-line no-console
-  console.log(data);
   $.ajax({
     method: "POST",
     url: "/recipe/add",
