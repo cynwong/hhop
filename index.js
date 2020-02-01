@@ -65,7 +65,6 @@ app.use("/recipe", require("./routes/recipe_routes"));
 // add /favourites routes
 app.use("/favourites", require("./routes/favourite_routes"));
 
-
 // misc routes redirect back to homepage.
 app.get("/*", (_, res) => res.redirect("/"));
 
