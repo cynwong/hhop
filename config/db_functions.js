@@ -55,6 +55,7 @@ module.exports = {
         title,
         photo,
         favCount: favourites.length,
+        isLiked: true,
       };
     });
   },
