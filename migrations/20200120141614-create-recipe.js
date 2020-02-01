@@ -45,16 +45,11 @@ module.exports = {
     source: {
       type: Sequelize.STRING(255),
       allowNull: true,
-      validate: {
-        is: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/gi,
-      },
     },
     photo: {
       type: Sequelize.STRING(255),
       allowNull: true,
-      validate: {
-        is: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/gi,
-      },
+    },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE,
@@ -62,7 +57,7 @@ module.exports = {
     updatedAt: {
       allowNull: false,
       type: Sequelize.DATE,
-    }
+    },
   }),
   down: (queryInterface) => queryInterface.dropTable("recipes"),
 };
