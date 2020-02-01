@@ -15,5 +15,5 @@ module.exports = {
     title: "Recipe Lovers!: Register new user",
     isLogin: true,
   },
-  
+
 };
