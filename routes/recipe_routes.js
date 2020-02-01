@@ -32,7 +32,6 @@ router.get("/search/:title", async (req, res) => {
       },
     },
   });
-  // console.log(result);
   const recipes = result.map(({ dataValues }) => ({
     id: dataValues.id,
     authorId: dataValues.authorId,
@@ -68,7 +67,6 @@ router.post("/add", (req, res) => {
   };
   Recipes.create(data).then((Res) => {
     res.json(Res);
-    // .catch((err) => res.status(500).json(err));
     try {
       res.json(Res);
     } catch (err) {
@@ -96,8 +94,6 @@ router.get("/edit", (req, res) => {
 });
 
 router.put("/edit", (req, res) => {
-  // add find user
-  // user.recipe.user.id = user.id
   Recipes.update({
     title: req.body.title,
     ingredients: req.body.ingredients,
@@ -116,7 +112,7 @@ router.put("/edit", (req, res) => {
     res.end();
   });
 });
-// });
+
 
 // --- DELETE ---
 router.delete("/:id", (req, res) => {
@@ -127,7 +123,6 @@ router.delete("/:id", (req, res) => {
       id: req.params.id,
     },
   }).then((Recipe) => {
-    // link to username or user id
     res.json(Recipe);
   });
 });
