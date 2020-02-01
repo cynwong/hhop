@@ -1,37 +1,40 @@
-<section class="signup">
-    <div class="container">
-        <div class="signup-content">
-            <form method="POST" id="signup-form" class="signup-form">
-                <h2 class="form-title">Create account</h2>
-                <div class="form-group">
-                    <div id="alert-text"></div>
-                    <input type="text" class="form-input" name="name" id="name" placeholder="Your Name" />
-                </div>
-                <div class="form-group">
-                    <input type="email" class="form-input" name="email" id="email" placeholder="Your Email" />
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-input" name="password" id="password" placeholder="Password" />
-                    <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-input" name="rePassword" id="rePassword"
-                        placeholder="Repeat your password" />
-                </div>
-                <div class="form-group">
-                    <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-                    <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all
-                        statements in <a href="#" class="term-service">Terms of service</a></label>
-                </div>
-                <div class="form-group">
-                    <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up" />
-                </div>
-            </form>
-            <p class="login">
-                Have already an account ? <a href="/login" class="link-login">Login here</a>
-            </p>
+<div class="main">
+    <section class="signup">
+        <div class="container">
+            <div class="signup-content">
+                <form method="POST" id="signup-form" class="signup-form">
+                    <h2 class="form-title">Create account</h2>
+                    <div class="form-group">
+                        <div id="alert-text"></div>
+                        <input type="text" class="form-input" name="name" id="user-name" placeholder="Your Name" />
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" name="email" id="user-email" placeholder="Your Email" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-input" name="password" id="user-pwd" placeholder="Password" />
+                        <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-input" name="rePassword" id="re-pwd"
+                            placeholder="Repeat your password" />
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                        <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all
+                            statements in <a href="#" class="term-service">Terms of service</a></label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" id="signup" class="form-submit" value="Sign up" />
+                    </div>
+                </form>
+                <p>
+                    Have already an account ? <a href="/user/login" class="link-login">Login here</a>
+                </p>
+            </div>
         </div>
-    </div>
-</section>
-
-<script src="/assets/js/login.js" type="text/javascript"></script>
+    </section>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="/assets/js/register.js" type="text/javascript"></script>
