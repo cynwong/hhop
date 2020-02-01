@@ -1,8 +1,8 @@
-function animation(itemOne, itemTwo, itemThree) {
-  $(itemOne).addClass("animation");
-  $(itemTwo).removeClass("animation");
-  $(itemThree).removeClass("animation");
-}
+// function animation(itemOne, itemTwo, itemThree) {
+//   $(itemOne).addClass("animation");
+//   $(itemTwo).removeClass("animation");
+//   $(itemThree).removeClass("animation");
+// }
 
 function animatedScrollCheck() {
   const featureOne = $("#recipe-one");
@@ -12,21 +12,17 @@ function animatedScrollCheck() {
   const windowHeight = $(window).height();
 
   const features = [featureOne, featureTwo, featureThree];
-  for (const feature of features) {
-    const clientRect = feature[0].getBoundingClientRect();
 
+  features.forEach((feature) => {
+    const clientRect = feature[0].getBoundingClientRect();
     // If the element is below the view, fade it out
-    if (clientRect.top >= clientRect.height ) {
-      feature.removeClass('animation');
+    if (clientRect.top >= clientRect.height) {
+      feature.removeClass("animation");
     } else if (windowHeight - clientRect.top >= clientRect.height / 2) {
       // If the element is half visible, against the bottom box
-      feature.addClass('animation');
+      feature.addClass("animation");
     }
-
-    
-    
-
-  }
+  });
 
   // const scrollTop = $(document).scrollTop();
   // if (scrollTop < 300) {

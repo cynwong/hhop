@@ -24,8 +24,18 @@ body {
     // background-repeat: repeat;
 }
 
+.btn {
+    border:$dark-color;
+    // shadow: 5px 5px;
+}
+
 nav {
+    // height: 10vh;
     background-image: $index-color;
+
+    .btn {
+        color: $midl-color;
+    }
 }
 
 #user-page {
@@ -55,7 +65,22 @@ nav {
 }
 
 .carousel {
-    margin-bottom: 4rem;
+    margin-bottom: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    .carousel-inner {
+        height:100vh;
+        flex: 1 0;
+        .carousel-item {
+            height:100vh;
+            img {
+                height: 100vh;
+                width:auto;
+            }
+        }
+    }
 }
 
 .carousel-caption {
@@ -137,7 +162,7 @@ nav {
     position: relative;
 
     background-image: $index-color;
-    border-radius: 100px 25px 50px 50px;
+    border-radius: 25px 25px 25px 25px;
 
     transition: 1.5s all;
 
@@ -148,6 +173,10 @@ nav {
 
     &:nth-of-type(2n) {
         right: 100%;
+    }
+
+    .btn {
+        margin-bottom: 1rem;
     }
 }
 
@@ -182,11 +211,15 @@ footer{
 }
 
 @media (min-width: 40em) {
-    .carousel-caption {
-        p {
-            margin-bottom: 1.25rem;
-            font-size: 1.25rem;
-            line-height: 1.4;   
+    .carousel {
+        margin-bottom: 0;
+
+        .carousel-caption {
+            p {
+                margin-bottom: 1.25rem;
+                font-size: 1.25rem;
+                line-height: 1.4;   
+            }
         }
     }
 
