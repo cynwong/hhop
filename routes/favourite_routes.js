@@ -1,14 +1,10 @@
 // for /api/favourite routes
 const router = require("express").Router();
 
+const { getAllFavBrief } = require("../config/db_functions");
+
 const { checkAuthenticated } = require("../config/auth");
 const { ViewMyFavourites } = require("../config/page_settings");
-
-// get the models
-const models = require("../models");
-
-const Favourites = models.favourite;
-const Recipe = models.recipe;
 
 // --- GET Routes ---
 router.get("/", checkAuthenticated, async (req, res) => {
@@ -16,36 +12,7 @@ router.get("/", checkAuthenticated, async (req, res) => {
   const { user } = req;
   const userId = user.id;
 
-  // get user's favourite records
-  const favs = await Favourites.findAll({
-    where: {
-      userId,
-    },
-    include: {
-      model: Recipe,
-      require: true,
-      include: {
-        model: Favourites,
-      },
-    },
-  });
-
-  // get recipes data for rendition
-  const recipes = favs.map(({ dataValues }) => {
-    const {
-      id,
-      title,
-      photo,
-      favourites,
-    } = dataValues.recipe;
-    const recipe = {
-      id,
-      title,
-      photo,
-    };
-    recipe.favCount = favourites.length;
-    return recipe;
-  });
+  const recipes = await getAllFavBrief(userId);
 
   // construct view page.
   const pageSettings = {
