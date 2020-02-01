@@ -3,11 +3,12 @@ $(document).ready(() => {
   function searchRecipe(event) {
     event.preventDefault();
     const search = $("#searchText").val().trim();
+    const path = "/recipe/search/";
     $.ajax({
-      url: "/api/search/:title",
+      url: path.concat(search),
       type: "GET",
-      data: search,
-    // }).then((res) => {
+    }).then(() => {
+      window.location.href = path.concat(search);
     });
   }
 
