@@ -14,7 +14,7 @@ $("#submit").on("click", (event) => {
   // function newRecipe() {
   $.ajax({
     method: "POST",
-    url: "/api/add",
+    url: "/recipe/add",
     data: {
       title: title.val(),
       ingredients: ingredients.val(),
