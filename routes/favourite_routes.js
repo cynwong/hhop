@@ -27,8 +27,8 @@ router.get("/", checkAuthenticated, async (req, res) => {
 });
 
 // --- POST ---
-router.post("/", (req, res) => {
-});
+// router.post("/", (req, res) => {
+// });
 
 // --- DELETE ---
 router.delete("/:id", async (req, res) => {

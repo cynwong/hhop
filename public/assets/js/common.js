@@ -16,7 +16,7 @@ const createAlert = (msg) => {
  */
 // eslint-disable-next-line no-unused-vars
 const alertUser = (messages) => {
-  // clean the container 
+  // clean the container
   $("#alert-text").empty();
 
   return messages.forEach((message) => createAlert(message.msg));
