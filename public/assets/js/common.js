@@ -15,4 +15,9 @@ const createAlert = (msg) => {
  * @param {array} messages array of alert messages
  */
 // eslint-disable-next-line no-unused-vars
-const alertUser = (messages) => messages.forEach((message) => createAlert(message.msg));
+const alertUser = (messages) => {
+  // clean the container 
+  $("#alert-text").empty();
+
+  return messages.forEach((message) => createAlert(message.msg));
+};
