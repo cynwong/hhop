@@ -5,7 +5,6 @@ const credit = $("#newCredit");
 const source = $("#newSource");
 const addImage = $("#newImage");
 const alertText = $("#alert-text");
-// const submit = $("#submit");
 
 $("#submit").on("click", (event) => {
   event.preventDefault();
