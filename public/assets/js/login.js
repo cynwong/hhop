@@ -27,7 +27,7 @@ $(document).ready(() => {
     }
 
     try {
-      const response = $.ajax({
+      const response = await $.ajax({
         url: "/user/login",
         method: "POST",
         data: {

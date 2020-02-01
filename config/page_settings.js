@@ -15,4 +15,9 @@ module.exports = {
     title: "Recipe Lovers!: Register new user",
     isLogin: true,
   },
+  ViewMyFavourites: {
+    title: "Recipe Lover!: View favourites",
+    isMain: true,
+    isSearch: true,
+  },
 };
