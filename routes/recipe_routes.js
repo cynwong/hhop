@@ -82,6 +82,13 @@ router.get("/add", (req, res) => {
 // });
 
 // --- PUT ---
+
+router.get("/edit", (req, res) => {
+  res.render("edit_recipe", {
+    isLogin: true,
+  });
+});
+
 router.put("/edit", (req, res) => {
   Recipes.update({
     title: req.body.title,
