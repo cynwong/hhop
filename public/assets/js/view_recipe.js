@@ -4,9 +4,7 @@ $(document).ready(() => {
   //
   //
   // Delete recipe -- Only user submitted
-  function DELETE() {
-    const listItemData = $(this).parent("#").parent("#").data("recipe");
-    const { id } = listItemData;
+  function delete() {
     $.ajax({
       method: "DELETE",
       url: `/api/delete/${id}`,
@@ -22,5 +20,5 @@ $(document).ready(() => {
       });
   }
 
-  $(document).on("delete", "#delete", DELETE);
+  $(document).on("delete", "#delete", delete);
 });

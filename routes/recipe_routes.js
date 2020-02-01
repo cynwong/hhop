@@ -58,6 +58,7 @@ router.get("/search/:title", async (req, res) => {
 // router.post("<<Route>>", (req, res) => {
 // route "/recipe/add" : Search page
 router.post("/add", (req, res) => {
+  console.log(req.body);
   Recipes.create({
     title: req.body.title,
     ingredients: req.body.ingredients,
@@ -66,14 +67,29 @@ router.post("/add", (req, res) => {
     creditTo: req.body.creditTo,
     source: req.body.source,
     photo: req.body.photo,
+    authorId: req.user.id,
   }).then((Recipe) => {
-    res.json(Recipe);
+    res.json(Recipe)
+      .catch((err) => res.status(500).json(err));
+  });
+});
+
+router.get("/add", (req, res) => {
+  res.render("add_recipe", {
+    isLogin: true,
   });
 });
 
 // });
 
 // --- PUT ---
+
+router.get("/edit", (req, res) => {
+  res.render("edit_recipe", {
+    isLogin: true,
+  });
+});
+
 router.put("/edit", (req, res) => {
   Recipes.update({
     title: req.body.title,
@@ -88,6 +104,8 @@ router.put("/edit", (req, res) => {
       id: req.body.id,
     },
   }).then(() => {
+    // link to username or user id
+    // try req.user
     res.end();
   });
 });
@@ -95,11 +113,14 @@ router.put("/edit", (req, res) => {
 
 // --- DELETE ---
 router.delete("/:id", (req, res) => {
+  // add find me
+  // user.recipe.user.id = user.id
   Recipes.destroy({
     where: {
       id: req.params.id,
     },
   }).then((Recipe) => {
+    // link to username or user id
     res.json(Recipe);
   });
 });

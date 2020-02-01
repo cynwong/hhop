@@ -44,8 +44,11 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     photo: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING(255),
       allowNull: true,
+      validate: {
+        is: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/gi,
+      },
     },
   }, {});
   recipe.associate = (models) => {
