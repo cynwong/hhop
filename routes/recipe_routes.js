@@ -20,6 +20,7 @@ router.get("/search", (_, res) => res.render("search_recipe", {
 
 // route "/recipe/add" : Search page
 router.post("/add", (req, res) => {
+console.log(req.body);
   Recipes.create({
     title: req.body.title,
     ingredients: req.body.ingredients,
@@ -29,8 +30,13 @@ router.post("/add", (req, res) => {
     source: req.body.source,
     photo: req.body.photo,
   }).then((Recipe) => {
-    res.json(Recipe);
+    res.json(Recipe)
+      .catch((err) => res.status(500).json(err));
   });
+});
+
+router.get("/add", (req, res) => {
+  res.render("add_recipe");
 });
 
 // });
@@ -50,6 +56,8 @@ router.put("/edit", (req, res) => {
       id: req.body.id,
     },
   }).then(() => {
+    // link to username or user id
+    // try req.user
     res.end();
   });
 });
@@ -62,6 +70,7 @@ router.delete("/:id", (req, res) => {
       id: req.params.id,
     },
   }).then((Recipe) => {
+    // link to username or user id
     res.json(Recipe);
   });
 });
