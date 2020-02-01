@@ -58,7 +58,7 @@ router.get("/search/:title", async (req, res) => {
 // router.post("<<Route>>", (req, res) => {
 // route "/recipe/add" : Search page
 router.post("/add", (req, res) => {
-console.log(req.body);
+  console.log(req.body);
   Recipes.create({
     title: req.body.title,
     ingredients: req.body.ingredients,
@@ -74,7 +74,9 @@ console.log(req.body);
 });
 
 router.get("/add", (req, res) => {
-  res.render("add_recipe");
+  res.render("add_recipe", {
+    isLogin: true,
+  });
 });
 
 // });
