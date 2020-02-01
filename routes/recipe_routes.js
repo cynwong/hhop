@@ -67,6 +67,7 @@ router.post("/add", (req, res) => {
     creditTo: req.body.creditTo,
     source: req.body.source,
     photo: req.body.photo,
+    authorId: req.user.id,
   }).then((Recipe) => {
     res.json(Recipe)
       .catch((err) => res.status(500).json(err));
