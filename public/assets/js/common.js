@@ -21,3 +21,20 @@ const alertUser = (messages) => {
 
   return messages.forEach((message) => createAlert(message.msg));
 };
+
+/**
+ * Display success message to user
+ * @param {string} message
+ */
+// eslint-disable-next-line no-unused-vars
+const alertSuccess = (message) => {
+  const $alert = $("#success-template").clone().removeAttr("id");
+  const $container = $("#alert-text");
+
+  // empty the container first.
+  $container.empty();
+
+  // add the message to the page. 
+  $alert.find("span.msg").text(message);
+  $container.append($alert);
+};
