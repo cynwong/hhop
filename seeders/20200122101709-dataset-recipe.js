@@ -17,6 +17,7 @@ module.exports = {
           + "Stir in garlic, tomatoes, and cilantro. Cook until heated through, 1 to 2 minutes, and remove from heat."
           + "Mix in the mangos. Serve over the salmon steaks.\n",
       source: "https://eightportions.com/datasets/Recipes/#fn:1",
+      photo: "https://newsroom.unsw.edu.au/sites/default/files/styles/full_width/public/thumbnails/image/5_junk_food_shutterstock_1.jpg?itok=X29w4W_j",
       is_private: false,
       authorId: 1,
       createdAt: new Date(),
@@ -37,6 +38,7 @@ module.exports = {
       ingredients: "1 or 8 ounce can tomato sauce \n 1 cup barbecue sauce \n 1 onion, chopped \n 2 or 4 ounce cans diced green chile peppers \n 1/4 cup chili powder\n 1 teaspoon ground cumin \n 1 teaspoon dried oregano \n 1/4 teaspoon ground cinnamon \n 2 1/2 pounds boneless pork loin roast, trimmed \n 1/2 cup chopped fresh cilantro",
       method: "In a 3 quart or larger slow cooker, mix tomato sauce, barbeque sauce, onion, green chile peppers, chili powder, cumin, oregano, and cinnamon. Place pork in slow cooker, and spoon sauce over to coat. the meat.\nCover, and cook on Low 8 to 10 hours, or until pork is tender.\nRemove pork to a cutting board. Using 2 forks, pull meat into shreds. Pour sauce into a serving dish; stir in cilantro and shredded pork.\n",
       source: "https://eightportions.com/datasets/Recipes/#fn:1",
+      photo: "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2012/3/22/0/FNCC_bobby-flay-salmon-brown-sugar-mustard_s4x3.jpg.rend.hgtvcom.616.462.suffix/1382541357316.jpeg",
       is_private: false,
       authorId: 1,
       createdAt: new Date(),
