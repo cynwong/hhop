@@ -34,7 +34,7 @@ const alertSuccess = (message) => {
   // empty the container first.
   $container.empty();
 
-  // add the message to the page. 
+  // add the message to the page.
   $alert.find("span.msg").text(message);
   $container.append($alert);
 };

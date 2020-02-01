@@ -45,7 +45,7 @@ app.use(express.static("public"));
 app.get("/", (req, res) => {
   const pageSettings = { ...HomePageSettings };
   if (req.isAuthenticated()) {
-    pageSettings.user = req.user;
+    pageSettings.username = req.user.name;
   }
   res.render("index", pageSettings);
 });
