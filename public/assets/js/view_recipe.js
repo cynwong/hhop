@@ -4,10 +4,10 @@ $(document).ready(() => {
   //
   //
   // Delete recipe -- Only user submitted
-  function delete() {
+  function deleteRecipe() {
     $.ajax({
       method: "DELETE",
-      url: `/api/delete/${id}`,
+      url: "/api/delete/",
     })
       .then((res) => {
         if (res) {
@@ -20,5 +20,5 @@ $(document).ready(() => {
       });
   }
 
-  $(document).on("delete", "#delete", delete);
+  $(document).on("delete", "#delete", deleteRecipe);
 });
