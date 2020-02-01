@@ -2,7 +2,7 @@
     <div class="card mx-auto mt-5">
         <div class="card-body">
             <h5 class="card-title">
-                Username
+                Hello, {{ username }}.
             </h5>
             <p class="card-text">
                 You own 2 recipes, and have favourited 3 recipes.
@@ -22,14 +22,10 @@
                     <div class="col px-md-5">
                         <div class="p-3 border bg-light">
                             <div class="list-group">
-                                <p>You added these recipes to your favourites:</p>
-                                <button type="button" class="list-group-item list-group-item-action active">
-                                    Favourite One
-                                </button>
-                                <button type="button" class="list-group-item list-group-item-action">Favourite
-                                    Two</button>
-                                <button type="button" class="list-group-item list-group-item-action">Favourite
-                                    Three</button>
+                                <p>Your favourite recipes:</p>
+                                {{#each favourites }}
+                                    {{> recipe-title }}
+                                {{/each}}
                             </div>
                         </div>
                     </div>
