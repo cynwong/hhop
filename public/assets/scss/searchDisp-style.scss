@@ -2,6 +2,11 @@
   --jumbotron-padding-y: 3rem;
 }
 
+body{
+  // background-image: url('/assets/images/signup-bg.jpg');
+  // background-repeat: repeat;
+}
+
 .jumbotron {
   padding-top: var(--jumbotron-padding-y);
   padding-bottom: var(--jumbotron-padding-y);
