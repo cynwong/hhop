@@ -12,29 +12,18 @@ Recipe lover is a blogging application used to store recipes.
 
 ### Installation
 
-1. Create database. If you have the database, you can skip this step.
+1. Create database with data. If you have the database, you can skip this step.
 
 ```sh
-  npm run createdb
+  npm run db:build
 ```
 
-2. Migrate/ create tables
-
-```sh
-  npm run migrate
-```
-
-3. Add seeds
-
-```sh
-  npm run seed
-```
-
-4. Add css
+2. Add css
 
 ```sh
   npm run generate:style
 ```
+
 ### Usage
 
 ```sh
