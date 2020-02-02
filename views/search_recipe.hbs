@@ -2,9 +2,10 @@
   <div class="container">
     <div class="row">
       {{#each recipes }}
-        {{> recipe_card this.recipe}}
+        {{> recipe_card recipe=this.recipe}}
+      {{else}}
+        <p>You have no recipe.</p>
       {{/each}}
-      {{ noresult }}
     </div>
   </div>
 </div>
