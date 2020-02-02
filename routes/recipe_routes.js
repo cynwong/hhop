@@ -156,13 +156,11 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-
 router.get("/search", (_, res) => res.render("search_recipe", {
   title: "Recipe Lovers!: View Search",
   isMain: true,
   isSearch: true,
 }));
-
 
 // post request for recipe search
 router.get("/search/:title", async (req, res) => {
@@ -173,7 +171,6 @@ router.get("/search/:title", async (req, res) => {
       },
     },
   });
-
   const recipes = result.map(({ dataValues }) => ({
     id: dataValues.id,
     recipe: dataValues,
@@ -218,9 +215,7 @@ router.post("/add", (req, res) => {
   });
 });
 
-
 // --- PUT ---
-
 router.get("/edit", (req, res) => {
   res.render("edit_recipe", {
     isLogin: true,
