@@ -46,13 +46,17 @@ router.route("/add")
       photo: req.body.photo,
       authorId: req.user.id,
     };
-    RECIPES.create(data).then((Res) => {
-      res.json(Res);
+    RECIPES.create(data).then(({id}) => {
       try {
-        res.json(Res);
+        return res.json({
+          data: {
+            recipeId: id,
+          },
+        });
       } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
+        return res.status(500).json({
+          error: [{ msg: "Something went wrong in saving data. Try again later." }],
+        });
       }
     });
   });
