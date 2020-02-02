@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     is_private: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false,
+      defaultValue: true,
       validate: {
         notNull: true,
       },
