@@ -69,6 +69,7 @@ app.use("/recipe", require("./routes/recipe_routes"));
 // add /favourites routes
 app.use("/favourite", require("./routes/favourite_routes"));
 
+// 404 page
 app.use("/404", (req, res) => {
   const pageSettings = { ...UnauthorizedPageSettings };
   if (req.user) {

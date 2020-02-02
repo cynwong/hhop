@@ -2,9 +2,14 @@
   <div class="container">
     <div class="row">
       {{#each recipes }}
-        {{> recipe_card this.recipe}}
+        {{> recipe_card recipe=this.recipe}}
+      {{else}}
+        <div class="col card mb-4 shadow">
+          <h5 class="p-4">You have no recipe.</h5>
+        </div>
       {{/each}}
-      {{ noresult }}
     </div>
   </div>
 </div>
+
+<script src="/assets/js/favourite.js"></script>

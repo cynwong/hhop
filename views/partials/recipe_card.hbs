@@ -1,4 +1,4 @@
-<div class="col-md-4">
+<div class="col-md-4 recipe card" data-id="{{id}}">
 
   <div class="card mb-4 shadow">
     <img class="card-img-top img-thumbnail rounded d-block" src="{{photo}}" alt="Recipe">
@@ -12,13 +12,15 @@
       <div class="d-flex justify-content-between align-items-center">
         <div class="btn-group">
           <a href="/recipe/{{id}}" class="btn btn-sm btn-outline-secondary btn-view-recipe">View</a>
-          <a class="btn btn-sm btn-outline-secondary btn-favourite">
-            {{#if isLiked }}
-              <i class="fas fa-heart"></i>
-            {{else}}
-              <i class="far fa-heart"></i>
-            {{/if}}
+          {{#if username }}
+            <a class="btn btn-sm btn-outline-secondary btn-favourite">
+              {{#if isLiked }}
+                <i class="fas fa-heart"></i>
+              {{else}}
+                <i class="far fa-heart"></i>
+              {{/if}}
             </a>
+          {{/if}}
         </div>
       </div>
     </div>
