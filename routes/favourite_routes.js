@@ -2,10 +2,9 @@
 const router = require("express").Router();
 
 const { checkAuthenticated } = require("../config/auth");
-const { 
-  LoginPageSettings,
+const {
   ViewMyFavourites,
- } = require("../config/page_settings");
+} = require("../config/page_settings");
 
 
 // get db models.
@@ -24,6 +23,7 @@ router.get("/", checkAuthenticated, async (req, res) => {
   // get current user id
   const { user } = req;
   const userId = user.id;
+  const userName = user.name;
 
   // get favourites
   const favs = await FAVOURITES.findAll({
@@ -52,6 +52,7 @@ router.get("/", checkAuthenticated, async (req, res) => {
       id,
       title,
       photo,
+      username: userName,
       favCount: favourites.length,
       isLiked: true,
     };
@@ -60,19 +61,34 @@ router.get("/", checkAuthenticated, async (req, res) => {
   // construct view page.
   const pageSettings = {
     ...ViewMyFavourites,
-    username: user.name,
+    username: userName,
     recipes,
   };
-  res.render("view_favourites", pageSettings);
+  res.render("view_all_favourites", pageSettings);
 });
 
 // --- POST ---
-router.post("/", (req, res) => {
-  const recipeId = req.body.recipeId;
+router.post("/", async (req, res) => {
+  const { recipeId } = req.body;
   const userId = req.user.id;
 
-  if(!userId){
-    
+  if (!userId || !recipeId) {
+    return res.status(400).json({
+      error: [{ msg: "Something went wrong. Try again later. " }],
+    });
+  }
+  try {
+    await FAVOURITES.create({
+      recipeId,
+      userId,
+    });
+    return res.status(200).json({
+      isSuccess: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: [{ msg: "Something went wrong. Try again later. " }],
+    });
   }
 });
 
