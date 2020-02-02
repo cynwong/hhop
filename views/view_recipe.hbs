@@ -1,10 +1,21 @@
-<div class="row mg-a">
-  <div class="col-md-6 offset-md-3 position-static p-4 pl-md-0">
+<div class="row no-gutters bg-light position-relative recipe" data-id="{{recipeId}}">
+  <div class="col-md-6 mb-md-0 p-md-4 flex-box">
+      <img src="{{ photo }}" class="recipe-img mg-a" alt="...">
+  </div>
+  <div class="col-md-6 position-static p-4 pl-md-0">
     <div class="card mt-3">
-      <img src="{{ photo }}" class="card-img-top view-photo" alt="...">
       <ul class="card-body text-center">
         <h5 class="card-title">
           {{ recipeTitle }}
+          {{#if username }}
+          <a class="btn btn-sm btn-outline-secondary btn-favourite">
+            {{#if isLiked }}
+            <i class="fas fa-heart"></i>
+            {{else}}
+            <i class="far fa-heart"></i>
+            {{/if}}
+          </a>
+          {{/if}}
         </h5>
         <h6 class="ml-1 card-subtitle mb-2 text-muted">
           Created by
@@ -22,19 +33,20 @@
         </h6>
 
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">  {{ ingredients }} </li>       
+          <li class="list-group-item"> {{ ingredients }} </li>
         </ul>
         <p class="mt-3 mb-3 ml-1">
           <span class="text-color">
-          {{ method }}
+            {{ method }}
           </span>
         </p>
         <div class="mt-3 d-flex bd-highlight mb-3">
           <div class="btn-group" role="group" aria-label="Edit & delete button">
-            <button type="button" class="btn btn-secondary"><i class="fas fa-heart"></i></button>
             <button type="button" class="btn btn-secondary">Edit</button>
             <button type="button" class="btn btn-secondary">Delete</button>
           </div>
         </div>
     </div>
   </div>
+
+  <script src="/assets/js/favourite.js"></script>
