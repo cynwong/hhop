@@ -1,0 +1,14 @@
+<div class="album py-5 bg-light h-75">
+  <div id="alertText"></div>
+  <div class="container">
+    <div class="row">
+      {{#each recipes }}
+        {{> recipe_card recipe=this}}
+      {{else}}
+        <p>You have no favourited recipe.</p>
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+<script src="/assets/js/all_favourites.js"></script>
