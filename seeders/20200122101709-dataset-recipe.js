@@ -41,7 +41,6 @@ module.exports = {
       source: "https://eightportions.com/datasets/Recipes/#fn:1",
       photo: "https://food.fnr.sndimg.com/content/dam/images/food/fullset/2012/3/22/0/FNCC_bobby-flay-salmon-brown-sugar-mustard_s4x3.jpg.rend.hgtvcom.616.462.suffix/1382541357316.jpeg",
       is_private: false,
-      photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSFt1hqR_okUlqQB7v2ex9xULyXh1PP2GLFqkaq8KdMcelG2phl",
       authorId: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
