@@ -5,8 +5,6 @@ Recipe lover is a blogging application used to store recipes.
 ## Project description 
 This application will display restaurants with known low ratings. The user can save time and money by using the application api database to make an educated decision on where NOT to eat. This application was also built with mobile in mind and is responsive.
 
-The focus point of this application is the use of Javascript and Jquery DOM, third party APIs.
-
 
 Additionally, this application needed to adhere to the below restrictions: 
 
@@ -30,8 +28,8 @@ Additionally, this application needed to adhere to the below restrictions:
 
 
 #### Project Management
-This project was managed by utilizing scrum practices. Tasks were broken down by features and assigned to team members with deadlines. 
-* Jobs progression was tracked on a Kanban board.
+This project was managed by utilizing scrum practices. Tasks were broken down by features and assigned to team members. 
+* Jobs progression was tracked on a Trello board.
 * scrum stand-up ceremony was practiced when the team was physically present.
 
 ## User Story
@@ -39,7 +37,6 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
 > As a user,
 > I want a database of recipes,
 > So that I can view and create recipes with like minded people.
-
 
 
 ## Instruction
