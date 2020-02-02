@@ -1,28 +1,31 @@
 <div class="row no-gutters bg-light position-relative">
   <div class="col-md-6 mb-md-0 p-md-4">
-    <img src={{ photo }} class="w-100" alt="...">
+    <img src="{{ photo }}" class="w-100" alt="...">
   </div>
   <div class="col-md-6 position-static p-4 pl-md-0">
     <h4 class="mt-0 ml-1 mb-3">
-      {{ title }}
+      {{ recipeTitle }}
     </h4>
     <h6 class="ml-1 card-subtitle mb-2 text-muted">
-      Created by:
+      Created by
       <a href="#">
-        {{ recipe-owner }}
-      </a>
-      Favourites: {{favCount}}
+        {{ author }}
+      </a> {{ created }}. Active {{ updated }}.
+    </h6>
+    <h6 class="ml-1 card-subtitle mb-2 text-muted">
+      {{favCount}} 
+      {{#greaterThan favCount 1}}
+        people
+      {{else}}
+        person
+      {{/greaterThan}} liked this recipe.
     </h6>
 
     <div class="card" style="width: 15rem;">
-      <ul class="list-group list-group-flush">
-        {{#each ingredients }}
-          {{> ingredient-block }}
-        {{/each}}
-      </ul>
+      {{ ingredients }}
     </div>
     <p class="mt-3 mb-3 ml-1">
-      {{ instrutions }}
+      {{ method }}
     </p>
     <div class="mt-3 d-flex bd-highlight mb-3">
       <a href="#" class="mr-auto p-2 bd-highlight">Previous</a>

@@ -11,10 +11,15 @@
                         <div class="p-3 border bg-light">
                             <div class="list-group">
                                 <h5>
-                                    Authored recipes:&nbsp;<a href="/recipe/">View all</a>
+                                    Authored recipes:&nbsp;
+                                    {{#if recipes}}
+                                        <a href="/favourite">View all</a>
+                                    {{/if}}
                                 </h5>
                                 {{#each recipes }}
                                     {{> recipe_title }}
+                                {{else}}
+                                    <p>You have not written any recipe yet.</p>
                                 {{/each}}
                             </div>
                         </div>
@@ -23,10 +28,15 @@
                         <div class="p-3 border bg-light">
                             <div class="list-group">
                                 <h5>
-                                    Favourite recipes:&nbsp;<a href="/favourite">View all</a>
+                                    Favourite recipes:&nbsp;
+                                    {{#if favourites}}
+                                        <a href="/favourite">View all</a>
+                                    {{/if}}
                                 </h5>
                                 {{#each favourites }}
                                     {{> recipe_title }}
+                                {{else}}
+                                    <p>You have no favourited recipe.</p>
                                 {{/each}}
                             </div>
                         </div>

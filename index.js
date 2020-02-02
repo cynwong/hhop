@@ -4,7 +4,10 @@ const path = require("path");
 const session = require("express-session");
 
 // get homepage setting
-const { HomePageSettings } = require("./config/page_settings");
+const {
+  HomePageSettings,
+  UnauthorizedPageSettings,
+} = require("./config/page_settings");
 
 // configure passport
 const passport = require("./config/passport");
@@ -65,6 +68,14 @@ app.use("/user", require("./routes/user_routes"));
 app.use("/recipe", require("./routes/recipe_routes"));
 // add /favourites routes
 app.use("/favourite", require("./routes/favourite_routes"));
+
+app.use("/404", (req, res) => {
+  const pageSettings = { ...UnauthorizedPageSettings };
+  if (req.user) {
+    pageSettings.username = req.user.name;
+  }
+  res.render("not_authorized", pageSettings);
+});
 
 // misc routes redirect back to homepage.
 app.get("/*", (_, res) => res.redirect("/"));
