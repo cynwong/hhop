@@ -3,7 +3,23 @@ const passport = require("passport");
 
 const router = require("express").Router();
 
-const Users = require("../models").user;
+// get db models.
+const models = require("../models");
+
+/**
+ * @typeof db.model
+ */
+const USERS = models.user;
+/**
+ * @typeof db.model
+ */
+const FAVOURITES = models.favourite;
+/**
+ * @typeof db.model
+ */
+const RECIPES = models.recipe;
+
+// get pge settings
 const {
   ChangePasswordPageSettings,
   DashboardPageSettings,
@@ -16,11 +32,41 @@ const { checkAuthenticated, forwardAuthenticated } = require("../config/auth");
 // --- GET Routes ---
 
 // route "/user"
-router.get("/", checkAuthenticated, (req, res) => {
-  const pageSettings = { ...DashboardPageSettings };
-  if (req.user) {
-    pageSettings.username = req.user.name;
-  }
+router.get("/", checkAuthenticated, async (req, res) => {
+  const userId = req.user.id;
+  const recordsLimit = 5;
+
+  // get all user's favourites
+  const favRecords = await FAVOURITES.findAll({
+    where: { userId },
+    include: {
+      model: RECIPES,
+      require: true,
+      attributes: ["id", "title", "updatedAt"],
+    },
+    order: [
+      [RECIPES, "updatedAt", "DESC"],
+    ],
+  });
+
+  // get all user's recipes
+  const recipeRecords = await RECIPES.findAll({
+    where: {
+      authorId: userId,
+    },
+    attributes: ["id", "title", "updatedAt"],
+    order: [
+      ["updatedAt", "DESC"],
+    ],
+  });
+  const pageSettings = {
+    ...DashboardPageSettings,
+    username: req.user.name,
+    recipesCount: recipeRecords.length,
+    favsCount: favRecords.length,
+    recipes: recipeRecords.slice(0, recordsLimit).map(({ dataValues }) => dataValues),
+    favourites: favRecords.slice(0, recordsLimit).map(({ recipe }) => recipe.dataValues),
+  };
   return res.render("user", pageSettings);
 });
 
@@ -86,7 +132,7 @@ router.route("/password")
       });
     }
     try {
-      await Users.update({ password },
+      await USERS.update({ password },
         {
           where: { id },
         });
@@ -129,7 +175,7 @@ router.route("/register")
       }
 
       // check if user already registered.
-      const user = await Users.findOne({
+      const user = await USERS.findOne({
         where: { email },
       });
       if (user) {
@@ -140,7 +186,7 @@ router.route("/register")
       }
 
       // add new user to db
-      await Users.create({
+      await USERS.create({
         email,
         name,
         password,
