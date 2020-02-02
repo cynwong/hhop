@@ -1,11 +1,14 @@
 <div class="album py-5 bg-light">
+  <div id="alertText"></div>
   <div class="container">
     <div class="row">
       {{#each recipes }}
         {{> recipe_card recipe=this}}
+      {{else}}
+        <p>You have no recipe.</p>
       {{/each}}
     </div>
   </div>
 </div>
 
-<script src="/assets/js/favourites.js"></script>
+<script src="/assets/js/favourite.js"></script>
