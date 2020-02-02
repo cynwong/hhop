@@ -1,36 +1,52 @@
-$("#edit").click(async (event) => {
-
-
-
-  event.preventDefault();
-  const title = $("#updateTitle");
-  const ingredients = $("#updateIngredients");
-  const method = $("#updateMethod");
-  const credit = $("#updateCredit");
-  const source = $("#updateSource");
-  const addImage = $("#updateImage");
-
-  const data = {
-    title: title.val().trim(),
-    ingredients: ingredients.val().trim(),
-    method: method.val().trim(),
-    creditTo: credit.val().trim(),
-    source: source.val().trim(),
-    photo: addImage.val().trim(),
-  };
-
-  try {
-    const response = await $.ajax({
-      method: "PUT",
-      url: "/recipe/edit",
-      data,
-    });
-    if (response.error) {
-      return alertUser(response.error);
+$(document).ready(() => {
+  $("#btn-save").click(async (event) => {
+    event.preventDefault();
+    const errors = [];
+    let id = $("#updateId").val().trim();
+    if (!id) {
+      id = window.location.href.split("/").pop();
     }
-    return window.location.replace("/recipe/");
-  } catch (error) {
-    // eslint-disable-next-line no-undef
-    return alertUser(error.responseJSON.error);
-  }
+    const title = $("#updateTitle").val().trim();
+    if (!title) {
+      errors.push([{ msg: "Title is required." }]);
+    }
+    const ingredients = $("#updateIngredients").val().trim();
+    if (!ingredients) {
+      errors.push([{ msg: "Ingredients is required." }]);
+    }
+    const method = $("#updateMethod").val().trim();
+    if (!method) {
+      errors.push([{ msg: "Method is required." }]);
+    }
+    const creditTo = $("#updateCredit").val().trim();
+    const source = $("#updateSource").val().trim();
+    const photo = $("#updateImage").val().trim();
+
+    try {
+      // connect
+      const response = await $.ajax({
+        url: "/recipe/edit",
+        method: "PUT",
+        data: {
+          id,
+          title,
+          ingredients,
+          method,
+          creditTo,
+          source,
+          photo,
+        },
+      });
+      // if there is an error message.
+      if (response.error) {
+        // eslint-disable-next-line no-undef
+        return alertUser(response.error);
+      }
+      // when success
+      return window.location.replace(`/recipe/${id}`);
+    } catch (error) {
+      // eslint-disable-next-line no-undef
+      return alertUser(error.responseJSON.error);
+    }
+  });
 });

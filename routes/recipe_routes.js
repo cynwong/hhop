@@ -21,12 +21,15 @@ const USERS = models.user;
 
 // get page settings
 const {
+  EditRecipePageSettings,
   SearchRecipe,
   ViewRecipe,
   ViewAllRecipes,
 } = require("../config/page_settings");
 
 const { Op } = Sequelize;
+
+const accessDenied = (res) => res.redirect("/404");
 
 router.route("/add")
   .get(checkAuthenticated, (req, res) => {
@@ -98,7 +101,7 @@ router.get("/all", checkAuthenticated, async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    return res.redirect("/404");
+    return accessDenied(res);
   }
 });
 
@@ -106,9 +109,7 @@ router.get("/all", checkAuthenticated, async (req, res) => {
 router.delete("/delete/:id", async (req, res) => {
   const { id } = req.params;
   if (!req.user) {
-    return res.status(401).json({
-      error: [{ msg: "Access denied." }],
-    });
+    return accessDenied(res);
   }
   try {
     const recipe = await RECIPES.findOne({
@@ -117,9 +118,7 @@ router.delete("/delete/:id", async (req, res) => {
     });
     // check if is author
     if (recipe.authorId !== req.user.id) {
-      return res.status(401).json({
-        error: [{ msg: "Access denied." }],
-      });
+      return accessDenied(res);
     }
     // delete recipe
     await RECIPES.destroy({
@@ -138,29 +137,84 @@ router.delete("/delete/:id", async (req, res) => {
 });
 
 // route /recipe/edit
-router.route("/edit")
-  .get((req, res) => {
-    res.render("edit_recipe", {
-      isLogin: true,
+router.put("/edit", async (req, res) => {
+  const {
+    id,
+    title,
+    ingredients,
+    method,
+    creditTo,
+    source,
+    photo,
+  } = req.body;
+
+  // check login
+  if (!req.user) {
+    return accessDenied(res);
+  }
+
+  try {
+    // check the record
+    const recipe = await RECIPES.findOne({
+      where: { id },
+      attributes: ["authorId"],
     });
-  })
-  .put((req, res) => {
-    RECIPES.update({
-      title: req.body.title,
-      ingredients: req.body.ingredients,
-      method: req.body.method,
-      is_private: req.body.is_private,
-      creditTo: req.body.creditTo,
-      source: req.body.source,
-      photo: req.body.photo,
-    }, {
-      where: {
-        id: req.body.id,
+    // check if is author
+    if (recipe.authorId !== req.user.id) {
+      return accessDenied(res);
+    }
+    // delete recipe
+    await RECIPES.update(
+      {
+        title,
+        ingredients,
+        method,
+        creditTo,
+        source,
+        photo,
       },
-    }).then(() => {
-      res.end();
+      {
+        where: { id },
+      },
+    );
+    // return success status
+    return res.status(200).json({
+      isSuccess: true,
     });
-  });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      error: [{ msg: "Something went wrong in deletion. Try again later." }],
+    });
+  }
+});
+
+// route "/recipe/edit/:id"
+router.get("/edit/:id", checkAuthenticated, async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // get recipe
+    const recipe = await RECIPES.findOne({
+      where: { id },
+    });
+    // render page
+    const pageSettings = {
+      ...EditRecipePageSettings,
+      id: recipe.id,
+      recipeTitle: recipe.title,
+      ingredients: recipe.ingredients,
+      method: recipe.method,
+      creditTo: recipe.creditTo,
+      source: recipe.source,
+      photo: recipe.photo,
+    };
+    return res.render("edit_recipe", pageSettings);
+  } catch (err) {
+    console.error(err);
+    return accessDenied(res);
+  }
+});
 
 // route /recipe/search
 router.get("/search", (_, res) => res.render("search_recipe", {
@@ -273,7 +327,7 @@ router.route("/:id")
           return renderRecipePage();
         }
         // if not author
-        return res.redirect("/404");
+        return accessDenied(res);
       }
 
       // if recipe is not marked as private,
@@ -281,7 +335,7 @@ router.route("/:id")
       return renderRecipePage();
     } catch (error) {
       console.error(error);
-      return res.redirect("/404");
+      return accessDenied(res);
     }
   });
 
