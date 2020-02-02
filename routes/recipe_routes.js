@@ -31,7 +31,7 @@ router.get("/search/:title", async (req, res) => {
       },
     },
   });
-  // console.log(result);
+
   const recipes = result.map(({ dataValues }) => ({
     id: dataValues.id,
     authorId: dataValues.authorId,
