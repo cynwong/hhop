@@ -22,6 +22,11 @@ module.exports = {
     isMain: true,
     isSearch: true,
   },
+  ViewAllRecipes: {
+    title: ": View my recipes",
+    isMain: true,
+    isSearch: true,
+  },
   ViewMyFavourites: {
     title: ": View favourites",
     isMain: true,
