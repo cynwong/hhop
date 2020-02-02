@@ -46,7 +46,7 @@ router.route("/add")
       photo: req.body.photo,
       authorId: req.user.id,
     };
-    RECIPES.create(data).then(({id}) => {
+    RECIPES.create(data).then(({ id }) => {
       try {
         return res.json({
           data: {

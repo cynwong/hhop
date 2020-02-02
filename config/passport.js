@@ -1,5 +1,6 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require("bcrypt");
 
 // Load User model
 const User = require("../models").user;
@@ -14,8 +15,10 @@ passport.use(
         if (!user) {
           return done(null, false, { message: "Incorrect Email." });
         }
+
         // Check if password is correct
-        if (!user.validPassword(password)) {
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
           return done(null, false, { message: "Incorrect password." });
         }
         return done(null, user);
@@ -26,11 +29,11 @@ passport.use(
   ),
 );
 
-passport.serializeUser(({ id }, done) => done(null, { id }));
+passport.serializeUser(({ id }, done) => done(null, id));
 
-passport.deserializeUser(async (user, done) => {
+passport.deserializeUser(async (id, done) => {
   try {
-    const dbUser = await User.findByPk(user.id);
+    const dbUser = await User.findByPk(id);
     return done(null, dbUser);
   } catch (error) {
     return done(error);
