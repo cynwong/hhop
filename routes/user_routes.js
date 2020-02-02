@@ -32,7 +32,6 @@ router.get("/login", forwardAuthenticated, (_, res) => res.render("login", Login
 // route:"/user/logout" : Logout
 router.get("/logout", (req, res) => {
   req.logOut();
-  req.flash("success_msg", "You are successfully logged out");
   res.redirect("/user/login");
 });
 
