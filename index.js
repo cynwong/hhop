@@ -29,13 +29,22 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Set Handlebars.
+app.set("views", path.resolve(__dirname, "views"));
+app.set("view engine", ".hbs");
+const helpers = {
+  greaterThan: (v1, v2, options) => {
+    if (v1 > v2) {
+      return options.fn(this);
+    }
+    return options.inverse(this);
+  },
+};
 app.engine(".hbs", exphbs({
   defaultLayout: "main",
   extname: "hbs", // shorten the handlebars extension
   layoutsDir: path.resolve(__dirname, "views", "layouts"),
+  helpers,
 }));
-app.set("view engine", ".hbs");
-app.set("views", path.resolve(__dirname, "views"));
 
 // add static folder.
 app.use(express.static("public"));
