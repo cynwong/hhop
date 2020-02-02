@@ -5,7 +5,16 @@ const { checkAuthenticated } = require("../config/auth");
 const { ViewMyFavourites } = require("../config/page_settings");
 
 
-const Favourites = require("../models").favourite;
+// get db models.
+const models = require("../models");
+/**
+ * @typeof db.model
+ */
+const FAVOURITES = models.favourite;
+/**
+ * @typeof db.model
+ */
+const RECIPES = models.recipe;
 
 // --- GET Routes ---
 router.get("/", checkAuthenticated, async (req, res) => {
@@ -14,27 +23,27 @@ router.get("/", checkAuthenticated, async (req, res) => {
   const userId = user.id;
 
   // get favourites
-  const favs = await Favourites.findAll({
+  const favs = await FAVOURITES.findAll({
     where: {
       userId,
     },
     include: {
-      model: Recipe,
+      model: RECIPES,
       require: true,
       include: [{
-        model: Favourites,
+        model: FAVOURITES,
         attributes: ["recipeId"],
       }],
     },
   });
 
   // get recipes
-  const recipes = favs.map(({ recipe : }) => {
+  const recipes = favs.map(({ recipe }) => {
     const {
       id,
       title,
       photo,
-      favourites
+      favourites,
     } = recipe;
     return {
       id,
@@ -64,7 +73,7 @@ router.delete("/:id", async (req, res) => {
   const userId = req.user.id;
 
   try {
-    await Favourites.destroy({
+    await FAVOURITES.destroy({
       where: {
         recipeId,
         userId,
