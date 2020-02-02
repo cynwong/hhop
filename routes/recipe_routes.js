@@ -117,7 +117,7 @@ router.delete("/delete/:id", async (req, res) => {
       attributes: ["authorId"],
     });
     // check if is author
-    if (recipe.authorId !== req.user.id) {
+    if (recipe && recipe.authorId !== req.user.id) {
       return accessDenied(res);
     }
     // delete recipe
@@ -216,6 +216,46 @@ router.get("/edit/:id", checkAuthenticated, async (req, res) => {
   }
 });
 
+// route /recipe/publish
+router.put("/publish/:id", async (req, res) => {
+  const { id } = req.params;
+
+  // check login
+  if (!req.user) {
+    return accessDenied(res);
+  }
+
+  try {
+    // check the record
+    const recipe = await RECIPES.findOne({
+      where: { id },
+      attributes: ["authorId"],
+    });
+    // check if is author
+    if (recipe.authorId !== req.user.id) {
+      return accessDenied(res);
+    }
+    // delete recipe
+    await RECIPES.update(
+      {
+        is_private: false,
+      },
+      {
+        where: { id },
+      },
+    );
+    // return success status
+    return res.status(200).json({
+      isSuccess: true,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      error: [{ msg: "Something went wrong in deletion. Try again later." }],
+    });
+  }
+});
+
 // route /recipe/search
 router.get("/search", (_, res) => res.render("search_recipe", {
   title: "Recipe Lovers!: View Search",
@@ -308,6 +348,7 @@ router.route("/:id")
           creditTo,
           source,
           photo,
+          isPrivate,
           created: moment(createdAt).fromNow(),
           updated: moment(updatedAt).fromNow(),
           author,

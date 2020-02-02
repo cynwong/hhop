@@ -44,6 +44,9 @@
         {{#if isAuthor }}
           <div class="mt-3 d-flex bd-highlight mb-3">
             <div class="btn-group mr-auto ml-auto" role="group" aria-label="Edit & delete button">
+              {{#if isPrivate }}
+                <button type="button" class="btn btn-danger btn-publish">Publish Recipe</button>
+              {{/if}}
               <button type="button" class="btn btn-danger btn-edit">Edit</button>
               <button type="button" class="btn btn-danger btn-delete">Delete</button>
             </div>
