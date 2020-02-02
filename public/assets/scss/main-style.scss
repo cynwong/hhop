@@ -53,8 +53,6 @@ body{
 }
 
 #user-page {
-
-
     .card, .active{
         background-image: $index-color;
     }
@@ -62,6 +60,11 @@ body{
     .active {
         border-color: $midl-color;
     }
+}
+
+.view-photo {
+    height:500px;
+    width:auto;
 }
 
 #add-page {
