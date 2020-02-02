@@ -57,7 +57,7 @@ router.get("/", checkAuthenticated, async (req, res) => {
   // construct view page.
   const pageSettings = {
     ...ViewMyFavourites,
-    user,
+    username: user.name,
     recipes,
   };
   res.render("view_favourites", pageSettings);
