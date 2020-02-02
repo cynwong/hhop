@@ -4,15 +4,16 @@
   "description": "A recipe repository where users can log their recipes",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "build": "npm run generate:style",
+    "db:create": "sequelize db:drop db_cookbook && sequelize db:create db_cookbook",
     "dev": "nodemon index.js",
-    "generate:style": "sass --watch public/assets/scss:public/assets/css",
+    "db:build": "npm run db:create && npm run-script migrate && npm run-script seed",
+    "generate:style": "sass public/assets/scss:public/assets/css",
     "lint": "eslint \"**/*.js\" --quiet",
-    "test": "npm run lint",
-    "createdb": "sequelize db:create db_cookbook",
     "migrate": "sequelize db:migrate",
     "seed": "sequelize-cli db:seed:undo:all && sequelize-cli db:seed:all",
-    "db:setup": "npm run createdb && npm run migrate && npm run seed"
+    "start": "node index.js",
+    "test": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "express-session": "^1.17.0",
+    "moment": "^2.24.0",
     "mysql2": "^2.1.0",
     "nodemon": "^2.0.2",
     "passport": "^0.4.1",
