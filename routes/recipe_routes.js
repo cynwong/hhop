@@ -52,7 +52,6 @@ router.get("/search/:title", async (req, res) => {
   }
 });
 
-
 // --- POST ---
 router.post("/add", (req, res) => {
   const data = {
@@ -92,35 +91,43 @@ router.get("/edit", checkAuthenticated, (req, res) => {
 });
 
 router.put("/edit", (req, res) => {
-  Recipes.update({
+  const data = {
     title: req.body.title,
     ingredients: req.body.ingredients,
     method: req.body.method,
-    is_private: req.body.is_private,
     creditTo: req.body.creditTo,
     source: req.body.source,
     photo: req.body.photo,
+  };
+  Recipes.update({
+    data,
   }, {
     where: {
-      id: req.body.id,
+      authorId: req.user.id,
     },
-  }).then(() => {
-    res.end();
+  }).then((Res) => {
+    res.json(Res);
+    try {
+      res.json(Res);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    }
   });
 });
 
 // --- DELETE ---
-router.get("/:id", checkAuthenticated, (req, res) => {
-  res.render("delete_recipe", {
+router.get("/:delete", checkAuthenticated, (req, res) => {
+  res.render("view_recipe", {
     user: req.user,
     isLogin: true,
   });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:delete", (req, res) => {
   Recipes.destroy({
     where: {
-      id: req.params.id,
+      authorId: req.params.id,
     },
   }).then((Recipe) => {
     res.json(Recipe);
