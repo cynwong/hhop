@@ -1,8 +1,8 @@
 // for /recipe routes
-
 const router = require("express").Router();
 const Sequelize = require("sequelize");
 const moment = require("moment");
+const { checkAuthenticated } = require("../config/auth");
 
 // get db models.
 const models = require("../models");
@@ -22,16 +22,103 @@ const USERS = models.user;
 // get page settings
 const {
   ViewRecipe,
-
+  ViewAllRecipes,
 } = require("../config/page_settings");
-
-const { checkAuthenticated } = require("../config/auth");
-const Recipes = require("../models").recipe;
 
 const { Op } = Sequelize;
 
+// --- POST ---
+router.post("/add", (req, res) => {
+  const data = {
+    title: req.body.title,
+    ingredients: req.body.ingredients,
+    method: req.body.method,
+    creditTo: req.body.creditTo,
+    source: req.body.source,
+    photo: req.body.photo,
+    authorId: req.user.id,
+    is_private: req.body.isPrivate,
+  };
+  RECIPES.create(data).then((Res) => {
+    res.json(Res);
+    try {
+      res.json(Res);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    }
+  });
+});
+
+router.get("/add", checkAuthenticated, (req, res) => {
+  res.render("add_recipe", {
+    user: req.user,
+    isLogin: true,
+    userName: true,
+  });
+});
+
+// --- DELETE ---
+router.delete("/:id", (req, res) => {
+  console.log("testweoursfheruo");
+  console.log(req.params);
+  RECIPES.destroy({
+    where: {
+      id: req.params.id,
+    },
+
+  }).then(() => {
+    res.render();
+  });
+});
+
+
 // --- GET Routes ---
-// route "/recipe" : Recipe page
+// route "/recipe/all" : Recipe page
+router.get("/all", checkAuthenticated, async (req, res) => {
+  const userId = req.user ? req.user.id : null;
+  const userName = req.user ? req.user.name : null;
+
+  try {
+    const records = await RECIPES.findAll({
+      where: { authorId: userId },
+      include: [
+        {
+          model: FAVOURITES,
+          attributes: ["recipeId"],
+        },
+      ],
+    });
+    const recipes = records.map(({ dataValues }) => {
+      const {
+        id,
+        title,
+        photo,
+        favourites,
+      } = dataValues;
+      return {
+        id,
+        title,
+        photo,
+        favCount: favourites.length,
+        username: userName,
+        isLiked: favourites.find((fav) => fav.recipeId === id),
+      };
+    });
+    // eslint-disable-next-line no-console
+    console.log(recipes);
+    return res.render("view_all_recipes", {
+      ...ViewAllRecipes,
+      recipes,
+      username: userName,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.redirect("/404");
+  }
+});
+
+// route "/recipe/{id}" : Recipe page
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
   const userId = req.user ? req.user.id : null;
@@ -124,6 +211,7 @@ router.get("/search/:title", async (req, res) => {
       },
     },
   });
+
   const recipes = result.map(({ dataValues }) => ({
     id: dataValues.id,
     recipe: dataValues,
@@ -145,6 +233,7 @@ router.get("/search/:title", async (req, res) => {
   }
 });
 
+
 // --- POST ---
 router.post("/add", (req, res) => {
   const data = {
@@ -155,8 +244,9 @@ router.post("/add", (req, res) => {
     source: req.body.source,
     photo: req.body.photo,
     authorId: req.user.id,
+    is_private: req.body.isPrivate,
   };
-  Recipes.create(data).then((Res) => {
+  RECIPES.create(data).then((Res) => {
     res.json(Res);
     try {
       res.json(Res);
@@ -171,59 +261,34 @@ router.get("/add", checkAuthenticated, (req, res) => {
   res.render("add_recipe", {
     user: req.user,
     isLogin: true,
+    userName: true,
   });
 });
 
 // --- PUT ---
-
-router.get("/edit", checkAuthenticated, (req, res) => {
+router.get("/edit", (req, res) => {
   res.render("edit_recipe", {
     user: req.user,
     isLogin: true,
+    userName: true,
   });
 });
 
 router.put("/edit", (req, res) => {
-  const data = {
+  RECIPES.update({
     title: req.body.title,
     ingredients: req.body.ingredients,
     method: req.body.method,
+    is_private: req.body.is_private,
     creditTo: req.body.creditTo,
     source: req.body.source,
     photo: req.body.photo,
-  };
-  Recipes.update({
-    data,
   }, {
     where: {
-      authorId: req.user.id,
+      id: req.body.id,
     },
-  }).then((Res) => {
-    res.json(Res);
-    try {
-      res.json(Res);
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    }
-  });
-});
-
-// --- DELETE ---
-router.get("/:delete", checkAuthenticated, (req, res) => {
-  res.render("view_recipe", {
-    user: req.user,
-    isLogin: true,
-  });
-});
-
-router.delete("/:delete", (req, res) => {
-  Recipes.destroy({
-    where: {
-      authorId: req.params.id,
-    },
-  }).then((Recipe) => {
-    res.json(Recipe);
+  }).then(() => {
+    res.end();
   });
 });
 
