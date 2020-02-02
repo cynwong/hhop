@@ -102,6 +102,41 @@ router.get("/all", checkAuthenticated, async (req, res) => {
   }
 });
 
+// route: /recipe/delete/:id
+router.delete("/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  if (!req.user) {
+    return res.status(401).json({
+      error: [{ msg: "Access denied." }],
+    });
+  }
+  try {
+    const recipe = await RECIPES.findOne({
+      where: { id },
+      attributes: ["authorId"],
+    });
+    // check if is author
+    if (recipe.authorId !== req.user.id) {
+      return res.status(401).json({
+        error: [{ msg: "Access denied." }],
+      });
+    }
+    // delete recipe
+    await RECIPES.destroy({
+      where: { id },
+    });
+    // return success status
+    return res.status(200).json({
+      isSuccess: true,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      error: [{ msg: "Something went wrong in deletion. Try again later." }],
+    });
+  }
+});
+
 // route /recipe/edit
 router.route("/edit")
   .get((req, res) => {
@@ -170,40 +205,6 @@ router.get("/search/:title", async (req, res) => {
   return res.render("search_recipe", pageSettings);
 });
 
-router.route("/delete/:id")
-  .delete(async (req, res) => {
-    const { id } = req.params;
-    if (!req.user) {
-      return res.status(401).json({
-        error: [{ msg: "Access denied." }],
-      });
-    }
-    try {
-      const recipe = await RECIPES.findOne({
-        where: { id },
-        attributes: ["authorId"],
-      });
-      // check if is author
-      if (recipe.authorId !== req.user.id) {
-        return res.status(401).json({
-          error: [{ msg: "Access denied." }],
-        });
-      }
-      // delete recipe
-      await RECIPES.destroy({
-        where: { id },
-      });
-      // return success status
-      return res.status(200).json({
-        isSuccess: true,
-      });
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({
-        error: [{ msg: "Something went wrong in deletion. Try again later." }],
-      });
-    }
-  });
 // route "/recipe/{id}" : Recipe page
 router.route("/:id")
   .get(async (req, res) => {
