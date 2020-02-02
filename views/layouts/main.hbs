@@ -43,7 +43,10 @@
     <div class="bg">
         <header>
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-                <a class="navbar-brand" href="/">Recipe Finder</a>
+                <a class="navbar-brand" href="/">
+                        <img class="logo" src="https://www.recipeunlimited.com/content/dam/cara/en/recipe-image-library/our-brands/recipeLogoFinal2018-white.png" alt="">
+                    Recipe Finder
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -54,20 +57,19 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="/user">Home <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item"></li>
-                        <span class="navbar-text">&nbsp;{{username}}&nbsp;</span>
+                        <li class="nav-item">
+                            <span class="navbar-text">&nbsp;{{username}}&nbsp;&nbsp;</span>
                         </li>
-                        <li class="nav-item"></li>
-                        <a class="nav-link btn my-2 my-sm-0" href="/user/password" data-toggle="tooltip" data-placement="bottom" title="Change password">
-                        <i class="fas fa-cog"></i>
-                        </a>
+                        <li class="nav-item">
+                            <a class="nav-link btn pt-0" href="/user/password" data-toggle="tooltip" data-placement="bottom" title="Change password"></a>
+                            <i class="fas fa-cog"></i>
                         </li>
-                        <li class="nav-item"></li>
-                        <a class="nav-link btn btn-outline-danger my-2 my-sm-0" href="/user/logout">Logout</a>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-danger my-2 my-sm-0" href="/user/logout">Logout</a>
                         </li>
                         {{else}}
-                        <li class="nav-item"></li>
-                        <a class="nav-link btn btn-outline-danger my-2 my-sm-0" href="/user/login">Login</a>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-danger my-2 my-sm-0" href="/user/login">Login</a>
                         </li>
                     {{/if}}
                 </ul>
