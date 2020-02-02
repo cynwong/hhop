@@ -2,34 +2,32 @@
     <div class="card mx-auto mt-5">
         <div class="card-body">
             <h5 class="card-title">
-                Username
+                Hello, {{ username }}.
             </h5>
             <p class="card-text">
-                You own 2 recipes, and have favourited 3 recipes.
+                You own {{ recipesCount }} recipe{{#greaterThan recipesCount 1}}s{{/greaterThan}}, and favourited {{favsCount}} recipe{{#greaterThan favsCount 1}}s{{/greaterThan}}.
                 <div class="row mx-md-n5">
                     <div class="col px-md-5">
                         <div class="p-3 border bg-light">
                             <div class="list-group">
-                                <p>You created these recipes:</p>
-                                <button type="button" class="list-group-item list-group-item-action active">
-                                    Recipe One
-                                </button>
-                                <button type="button" class="list-group-item list-group-item-action">Recipe Two</button>
-                                <button type="button" class="list-group-item list-group-item-action">Recipe Three</button>
+                                <h5>
+                                    Authored recipes:&nbsp;<a href="/recipe/">View all</a>
+                                </h5>
+                                {{#each recipes }}
+                                    {{> recipe_title }}
+                                {{/each}}
                             </div>
                         </div>
                     </div>
                     <div class="col px-md-5">
                         <div class="p-3 border bg-light">
                             <div class="list-group">
-                                <p>You added these recipes to your favourites:</p>
-                                <button type="button" class="list-group-item list-group-item-action active">
-                                    Favourite One
-                                </button>
-                                <button type="button" class="list-group-item list-group-item-action">Favourite
-                                    Two</button>
-                                <button type="button" class="list-group-item list-group-item-action">Favourite
-                                    Three</button>
+                                <h5>
+                                    Favourite recipes:&nbsp;<a href="/favourite">View all</a>
+                                </h5>
+                                {{#each favourites }}
+                                    {{> recipe_title }}
+                                {{/each}}
                             </div>
                         </div>
                     </div>
