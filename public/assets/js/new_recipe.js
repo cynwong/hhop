@@ -8,6 +8,7 @@ $(document).ready(() => {
     const credit = $("#newCredit");
     const source = $("#newSource");
     const addImage = $("#newImage");
+    const isPvt = $("isPvt");
     const errors = [];
 
     const data = {
@@ -17,6 +18,7 @@ $(document).ready(() => {
       creditTo: credit.val().trim(),
       source: source.val().trim(),
       photo: addImage.val().trim(),
+      isPvt: isPvt.val(),
     };
 
     const titleErr = title.val().trim();
