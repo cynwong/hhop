@@ -135,7 +135,7 @@ router.get("/search", (_, res) => res.render("search_recipe", {
 router.get("/search/:title", async (req, res) => {
   const userId = req.user ? req.user.id : null;
   const userName = req.user ? req.user.name : null;
-  
+
   const result = await RECIPES.findAll({
     where: {
       title: {
