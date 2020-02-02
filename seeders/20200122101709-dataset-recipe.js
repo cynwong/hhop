@@ -138,5 +138,5 @@ module.exports = {
       updatedAt: new Date(),
     },
   ]),
-  down: (queryInterface) => queryInterface.bulkEDelete("recipes", null, {}),
+  down: (queryInterface) => queryInterface.bulkDelete("recipes", null, {}),
 };
