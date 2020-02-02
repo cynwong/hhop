@@ -48,11 +48,11 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = (models) => {
     User.hasMany(models.recipe, {
       foreignKey: "authorId",
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
       onUpdate: "CASCADE",
     });
     User.hasMany(models.favourite, {
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
       onUpdate: "CASCADE",
     });
   };

@@ -33,7 +33,7 @@ module.exports = {
     is_private: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
-      defaultValue: false,
+      defaultValue: true,
       validate: {
         notNull: true,
       },
