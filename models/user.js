@@ -2,6 +2,13 @@ const bcrypt = require("bcrypt");
 
 const saltRound = 10;
 
+const hashPassword = async (info) => {
+  const u = info;
+  const salt = await bcrypt.genSalt(saltRound);
+  u.password = await bcrypt.hash(u.password, salt);
+  return u;
+};
+
 module.exports = (sequelize, DataTypes) => {
   const user = sequelize.define("user", {
     email: {
@@ -43,12 +50,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
 
-  // before user is created, hash the password
-  user.beforeCreate(async (info) => {
-    const u = info;
-    u.password = await bcrypt.hash(u.password, saltRound);
-    return u;
-  });
+  // hash the password
+  user.beforeCreate(hashPassword);
+  user.beforeUpdate(hashPassword);
 
   // eslint-disable-next-line func-names
   user.associate = function (models) {

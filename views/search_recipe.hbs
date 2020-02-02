@@ -1,11 +1,8 @@
-
-{{> carousel_block }}
-
-<div class="album py-5 bg-light">
+<div class="album py-5">
   <div class="container">
     <div class="row">
-      {{#each result }}
-        {{> recipe_card recipe=this.recipe}}
+      {{#each recipes }}
+        {{> recipe_card this.recipe}}
       {{/each}}
       {{ noresult }}
     </div>
