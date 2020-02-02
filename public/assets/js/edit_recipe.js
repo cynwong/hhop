@@ -1,7 +1,4 @@
-$("#edit").click(async (event) => {
-
-
-
+$("#save").click(async (event) => {
   event.preventDefault();
   const title = $("#updateTitle");
   const ingredients = $("#updateIngredients");
@@ -26,6 +23,7 @@ $("#edit").click(async (event) => {
       data,
     });
     if (response.error) {
+      // eslint-disable-next-line no-undef
       return alertUser(response.error);
     }
     return window.location.replace("/recipe/");

@@ -1,6 +1,4 @@
 /* eslint-disable no-undef */
-// $(document).ready(() => {
-
 const title = $("#newTitle");
 const ingredients = $("#newIngredients");
 const method = $("#newMethod");
@@ -20,8 +18,8 @@ const data = {
 };
 // Delete
 function deleteRecipe() {
-  // event.stopPropagation();
-  alert("debug 1");
+  // eslint-disable-next-line no-alert
+  alert("debug 1 --- Your recipe will be deleted");
   $.ajax({
     method: "DELETE",
     url: `/recipe/${id}`,
@@ -39,5 +37,3 @@ function deleteRecipe() {
 }
 
 $("#delete").click(deleteRecipe);
-
-// });
