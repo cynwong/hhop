@@ -21,59 +21,45 @@ const USERS = models.user;
 
 // get page settings
 const {
+  SearchRecipe,
   ViewRecipe,
   ViewAllRecipes,
 } = require("../config/page_settings");
 
 const { Op } = Sequelize;
 
-// --- POST ---
-router.post("/add", (req, res) => {
-  const data = {
-    title: req.body.title,
-    ingredients: req.body.ingredients,
-    method: req.body.method,
-    creditTo: req.body.creditTo,
-    source: req.body.source,
-    photo: req.body.photo,
-    authorId: req.user.id,
-    is_private: req.body.isPrivate,
-  };
-  RECIPES.create(data).then((Res) => {
-    res.json(Res);
-    try {
-      res.json(Res);
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
-    }
+router.route("/add")
+  .get(checkAuthenticated, (req, res) => {
+    res.render("add_recipe", {
+      username: req.user.name,
+      isLogin: true,
+    });
+  })
+  .post((req, res) => {
+    const data = {
+      title: req.body.title,
+      ingredients: req.body.ingredients,
+      method: req.body.method,
+      creditTo: req.body.creditTo,
+      source: req.body.source,
+      photo: req.body.photo,
+      authorId: req.user.id,
+    };
+    RECIPES.create(data).then(({ id }) => {
+      try {
+        return res.json({
+          data: {
+            recipeId: id,
+          },
+        });
+      } catch (err) {
+        return res.status(500).json({
+          error: [{ msg: "Something went wrong in saving data. Try again later." }],
+        });
+      }
+    });
   });
-});
 
-router.get("/add", checkAuthenticated, (req, res) => {
-  res.render("add_recipe", {
-    user: req.user,
-    isLogin: true,
-    userName: true,
-  });
-});
-
-// --- DELETE ---
-router.delete("/:id", (req, res) => {
-  console.log("DEBUG 3");
-  console.log(req.params);
-  RECIPES.destroy({
-    where: {
-      id: req.params.id,
-    },
-
-  }).then(() => {
-    res.render();
-  });
-});
-
-
-// --- GET Routes ---
 // route "/recipe/all" : Recipe page
 router.get("/all", checkAuthenticated, async (req, res) => {
   const userId = req.user ? req.user.id : null;
@@ -105,8 +91,6 @@ router.get("/all", checkAuthenticated, async (req, res) => {
         isLiked: favourites.find((fav) => fav.recipeId === id),
       };
     });
-    // eslint-disable-next-line no-console
-    console.log(recipes);
     return res.render("view_all_recipes", {
       ...ViewAllRecipes,
       recipes,
@@ -118,178 +102,186 @@ router.get("/all", checkAuthenticated, async (req, res) => {
   }
 });
 
-// route "/recipe/{id}" : Recipe page
-router.get("/:id", async (req, res) => {
-  const { id } = req.params;
-  const userId = req.user ? req.user.id : null;
-  const userName = req.user ? req.user.name : null;
-
-  try {
-    const {
-      id: recipeId,
-      title,
-      ingredients,
-      method,
-      is_private: isPrivate,
-      creditTo,
-      source,
-      photo,
-      createdAt,
-      updatedAt,
-      authorId,
-      user: {
-        name: author,
-      },
-      favourites,
-    } = await RECIPES.findOne({
-      where: { id },
-      include: [
-        {
-          model: USERS,
-          attributes: ["name"],
-          required: true,
-        },
-        {
-          model: FAVOURITES,
-          attributes: ["recipeId"],
-        },
-      ],
+// route /recipe/edit
+router.route("/edit")
+  .get((req, res) => {
+    res.render("edit_recipe", {
+      isLogin: true,
     });
+  })
+  .put((req, res) => {
+    RECIPES.update({
+      title: req.body.title,
+      ingredients: req.body.ingredients,
+      method: req.body.method,
+      is_private: req.body.is_private,
+      creditTo: req.body.creditTo,
+      source: req.body.source,
+      photo: req.body.photo,
+    }, {
+      where: {
+        id: req.body.id,
+      },
+    }).then(() => {
+      res.end();
+    });
+  });
 
-    const renderRecipePage = () => {
-      const pageSettings = {
-        ...ViewRecipe,
-        recipeId,
-        recipeTitle: title,
-        ingredients,
-        method,
-        creditTo,
-        source,
-        photo,
-        created: moment(createdAt).fromNow(),
-        updated: moment(updatedAt).fromNow(),
-        author,
-        favCount: favourites.length,
-      };
-      if (userName) {
-        pageSettings.username = userName;
-      }
-      return res.render("view_recipe", pageSettings);
-    };
-
-    if (isPrivate) {
-      // if private,
-      if (userId && userId === authorId) {
-        return renderRecipePage();
-      }
-      // if not author
-      return res.redirect("/404");
-    }
-
-    // if recipe is not marked as private,
-    // everyone can see it
-    return renderRecipePage();
-  } catch (error) {
-    console.error(error);
-    return res.redirect("/404");
-  }
-});
-
+// route /recipe/search
 router.get("/search", (_, res) => res.render("search_recipe", {
   title: "Recipe Lovers!: View Search",
   isMain: true,
   isSearch: true,
 }));
 
-
 // post request for recipe search
 router.get("/search/:title", async (req, res) => {
+  const userId = req.user ? req.user.id : null;
+  const userName = req.user ? req.user.name : null;
+
   const result = await RECIPES.findAll({
     where: {
       title: {
         [Op.like]: "%".concat(req.params.title, "%"),
       },
     },
+    include: [{
+      model: FAVOURITES,
+      attributes: ["userId"],
+    }],
   });
 
   const recipes = result.map(({ dataValues }) => ({
     id: dataValues.id,
-    recipe: dataValues,
+    title: dataValues.title,
+    photo: dataValues.photo,
+    favCount: dataValues.favourites.length,
+    isLiked: dataValues.favourites.find((fav) => fav.userId === userId),
+    username: userName,
   }));
 
-  const notice = "NO RESULT";
-  if (result.length === 0) {
-    res.render("search_recipe", {
-      title: "No result",
-      noresult: notice,
-      isSearch: true,
-    });
-  } else {
-    res.render("search_recipe", {
-      title: "View Search",
-      recipes,
-      isSearch: true,
-    });
+  const pageSettings = {
+    ...SearchRecipe,
+    recipes,
+  };
+  if (req.user) {
+    pageSettings.username = req.user.name;
   }
+  return res.render("search_recipe", pageSettings);
 });
 
-
-// --- POST ---
-router.post("/add", (req, res) => {
-  const data = {
-    title: req.body.title,
-    ingredients: req.body.ingredients,
-    method: req.body.method,
-    creditTo: req.body.creditTo,
-    source: req.body.source,
-    photo: req.body.photo,
-    authorId: req.user.id,
-    is_private: req.body.isPrivate,
-  };
-  RECIPES.create(data).then((Res) => {
-    res.json(Res);
+router.route("/delete/:id")
+  .delete(async (req, res) => {
+    const { id } = req.params;
+    if (!req.user) {
+      return res.status(401).json({
+        error: [{ msg: "Access denied." }],
+      });
+    }
     try {
-      res.json(Res);
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
+      const recipe = await RECIPES.findOne({
+        where: { id },
+        attributes: ["authorId"],
+      });
+      // check if is author
+      if (recipe.authorId !== req.user.id) {
+        return res.status(401).json({
+          error: [{ msg: "Access denied." }],
+        });
+      }
+      // delete recipe
+      await RECIPES.destroy({
+        where: { id },
+      });
+      // return success status
+      return res.status(200).json({
+        isSuccess: true,
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        error: [{ msg: "Something went wrong in deletion. Try again later." }],
+      });
     }
   });
-});
+// route "/recipe/{id}" : Recipe page
+router.route("/:id")
+  .get(async (req, res) => {
+    const { id } = req.params;
+    const userId = req.user ? req.user.id : null;
+    const userName = req.user ? req.user.name : null;
 
-router.get("/add", checkAuthenticated, (req, res) => {
-  res.render("add_recipe", {
-    user: req.user,
-    isLogin: true,
-    userName: true,
-  });
-});
+    try {
+      // get data
+      const {
+        id: recipeId,
+        title,
+        ingredients,
+        method,
+        is_private: isPrivate,
+        creditTo,
+        source,
+        photo,
+        createdAt,
+        updatedAt,
+        authorId,
+        user: {
+          name: author,
+        },
+        favourites,
+      } = await RECIPES.findOne({
+        where: { id },
+        include: [
+          {
+            model: USERS,
+            attributes: ["name"],
+            required: true,
+          },
+          {
+            model: FAVOURITES,
+          },
+        ],
+      });
+      // render recipe page.
+      const renderRecipePage = () => {
+        const pageSettings = {
+          ...ViewRecipe,
+          recipeId,
+          recipeTitle: title,
+          ingredients,
+          method,
+          creditTo,
+          source,
+          photo,
+          created: moment(createdAt).fromNow(),
+          updated: moment(updatedAt).fromNow(),
+          author,
+          favCount: favourites.length,
+          isLiked: favourites.find((fav) => fav.userId === userId),
+          isAuthor: userId === authorId,
+        };
+        if (userName) {
+          pageSettings.username = userName;
+        }
+        return res.render("view_recipe", pageSettings);
+      };
 
-// --- PUT ---
-router.get("/edit", (req, res) => {
-  res.render("edit_recipe", {
-    user: req.user,
-    isLogin: true,
-    userName: true,
-  });
-});
+      if (isPrivate) {
+        // if private,
+        if (userId && userId === authorId) {
+          return renderRecipePage();
+        }
+        // if not author
+        return res.redirect("/404");
+      }
 
-router.put("/edit", (req, res) => {
-  RECIPES.update({
-    title: req.body.title,
-    ingredients: req.body.ingredients,
-    method: req.body.method,
-    is_private: req.body.is_private,
-    creditTo: req.body.creditTo,
-    source: req.body.source,
-    photo: req.body.photo,
-  }, {
-    where: {
-      id: req.body.id,
-    },
-  }).then(() => {
-    res.end();
+      // if recipe is not marked as private,
+      // everyone can see it
+      return renderRecipePage();
+    } catch (error) {
+      console.error(error);
+      return res.redirect("/404");
+    }
   });
-});
 
 module.exports = router;

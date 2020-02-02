@@ -10,7 +10,7 @@ const hashPassword = async (info) => {
 };
 
 module.exports = (sequelize, DataTypes) => {
-  const user = sequelize.define("user", {
+  const User = sequelize.define("user", {
     email: {
       type: DataTypes.STRING(255),
       allowNull: false,
@@ -40,31 +40,21 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  // add password validation
-  user.prototype.validPassword = async (password) => {
-    try {
-      const isMatch = await bcrypt.compare(password, this.password);
-      return isMatch;
-    } catch (err) {
-      return false;
-    }
-  };
-
   // hash the password
-  user.beforeCreate(hashPassword);
-  user.beforeUpdate(hashPassword);
+  User.beforeCreate(hashPassword);
+  User.beforeUpdate(hashPassword);
 
   // eslint-disable-next-line func-names
-  user.associate = function (models) {
-    user.hasMany(models.recipe, {
+  User.associate = (models) => {
+    User.hasMany(models.recipe, {
       foreignKey: "authorId",
       onDelete: "RESTRICT",
       onUpdate: "CASCADE",
     });
-    user.hasMany(models.favourite, {
+    User.hasMany(models.favourite, {
       onDelete: "RESTRICT",
       onUpdate: "CASCADE",
     });
   };
-  return user;
+  return User;
 };
