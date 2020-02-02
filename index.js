@@ -1,7 +1,6 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const path = require("path");
-const flash = require("flash");
 const session = require("express-session");
 
 // get homepage setting
@@ -29,9 +28,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Flash
-app.use(flash());
-
 // Set Handlebars.
 app.engine(".hbs", exphbs({
   defaultLayout: "main",
@@ -47,8 +43,8 @@ app.use(express.static("public"));
 // --- add routes ---
 // root route : Home page.
 app.get("/", (req, res) => {
-  const pageSettings = HomePageSettings;
-  if (req.user) {
+  const pageSettings = { ...HomePageSettings };
+  if (req.isAuthenticated()) {
     pageSettings.user = req.user;
   }
   res.render("index", pageSettings);
@@ -59,7 +55,7 @@ app.use("/user", require("./routes/user_routes"));
 // add /recipe routes
 app.use("/recipe", require("./routes/recipe_routes"));
 // add /favourites routes
-app.use("/favourites", require("./routes/favourite_routes"));
+app.use("/favourite", require("./routes/favourite_routes"));
 
 
 // misc routes redirect back to homepage.
