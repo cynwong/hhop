@@ -1,22 +1,24 @@
 module.exports = {
+  ChangePasswordPageSettings: {
+    isLogin: true,
+  },
   DashboardPageSettings: {
-    title: "Recipe Lovers!: User dashboard",
+    title: ": User dashboard",
     isMain: true,
   },
   HomePageSettings: {
-    title: "Recipe Lovers!",
     isMain: true,
   },
   LoginPageSettings: {
-    title: "Recipe Lovers!: User login",
+    title: ": User login",
     isLogin: true,
   },
   RegisterUserPageSettings: {
-    title: "Recipe Lovers!: Register new user",
+    title: ": Register new user",
     isLogin: true,
   },
   ViewMyFavourites: {
-    title: "Recipe Lover!: View favourites",
+    title: ": View favourites",
     isMain: true,
     isSearch: true,
   },
