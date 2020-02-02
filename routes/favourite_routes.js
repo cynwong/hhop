@@ -2,7 +2,10 @@
 const router = require("express").Router();
 
 const { checkAuthenticated } = require("../config/auth");
-const { ViewMyFavourites } = require("../config/page_settings");
+const { 
+  LoginPageSettings,
+  ViewMyFavourites,
+ } = require("../config/page_settings");
 
 
 // get db models.
@@ -64,8 +67,14 @@ router.get("/", checkAuthenticated, async (req, res) => {
 });
 
 // --- POST ---
-// router.post("/", (req, res) => {
-// });
+router.post("/", (req, res) => {
+  const recipeId = req.body.recipeId;
+  const userId = req.user.id;
+
+  if(!userId){
+    
+  }
+});
 
 // --- DELETE ---
 router.delete("/:id", async (req, res) => {
