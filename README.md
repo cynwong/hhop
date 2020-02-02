@@ -24,6 +24,11 @@ Recipe lover is a blogging tool to save recipes.
   npm run seed
 ```
 
+4. Add css
+
+```sh
+  npm run generate:style
+```
 ### Usage
 
 ```sh
