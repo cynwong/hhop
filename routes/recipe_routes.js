@@ -84,8 +84,9 @@ router.get("/add", checkAuthenticated, (req, res) => {
 
 // --- PUT ---
 
-router.get("/edit", (req, res) => {
+router.get("/edit", checkAuthenticated, (req, res) => {
   res.render("edit_recipe", {
+    user: req.user,
     isLogin: true,
   });
 });
@@ -109,6 +110,13 @@ router.put("/edit", (req, res) => {
 });
 
 // --- DELETE ---
+router.get("/:id", checkAuthenticated, (req, res) => {
+  res.render("delete_recipe", {
+    user: req.user,
+    isLogin: true,
+  });
+});
+
 router.delete("/:id", (req, res) => {
   Recipes.destroy({
     where: {
