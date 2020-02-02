@@ -170,6 +170,40 @@ router.get("/search/:title", async (req, res) => {
   return res.render("search_recipe", pageSettings);
 });
 
+router.route("/delete/:id")
+  .delete(async (req, res) => {
+    const { id } = req.params;
+    if (!req.user) {
+      return res.status(401).json({
+        error: [{ msg: "Access denied." }],
+      });
+    }
+    try {
+      const recipe = await RECIPES.findOne({
+        where: { id },
+        attributes: ["authorId"],
+      });
+      // check if is author
+      if (recipe.authorId !== req.user.id) {
+        return res.status(401).json({
+          error: [{ msg: "Access denied." }],
+        });
+      }
+      // delete recipe
+      await RECIPES.destroy({
+        where: { id },
+      });
+      // return success status
+      return res.status(200).json({
+        isSuccess: true,
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+        error: [{ msg: "Something went wrong in deletion. Try again later." }],
+      });
+    }
+  });
 // route "/recipe/{id}" : Recipe page
 router.route("/:id")
   .get(async (req, res) => {
@@ -177,7 +211,6 @@ router.route("/:id")
     const userId = req.user ? req.user.id : null;
     const userName = req.user ? req.user.name : null;
 
-    console.log({id});
     try {
       // get data
       const {
@@ -248,30 +281,6 @@ router.route("/:id")
     } catch (error) {
       console.error(error);
       return res.redirect("/404");
-    }
-  })
-  .delete(async (req, res) => {
-    const { id } = req.params;
-    if (!req.user) {
-      return res.status(401).json({
-        error: [{ msg: "Access denied." }],
-      });
-    }
-    try {
-      const recipe = RECIPES.findByPK(id, {
-        attributes: ["authorId"],
-      });
-      return console.log(recipe);
-      await RECIPES.destroy({
-        where: { id },
-      });
-      return res.status(200).json({
-        isSuccess: true,
-      });
-    } catch (error) {
-      return res.status(500).json({
-        error: [{ msg: "Something went wrong in deletion. Try again later." }],
-      });
     }
   });
 
