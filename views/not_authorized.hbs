@@ -1,0 +1,9 @@
+<div class="jumbotron .bg-danger w-75 m-auto">
+  <h1 class="display-4">Resource unavailable</h1>
+  <p class="lead">Sorry. You are not authorized to view this resource.</p>
+  <hr class="my-4">
+  {{#unless username}}
+  <p>Try logging in? </p>
+  <a class="btn btn-danger btn-sm" href="/user/login" role="button">Log In</a>
+  {{/unless}}
+</div>
