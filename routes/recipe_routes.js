@@ -214,6 +214,7 @@ router.get("/edit/:id", checkAuthenticated, async (req, res) => {
       creditTo: recipe.creditTo,
       source: recipe.source,
       photo: recipe.photo,
+      username: req.user.name,
     };
     return res.render("edit_recipe", pageSettings);
   } catch (err) {
