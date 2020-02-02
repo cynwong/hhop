@@ -71,6 +71,14 @@ router.get("/all", checkAuthenticated, async (req, res) => {
     return res.redirect("/404");
   }
 });
+
+router.get("/add", checkAuthenticated, (req, res) => {
+  res.render("add_recipe", {
+    user: req.user,
+    isLogin: true,
+  });
+});
+
 // route "/recipe/{id}" : Recipe page
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
@@ -210,12 +218,6 @@ router.post("/add", (req, res) => {
   });
 });
 
-router.get("/add", checkAuthenticated, (req, res) => {
-  res.render("add_recipe", {
-    user: req.user,
-    isLogin: true,
-  });
-});
 
 // --- PUT ---
 
