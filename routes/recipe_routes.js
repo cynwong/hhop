@@ -1,8 +1,9 @@
 // for /recipe routes
-
 const router = require("express").Router();
 const Sequelize = require("sequelize");
 const moment = require("moment");
+
+const { checkAuthenticated } = require("../config/auth");
 
 // get db models.
 const models = require("../models");
@@ -22,16 +23,64 @@ const USERS = models.user;
 // get page settings
 const {
   ViewRecipe,
-
+  ViewAllRecipes,
 } = require("../config/page_settings");
-
-const { checkAuthenticated } = require("../config/auth");
-const Recipes = require("../models").recipe;
 
 const { Op } = Sequelize;
 
 // --- GET Routes ---
-// route "/recipe" : Recipe page
+// route "/recipe/all" : Recipe page
+router.get("/all", checkAuthenticated, async (req, res) => {
+  const userId = req.user ? req.user.id : null;
+  const userName = req.user ? req.user.name : null;
+
+  try {
+    const records = await RECIPES.findAll({
+      where: { authorId: userId },
+      include: [
+        {
+          model: FAVOURITES,
+          attributes: ["recipeId"],
+        },
+      ],
+    });
+    const recipes = records.map(({ dataValues }) => {
+      const {
+        id,
+        title,
+        photo,
+        favourites,
+      } = dataValues;
+      return {
+        id,
+        title,
+        photo,
+        favCount: favourites.length,
+        username: userName,
+        isLiked: favourites.find((fav) => fav.recipeId === id),
+      };
+    });
+    console.log(recipes);
+    return res.render("view_all_recipes", {
+      ...ViewAllRecipes,
+      recipes,
+      username: userName,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.redirect("/404");
+  }
+});
+
+router.get("/add", checkAuthenticated, (req, res) => {
+  res.render("add_recipe", {
+    user: req.user,
+    isLogin: true,
+    username: true,
+  });
+});
+
+// route "/recipe/{id}" : Recipe page
 router.get("/:id", async (req, res) => {
   const { id } = req.params;
   const userId = req.user ? req.user.id : null;
@@ -108,6 +157,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+
 router.get("/search", (_, res) => res.render("search_recipe", {
   title: "Recipe Lovers!: View Search",
   isMain: true,
@@ -116,7 +166,8 @@ router.get("/search", (_, res) => res.render("search_recipe", {
 
 
 // post request for recipe search
-router.get("/search/:title", async (req, res) => {
+router.post("/search/:title", async (req, res) => {
+  const userName = req.user ? req.user.name : null;
   const result = await RECIPES.findAll({
     where: {
       title: {
@@ -124,6 +175,7 @@ router.get("/search/:title", async (req, res) => {
       },
     },
   });
+
   const recipes = result.map(({ dataValues }) => ({
     id: dataValues.id,
     recipe: dataValues,
@@ -135,6 +187,7 @@ router.get("/search/:title", async (req, res) => {
       title: "No result",
       noresult: notice,
       isSearch: true,
+      username: userName,
     });
   } else {
     res.render("search_recipe", {
@@ -157,7 +210,7 @@ router.post("/add", (req, res) => {
     photo: req.body.photo,
     authorId: req.user.id,
   };
-  Recipes.create(data).then((Res) => {
+  RECIPES.create(data).then((Res) => {
     res.json(Res);
     try {
       res.json(Res);
@@ -168,18 +221,12 @@ router.post("/add", (req, res) => {
   });
 });
 
-router.get("/add", checkAuthenticated, (req, res) => {
-  res.render("add_recipe", {
-    user: req.user,
-    isLogin: true,
-  });
-});
-
 // --- PUT ---
 
 router.get("/edit", (req, res) => {
   res.render("edit_recipe", {
     isLogin: true,
+    username: true,
   });
 });
 
