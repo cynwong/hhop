@@ -32,7 +32,7 @@ const { Op } = Sequelize;
 router.route("/add")
   .get(checkAuthenticated, (req, res) => {
     res.render("add_recipe", {
-      user: req.user,
+      username: req.user.name,
       isLogin: true,
     });
   })
