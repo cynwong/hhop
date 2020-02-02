@@ -18,4 +18,12 @@ $(document).ready(() => {
       return alertUser({ error: err.responseJson.error });
     }
   });
+
+  // edit button handler
+  $(".btn-edit").click(async (event) => {
+    event.preventDefault();
+    // get recipe id
+    const id = $(event.target).closest(".recipe").data("id");
+    window.location.replace(`/recipe/edit/${id}`);
+  });
 });
