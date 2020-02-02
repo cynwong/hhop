@@ -17,8 +17,17 @@ module.exports = {
     title: ": Register new user",
     isLogin: true,
   },
+  UnauthorizedPageSettings: {
+    title: ": Resource Not Found",
+    isMain: true,
+    isSearch: true,
+  },
   ViewMyFavourites: {
     title: ": View favourites",
+    isMain: true,
+    isSearch: true,
+  },
+  ViewRecipe: {
     isMain: true,
     isSearch: true,
   },
