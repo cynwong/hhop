@@ -43,8 +43,7 @@
         <header>
             <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
                 <a class="navbar-brand" href="/">
-                        <img class="logo" src="https://www.recipeunlimited.com/content/dam/cara/en/recipe-image-library/our-brands/recipeLogoFinal2018-white.png" alt="">
-                    Recipe Finder
+                    <img class="logo" src="https://www.recipeunlimited.com/content/dam/cara/en/recipe-image-library/our-brands/recipeLogoFinal2018-white.png" alt="Recipe Finder">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,10 +55,8 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="/user">
                                 <i class="fas fa-home"></i>
+                                &nbsp;{{username}}
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <span class="navbar-text">&nbsp;{{username}}&nbsp;&nbsp;</span>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/user/password" data-toggle="tooltip" data-placement="bottom" title="Change password">
@@ -67,7 +64,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-danger my-2 my-sm-0" href="/recipe/add">Create</a>
+                            <a class="nav-link btn btn-outline-danger my-2 my-sm-0" href="/recipe/add">
+                                <i class="fas fa-edit"></i>Create
+                            </a>
                         </li>
                         &nbsp;
                         &nbsp;
