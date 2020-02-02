@@ -33,9 +33,9 @@ router.get("/search/:title", async (req, res) => {
   });
   const recipes = result.map(({ dataValues }) => ({
     id: dataValues.id,
-    authorId: dataValues.authorId,
     recipe: dataValues,
   }));
+
   const notice = "NO RESULT";
   if (result.length === 0) {
     res.render("search_recipe", {
@@ -46,7 +46,7 @@ router.get("/search/:title", async (req, res) => {
   } else {
     res.render("search_recipe", {
       title: "View Search",
-      result: recipes,
+      recipes,
       isSearch: true,
     });
   }

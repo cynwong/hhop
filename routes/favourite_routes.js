@@ -1,13 +1,20 @@
 // for /favourite routes
 const router = require("express").Router();
 
-const { getAllFavBrief } = require("../config/db_functions");
-
 const { checkAuthenticated } = require("../config/auth");
 const { ViewMyFavourites } = require("../config/page_settings");
 
 
-const Favourites = require("../models").favourite;
+// get db models.
+const models = require("../models");
+/**
+ * @typeof db.model
+ */
+const FAVOURITES = models.favourite;
+/**
+ * @typeof db.model
+ */
+const RECIPES = models.recipe;
 
 // --- GET Routes ---
 router.get("/", checkAuthenticated, async (req, res) => {
@@ -15,12 +22,42 @@ router.get("/", checkAuthenticated, async (req, res) => {
   const { user } = req;
   const userId = user.id;
 
-  const recipes = await getAllFavBrief(userId);
+  // get favourites
+  const favs = await FAVOURITES.findAll({
+    where: {
+      userId,
+    },
+    include: {
+      model: RECIPES,
+      require: true,
+      include: [{
+        model: FAVOURITES,
+        attributes: ["recipeId"],
+      }],
+    },
+  });
+
+  // get recipes
+  const recipes = favs.map(({ recipe }) => {
+    const {
+      id,
+      title,
+      photo,
+      favourites,
+    } = recipe;
+    return {
+      id,
+      title,
+      photo,
+      favCount: favourites.length,
+      isLiked: true,
+    };
+  });
 
   // construct view page.
   const pageSettings = {
     ...ViewMyFavourites,
-    user,
+    username: user.name,
     recipes,
   };
   res.render("view_favourites", pageSettings);
@@ -36,7 +73,7 @@ router.delete("/:id", async (req, res) => {
   const userId = req.user.id;
 
   try {
-    await Favourites.destroy({
+    await FAVOURITES.destroy({
       where: {
         recipeId,
         userId,

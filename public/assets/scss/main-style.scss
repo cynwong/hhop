@@ -24,8 +24,23 @@ body {
     // background-repeat: repeat;
 }
 
+.btn {
+    border:$dark-color;
+    // shadow: 5px 5px;
+}
+
 nav {
+    // height: 10vh;
     background-image: $index-color;
+
+    .btn {
+        color: $midl-color;
+    }
+}
+
+.img-thumbnail {
+    height:250px;
+    width:auto;
 }
 
 #user-page {
@@ -50,12 +65,27 @@ nav {
     padding:0px;
 }
 
-#alert-template{
+#alert-template, #success-template{
     display: none;
 }
 
 .carousel {
-    margin-bottom: 4rem;
+    margin-bottom: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    .carousel-inner {
+        height:100vh;
+        flex: 1 0;
+        .carousel-item {
+            height:100vh;
+            img {
+                height: 100vh;
+                width:auto;
+            }
+        }
+    }
 }
 
 .carousel-caption {
@@ -83,6 +113,8 @@ nav {
 }
 
 .marketing{
+    overflow: hidden;
+
     .col-lg-4{
         margin-bottom: 1.5rem;
         text-align: center;
@@ -93,6 +125,8 @@ nav {
     }
 
     h2{
+        margin-top: 50px;
+
         font-weight: 400;
     }
 }
@@ -117,26 +151,49 @@ nav {
     color: #fff;
 }
 
-.animation {
-    animation-duration: 1.5s;
-    animation-name: slidein;
-}
+// @keyframes slidein {
+//     from {
+//         margin-left:100%;
+//         width:100%;
+//     }
 
-@keyframes slidein {
-    from {
-        margin-left:100%;
-        width:100%;
-    }
-
-    to {
-        margin-left: 0%;
-        width:100%;
-    }
-}
+//     to {
+//         margin-left: 0%;
+//         width:100%;
+//     }
+// }
 
 .featurette {
+    position: relative;
+
     background-image: $index-color;
-    border-radius: 100px 25px 50px 50px;
+    border-radius: 25px 25px 25px 25px;
+
+    transition: 1.5s all;
+
+    opacity: 0;
+    &:nth-of-type(2n + 1) {
+        left: 100%;
+    }
+
+    &:nth-of-type(2n) {
+        right: 100%;
+    }
+
+    .btn {
+        margin-bottom: 1rem;
+    }
+}
+
+.animation {
+    &:nth-of-type(2n + 1) {
+        left: 0;
+    }
+
+    &:nth-of-type(2n) {
+        right: 0;
+    }
+    opacity: 1;
 }
 
 .featurette-divider {
@@ -159,11 +216,15 @@ footer{
 }
 
 @media (min-width: 40em) {
-    .carousel-caption {
-        p {
-            margin-bottom: 1.25rem;
-            font-size: 1.25rem;
-            line-height: 1.4;   
+    .carousel {
+        margin-bottom: 0;
+
+        .carousel-caption {
+            p {
+                margin-bottom: 1.25rem;
+                font-size: 1.25rem;
+                line-height: 1.4;   
+            }
         }
     }
 
