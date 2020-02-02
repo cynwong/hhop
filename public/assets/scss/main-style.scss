@@ -19,6 +19,11 @@ body {
     padding-bottom: 3rem;
 }
 
+.logo {
+    margin: auto;
+    height:40px;
+}
+
 .bg {
     // background-image: url('/assets/images/signup-bg.jpg');
     // background-repeat: repeat;
@@ -38,12 +43,18 @@ nav {
     }
 }
 
+body{
+    background-image: url('/assets/images/signup-bg.jpg');
+}
+
 .img-thumbnail {
     height:250px;
     width:auto;
 }
 
 #user-page {
+
+
     .card, .active{
         background-image: $index-color;
     }
