@@ -20,7 +20,7 @@ const submitData = async (settings) => {
 
 $(document).ready(() => {
   // listener for favourite buttons.
-  $(".btn-favourite").click(async event => {
+  $(".btn-favourite").click(async (event) => {
     event.preventDefault();
     const $target = $(event.target);
     const $container = $target.closest(".recipe.card");
@@ -28,7 +28,7 @@ $(document).ready(() => {
     if ($target.hasClass("fas") || $target.find("i").hasClass("fas")) {
       await submitData({
         method: "DELETE",
-        url: `/favourite/${id}`
+        url: `/favourite/${id}`,
       });
       return null;
     }

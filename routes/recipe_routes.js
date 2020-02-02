@@ -60,7 +60,6 @@ router.get("/all", checkAuthenticated, async (req, res) => {
         isLiked: favourites.find((fav) => fav.recipeId === id),
       };
     });
-    console.log(recipes);
     return res.render("view_all_recipes", {
       ...ViewAllRecipes,
       recipes,
