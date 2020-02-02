@@ -2,12 +2,12 @@
 
 const router = require("express").Router();
 const Sequelize = require("sequelize");
+const { checkAuthenticated } = require("../config/auth");
 const Recipes = require("../models").recipe;
 
 const { Op } = Sequelize;
 
 // --- GET Routes ---
-// route "/recipe" : Recipe page
 router.get("/", (_, res) => res.render("view_recipe", {
   title: "Recipe Lovers!",
   isMain: true,
@@ -55,25 +55,42 @@ router.get("/search/:title", async (req, res) => {
 
 
 // --- POST ---
-// router.post("<<Route>>", (req, res) => {
-// route "/recipe/add" : Search page
 router.post("/add", (req, res) => {
-  Recipes.create({
+  const data = {
     title: req.body.title,
     ingredients: req.body.ingredients,
     method: req.body.method,
-    is_private: req.body.is_private,
     creditTo: req.body.creditTo,
     source: req.body.source,
     photo: req.body.photo,
-  }).then((Recipe) => {
-    res.json(Recipe);
+    authorId: req.user.id,
+  };
+  Recipes.create(data).then((Res) => {
+    res.json(Res);
+    try {
+      res.json(Res);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    }
   });
 });
 
-// });
+router.get("/add", checkAuthenticated, (req, res) => {
+  res.render("add_recipe", {
+    user: req.user,
+    isLogin: true,
+  });
+});
 
 // --- PUT ---
+
+router.get("/edit", (req, res) => {
+  res.render("edit_recipe", {
+    isLogin: true,
+  });
+});
+
 router.put("/edit", (req, res) => {
   Recipes.update({
     title: req.body.title,
@@ -91,7 +108,6 @@ router.put("/edit", (req, res) => {
     res.end();
   });
 });
-// });
 
 // --- DELETE ---
 router.delete("/:id", (req, res) => {
