@@ -38,6 +38,11 @@ nav {
     }
 }
 
+.img-thumbnail {
+    height:250px;
+    width:auto;
+}
+
 #user-page {
     .card, .active{
         background-image: $index-color;
