@@ -120,6 +120,12 @@ router.delete("/delete/:id", async (req, res) => {
     if (recipe && recipe.authorId !== req.user.id) {
       return accessDenied(res);
     }
+    // delete favourites first
+    await FAVOURITES.destroy({
+      where: {
+        recipeId: id,
+      },
+    });
     // delete recipe
     await RECIPES.destroy({
       where: { id },
