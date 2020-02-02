@@ -1,39 +1,51 @@
+/* eslint-disable no-undef */
 $(document).ready(() => {
-  const title = $("#newTitle").val().trim();
-  const ingredients = $("#newIngredients").val().trim();
-  const method = $("#newMethod").val().trim();
-  const credit = $("#newCredit").val().trim();
-  const source = $("#newSource").val().trim();
-  const addImage = $("#newImage").val().trim();
-  const alertText = $("#alert-text");
-
-  function newRecipe() {
-    $.ajax({
-      method: "POST",
-      url: "/api/add",
-      data: {
-        title, ingredients, method, credit, source, addImage,
-      },
-    }).then((res) => {
-      if (res) {
-        alertText.text("New Recipe added Successfully");
-      }
-    });
-  }
-
-  function runCheck() {
-    if (title !== "" && ingredients !== "" && method !== "") {
-      newRecipe();
-    } else {
-      alertText.text("Please check if all required information has been filled");
-    }
-  }
-
-  function submit(event) {
+  $("#submit").click(async (event) => {
     event.preventDefault();
-    runCheck();
-  }
+    const title = $("#newTitle");
+    const ingredients = $("#newIngredients");
+    const method = $("#newMethod");
+    const credit = $("#newCredit");
+    const source = $("#newSource");
+    const addImage = $("#newImage");
+    const errors = [];
 
+    const data = {
+      title: title.val().trim(),
+      ingredients: ingredients.val().trim(),
+      method: method.val().trim(),
+      creditTo: credit.val().trim(),
+      source: source.val().trim(),
+      photo: addImage.val().trim(),
+    };
 
-  $(document).on("submit", "#newRecipe", submit);
+    const titleErr = title.val().trim();
+    if (!titleErr) errors.push({ msg: "Please enter a title." });
+
+    const ingredientsErr = ingredients.val().trim();
+    if (!ingredientsErr) errors.push({ msg: "Please enter a ingredients." });
+
+    const methodErr = method.val().trim();
+    if (!methodErr) errors.push({ msg: "Please enter method." });
+
+    if (errors.length > 0) {
+      // eslint-disable-next-line no-undef
+      return alertUser(errors);
+    }
+
+    try {
+      const response = await $.ajax({
+        method: "POST",
+        url: "/recipe/add",
+        data,
+      });
+      if (response.error) {
+        return alertUser(response.error);
+      }
+      return window.location.replace("/recipe/");
+    } catch (error) {
+      // eslint-disable-next-line no-undef
+      return alertUser(error.responseJSON.error);
+    }
+  });
 });
