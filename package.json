@@ -8,7 +8,7 @@
     "db:create": "sequelize db:drop db_cookbook && sequelize db:create db_cookbook",
     "dev": "nodemon index.js",
     "db:build": "npm run db:create && npm run-script migrate && npm run-script seed",
-    "generate:style": "sass public/assets/scss:public/assets/css",
+    "generate:style": "sass public/assets/scss:public/assets/css --watch",
     "lint": "eslint \"**/*.js\" --quiet",
     "migrate": "sequelize db:migrate",
     "seed": "sequelize-cli db:seed:undo:all && sequelize-cli db:seed:all",
