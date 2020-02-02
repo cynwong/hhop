@@ -21,16 +21,17 @@ const data = {
 // Delete
 function deleteRecipe() {
   // event.stopPropagation();
-  alert("Hell break loose.");
+  alert("debug 1");
   $.ajax({
     method: "DELETE",
     url: `/recipe/${id}`,
     data,
     id: this,
   })
-    .then((Res) => {
+    .then(() => {
+      console.log("debug 2");
       try {
-        res.json(Res);
+        res.json();
       } catch (err) {
         console.log(err);
       }

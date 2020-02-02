@@ -59,8 +59,8 @@ router.get("/add", checkAuthenticated, (req, res) => {
 });
 
 // --- DELETE ---
-router.delete("/:id", (req, res) => {
-  console.log("testweoursfheruo");
+router.delete("/id", (req, res) => {
+  console.log("DEBUG 3");
   console.log(req.params);
   RECIPES.destroy({
     where: {
