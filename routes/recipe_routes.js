@@ -85,6 +85,7 @@ router.get("/:id", async (req, res) => {
   const userName = req.user ? req.user.name : null;
 
   try {
+    // get data
     const {
       id: recipeId,
       title,
@@ -111,11 +112,10 @@ router.get("/:id", async (req, res) => {
         },
         {
           model: FAVOURITES,
-          attributes: ["recipeId"],
         },
       ],
     });
-
+    // render recipe page.
     const renderRecipePage = () => {
       const pageSettings = {
         ...ViewRecipe,
@@ -130,6 +130,7 @@ router.get("/:id", async (req, res) => {
         updated: moment(updatedAt).fromNow(),
         author,
         favCount: favourites.length,
+        isLiked: favourites.find((fav) => fav.userId === userId),
       };
       if (userName) {
         pageSettings.username = userName;

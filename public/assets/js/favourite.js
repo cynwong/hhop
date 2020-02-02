@@ -23,7 +23,7 @@ $(document).ready(() => {
   $(".btn-favourite").click(async (event) => {
     event.preventDefault();
     const $target = $(event.target);
-    const $container = $target.closest(".recipe.card");
+    const $container = $target.closest(".recipe");
     const id = $container.data("id");
     if ($target.hasClass("fas") || $target.find("i").hasClass("fas")) {
       await submitData({
