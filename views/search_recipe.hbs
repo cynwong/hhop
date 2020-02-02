@@ -4,7 +4,9 @@
       {{#each recipes }}
         {{> recipe_card recipe=this.recipe}}
       {{else}}
-        <p>You have no recipe.</p>
+        <div class="col card mb-4 shadow">
+          <h5 class="p-4">You have no recipe.</h5>
+        </div>
       {{/each}}
     </div>
   </div>
