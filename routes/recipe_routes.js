@@ -151,6 +151,7 @@ router.get("/search/:title", async (req, res) => {
       attributes: ["userId"],
     }],
   });
+
   const recipes = result.map(({ dataValues }) => ({
     id: dataValues.id,
     title: dataValues.title,

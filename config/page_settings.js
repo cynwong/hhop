@@ -23,7 +23,6 @@ module.exports = {
   },
   UnauthorizedPageSettings: {
     title: ": Resource Not Found",
-    isMain: true,
     isSearch: true,
   },
   ViewAllRecipes: {
@@ -33,11 +32,9 @@ module.exports = {
   },
   ViewMyFavourites: {
     title: ": View favourites",
-    isMain: true,
     isSearch: true,
   },
   ViewRecipe: {
-    isMain: true,
     isSearch: true,
   },
 };
