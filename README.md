@@ -61,25 +61,41 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
 
 ## Installation on a local environment
 
+1. Create database with data. If you have the database, you can skip this step.
+```sh
+  npm run db:build
+```
+2. Add css
+```sh
+  npm run generate:style
+```
+
+
 1. Create database. If you have the database, you can skip this step.
 
 ```sh
   npm run createdb
 ```
 
-2. Migrate/ create tables
+2. Add css
+
+```sh
+  npm run generate:style
+```
+
+3. Migrate/ create tables
 
 ```sh
   npm run migrate
 ```
 
-3. Add seeds
+4. Add seeds
 
 ```sh
   npm run seed
 ```
 
-4. Add css
+5. Add css
 
 ```sh
   npm run generate:style
@@ -116,8 +132,6 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
 * Include email verification
 * Comments on recipes
 * Mobile Applications
-
-
 
 ## Quality Assurance Tests:
 
