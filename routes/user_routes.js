@@ -1,5 +1,6 @@
 // for /users routes
 const passport = require("passport");
+const bcrypt = require("bcrypt");
 
 const router = require("express").Router();
 
@@ -119,7 +120,7 @@ router.route("/password")
     const { id } = req.user;
     const { password, rePassword } = req.body;
 
-    if (password.length < 8) {
+    if (password.length < 8 || password.length > 16) {
       errors.push({ msg: "Password must be 8-16 characters long." });
     }
 
@@ -132,7 +133,25 @@ router.route("/password")
       });
     }
     try {
-      await USERS.update({ password },
+      const user = await USERS.findOne({
+        where: { id },
+      });
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (isMatch) {
+        return res.json({
+          error: [{ msg: "Cannot use the same password as current one." }],
+        });
+      }
+
+      // fix BeforeUpdate not getting the data.
+      // not require if that beforeUpdate is fixed.
+      const saltRound = 10;
+      const salt = await bcrypt.genSalt(saltRound);
+      const newPassword = await bcrypt.hash(password, salt);
+
+      // update the new password
+      await USERS.update({ password: newPassword },
         {
           where: { id },
         });
@@ -140,6 +159,7 @@ router.route("/password")
         success_msg: "Password is changed.",
       });
     } catch (error) {
+      console.error(error);
       return res.status(500).json({
         error: [{ msg: "Something went wrong during update. Try again later." }],
       });
@@ -196,6 +216,7 @@ router.route("/register")
         success_msg: "Successfully registered",
       });
     } catch (err) {
+      console.log("err");
       console.error(err);
       return res.status(500).json({
         error: [{ msg: "Something went wrong. Try again later." }],
