@@ -2,8 +2,13 @@ const bcrypt = require("bcrypt");
 
 const saltRound = 10;
 
-const hashPassword = async (info) => {
-  const u = info;
+/**
+ * Hash user's password
+ * @param {object} user user object
+ * NOTE: manually hashing for update action for change password.
+ */
+const hashPassword = async (user) => {
+  const u = user;
   const salt = await bcrypt.genSalt(saltRound);
   u.password = await bcrypt.hash(u.password, salt);
   return u;
@@ -25,7 +30,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(255),
       allowNull: false,
       validate: {
-        len: [8, 16],
         notEmpty: true,
         notNull: true,
       },
@@ -42,7 +46,8 @@ module.exports = (sequelize, DataTypes) => {
 
   // hash the password
   User.beforeCreate(hashPassword);
-  User.beforeUpdate(hashPassword);
+  // User.beforeUpdate(hashPassword);
+  // User.beforeBulkUpdate(hashPassword);
 
   // eslint-disable-next-line func-names
   User.associate = (models) => {

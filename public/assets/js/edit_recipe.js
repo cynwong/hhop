@@ -8,20 +8,23 @@ $(document).ready(() => {
     }
     const title = $("#updateTitle").val().trim();
     if (!title) {
-      errors.push([{ msg: "Title is required." }]);
+      errors.push({ msg: "Title is required." });
     }
     const ingredients = $("#updateIngredients").val().trim();
     if (!ingredients) {
-      errors.push([{ msg: "Ingredients is required." }]);
+      errors.push({ msg: "Ingredients is required." });
     }
     const method = $("#updateMethod").val().trim();
     if (!method) {
-      errors.push([{ msg: "Method is required." }]);
+      errors.push({ msg: "Method is required." });
     }
     const creditTo = $("#updateCredit").val().trim();
     const source = $("#updateSource").val().trim();
     const photo = $("#updateImage").val().trim();
-
+    if (errors.length > 0) {
+      // eslint-disable-next-line no-undef
+      return alertUser(errors);
+    }
     try {
       // connect
       const response = await $.ajax({

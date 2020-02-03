@@ -20,7 +20,6 @@ module.exports = {
       type: Sequelize.STRING(255),
       allowNull: false,
       validate: {
-        len: [8, 16],
         notEmpty: true,
         notNull: true,
       },
