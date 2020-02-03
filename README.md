@@ -112,6 +112,8 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
 
 * Ingredient-based search
 * Recipe-sharing
+* Include Prep / Cook time , Number of  Servings and Difficulty to Recipes.
+* Include email verification
 * Comments on recipes
 * Mobile Applications
 
@@ -156,9 +158,7 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
 Coding standard were maintained by Travis CI and Eslint.
 
 ## Limitations:
-* 
-* 
-*  
+* As the application does not; st this stage have email verification, a user can create an account with a fake email address.
 
 ## Developers
 * Cynthia
