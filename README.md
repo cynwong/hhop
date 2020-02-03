@@ -3,7 +3,9 @@
 Recipe lover is a blogging application used to store recipes.
 
 ## Project description 
-This application will display restaurants with known low ratings. The user can save time and money by using the application api database to make an educated decision on where NOT to eat. This application was also built with mobile in mind and is responsive.
+This application stands as a site to view, search and create recipes. A user can create an account and utilise this application to house and favorite recipes. 
+The vision for this site is to curate recipes from all over the world and be a space for like-minded individuals to use and share their culinary insights.
+This application was also built with mobile in mind and is responsive.
 
 
 This application needed to adhere to the below restrictions: 
