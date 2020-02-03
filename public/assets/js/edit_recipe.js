@@ -8,15 +8,15 @@ $(document).ready(() => {
     }
     const title = $("#updateTitle").val().trim();
     if (!title) {
-      errors.push([{ msg: "Title is required." }]);
+      errors.push({ msg: "Title is required." });
     }
     const ingredients = $("#updateIngredients").val().trim();
     if (!ingredients) {
-      errors.push([{ msg: "Ingredients is required." }]);
+      errors.push({ msg: "Ingredients is required." });
     }
     const method = $("#updateMethod").val().trim();
     if (!method) {
-      errors.push([{ msg: "Method is required." }]);
+      errors.push({ msg: "Method is required." });
     }
     const creditTo = $("#updateCredit").val().trim();
     const source = $("#updateSource").val().trim();
