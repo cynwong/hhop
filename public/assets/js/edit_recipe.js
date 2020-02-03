@@ -21,7 +21,10 @@ $(document).ready(() => {
     const creditTo = $("#updateCredit").val().trim();
     const source = $("#updateSource").val().trim();
     const photo = $("#updateImage").val().trim();
-
+    if (errors.length > 0) {
+      // eslint-disable-next-line no-undef
+      return alertUser(errors);
+    }
     try {
       // connect
       const response = await $.ajax({
