@@ -35,7 +35,7 @@ Additionally:
 
 * Create a migration strategy for sharing data across team members - [x]
 
-#### Project Management
+## Project Management
 This project was managed by utilizing scrum practices. Tasks were broken down by features and assigned to team members. 
 * Jobs progression was tracked on a Trello board.
 * scrum stand-up ceremony was practiced when the team was physically present.
@@ -59,7 +59,7 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
 * Click to "Home" icon to view recipes you have created or favorited
 * Click the settings icon to change you password
 
-### Installation on a local environment
+## Installation on a local environment
 
 1. Create database. If you have the database, you can skip this step.
 
@@ -117,9 +117,9 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
 
 
 
-#### Quality Assurance Tests:
+## Quality Assurance Tests:
 
-##### Responsiveness and CSS per browser
+### Responsiveness and CSS per browser
 * Chrome browser - base line 
 
 * Firefox browser
@@ -152,19 +152,19 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
   * Any browser variations? - Y/N
   * Expected and Actual behavior are the same? Y/N
 
-#### Code test:
+## Code test:
 Coding standard were maintained by Travis CI and Eslint.
 
-#### Limitations:
+## Limitations:
 * 
 * 
 *  
 
-#### Developers
+## Developers
 * Cynthia
 * Harper
 * Devin
 * Tara 
 
-#### Acknowledgments
+## Acknowledgments
 Monash coding Bootcamp academic staff
