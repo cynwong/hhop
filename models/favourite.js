@@ -14,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
 
   favourite.associate = function (models) {
     favourite.belongsTo(models.user, {
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
       onUpdate: "CASCADE",
     });
 
     favourite.belongsTo(models.recipe, {
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
       onUpdate: "CASCADE",
     });
   };

@@ -4,13 +4,14 @@
   "description": "A recipe repository where users can log their recipes",
   "main": "index.js",
   "scripts": {
-    "build": "npm run generate:style",
     "db:create": "sequelize db:drop db_cookbook && sequelize db:create db_cookbook",
     "dev": "nodemon index.js",
     "db:build": "npm run db:create && npm run-script migrate && npm run-script seed",
-    "generate:style": "sass public/assets/scss:public/assets/css --watch",
+    "generate:style": "sass --watch public/assets/scss:public/assets/css",
+    "heroku-postbuild": "sass public/assets/scss:public/assets/css",
     "lint": "eslint \"**/*.js\" --quiet",
     "migrate": "sequelize db:migrate",
+    "remote-db-build":  "sequelize db:migrate --env=\"production\" && sequelize-cli db:seed:undo:all --env=\"production\" && sequelize-cli db:seed:all --env=\"production\"",
     "seed": "sequelize-cli db:seed:undo:all && sequelize-cli db:seed:all",
     "start": "node index.js",
     "test": "npm run lint"

@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     is_private: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: false,
+      defaultValue: true,
       validate: {
         notNull: true,
       },
@@ -52,11 +52,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.INTEGER,
       },
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
       onUpdate: "CASCADE",
     });
     recipe.hasMany(models.favourite, {
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
       onUpdate: "CASCADE",
     });
   };

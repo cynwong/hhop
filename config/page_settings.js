@@ -6,6 +6,10 @@ module.exports = {
     title: ": User dashboard",
     isMain: true,
   },
+  EditRecipePageSettings: {
+    title: ": Edit recipe",
+    isLogin: true,
+  },
   HomePageSettings: {
     isMain: true,
   },
