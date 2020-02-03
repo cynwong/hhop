@@ -54,14 +54,15 @@
                     <ul class="navbar-nav mr-auto">
                         {{#if username}}
                         <li class="nav-item active">
-                            <a class="nav-link" href="/user"><i class="fas fa-home"></i></a>
+                            <a class="nav-link btn btn-outline-danger my-2 my-sm-0" href="/user"><i class="fas fa-home"></i></a>
                         </li>
                         <li class="nav-item">
-                            <span class="navbar-text">&nbsp;{{username}}&nbsp;&nbsp;</span>
+                            <span class="nav-link btn btn-outline-danger my-2 my-sm-0">&nbsp;{{username}}&nbsp;&nbsp;</span>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn pt-0" href="/user/password" data-toggle="tooltip" data-placement="bottom" title="Change password"></a>
-                            <i class="fas fa-cog"></i>
+                            <a class="nav-link btn btn-outline-danger my-2 my-sm-0" href="/user/password" data-toggle="tooltip" data-placement="bottom" title="Change password">
+                            <i class="fas fa-cog"></i></a>
+                            
                         </li>
                         <li class="nav-item"></li>
                         <a class="nav-link btn btn-outline-danger my-2 my-sm-0" href="/recipe/add">Create</a>
@@ -77,7 +78,7 @@
                         </li>
                         {{/if}}
                     </ul>
-                <form id="searchForm" class="form-inline mt-2 mt-md-0">
+                <form id="searchForm" class="form-inline mt-2 mt-md-0 nav-link btn btn-outline-danger my-2 my-sm-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
                         id="searchText">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
