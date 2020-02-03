@@ -61,16 +61,6 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
 
 ## Installation on a local environment
 
-1. Create database with data. If you have the database, you can skip this step.
-```sh
-  npm run db:build
-```
-2. Add css
-```sh
-  npm run generate:style
-```
-
-
 1. Create database. If you have the database, you can skip this step.
 
 ```sh
