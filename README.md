@@ -114,3 +114,57 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
 * Recipe-sharing
 * Comments on recipes
 * Mobile Applications
+
+
+
+#### Quality Assurance Tests:
+
+##### Responsiveness and CSS per browser
+* Chrome browser - base line 
+
+* Firefox browser
+  * Responsiveness - Y
+  * Does the UI change? - N
+  * Any browser variations? - N
+  * Expected and Actual behavior are the same? Y
+
+* Edge
+  * Responsiveness - Y
+  * Does the UI change? - N
+  * Any browser variations? - N
+  * Expected and Actual behavior are the same? Y
+
+* Safari browser
+  * Responsiveness - Y
+  * Does the UI change? - N
+  * Any browser variations? - N
+  * Expected and Actual behavior are the same? N
+
+* Android mobile Chrome
+  * Responsiveness - Y
+  * Does the UI change? - N
+  * Any browser variations? - N
+  * Expected and Actual behavior are the same? Y
+
+* Apple mobile browser
+  * Responsiveness - Y/N
+  * Does the UI change? - Y/N
+  * Any browser variations? - Y/N
+  * Expected and Actual behavior are the same? Y/N
+
+#### Code test:
+Coding standard were maintained by Travis CI and Eslint.
+
+#### Limitations:
+* 
+* 
+*  
+
+#### Developers
+* Cynthia
+* Harper
+* Devin
+* Tara 
+
+#### Acknowledgments
+Monash coding Bootcamp academic staff
