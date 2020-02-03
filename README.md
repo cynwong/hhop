@@ -50,14 +50,15 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
 ## Instructions to user
 
 * [Recipe Lovers Site](https://hhop-recipe-blog.herokuapp.com)
-* Login or sign up to create an account
-* Use the search bar to look for publicly available recipes
-* Click to heart icon on a recipe card to add it to your favorites list
-* Use the view icon to see the full recipe.
-* Click "Create" to add a recipe to your account
-* Edit or delete recipes you create 
-* Click to "Home" icon to view recipes you have created or favorited
-* Click the settings icon to change you password
+* Login or sign up to create an account.
+* Use the search bar to look for publicly available recipes.
+* Click the heart icon on a recipe card to add it to your favorites list.
+* Use view button to see the full recipe.
+* Click "Create" to add your own recipe.
+* Use Edit or delete delete buttons to modifiy or remove recipes you create.
+* Use the "Publish Recipe" button to share your recipe with others! (note: this will make your recipe public)
+* Click the "Home" icon to view a full list of recipes you have created or favorited.
+* Click the settings icon to change you password.
 
 ## Installation on a local environment
 
