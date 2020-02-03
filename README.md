@@ -6,7 +6,7 @@ Recipe lover is a blogging application used to store recipes.
 This application will display restaurants with known low ratings. The user can save time and money by using the application api database to make an educated decision on where NOT to eat. This application was also built with mobile in mind and is responsive.
 
 
-Additionally, this application needed to adhere to the below restrictions: 
+This application needed to adhere to the below restrictions: 
 
 * Must have a folder structure that meets the MVC paradigm - [x]
 
@@ -26,6 +26,13 @@ Additionally, this application needed to adhere to the below restrictions:
 
 * Must protect API keys in Node with environment variables - [x]
 
+Additionally:
+
+* Utilize Handlebars for server-side templating - [x]
+
+* Incorporate authentication - [x]
+
+* Create a migration strategy for sharing data across team members - [x]
 
 #### Project Management
 This project was managed by utilizing scrum practices. Tasks were broken down by features and assigned to team members. 
