@@ -64,7 +64,7 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
 1. Create database. If you have the database, you can skip this step.
 
 ```sh
-  npm run createdb
+  npm run db:build
 ```
 
 2. Add css
