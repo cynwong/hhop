@@ -216,8 +216,6 @@ router.route("/register")
         success_msg: "Successfully registered",
       });
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log("err");
       console.error(err);
       return res.status(500).json({
         error: [{ msg: "Something went wrong. Try again later." }],
