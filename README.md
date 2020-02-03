@@ -4,8 +4,7 @@ Recipe lover is a blogging application used to store recipes.
 
 ## Project description 
 This application stands as a site to view, search and create recipes. A user can create an account and utilise this application to house and favorite recipes. 
-The vision for this site is to curate recipes from all over the world and be a space for like-minded individuals to use and share their culinary insights.
-This application was also built with mobile in mind and is responsive.
+The vision for this site is to curate recipes from all over the world and be a space for like-minded individuals to use and share their culinary insights. This application was also built with mobile in mind and is responsive.
 
 
 This application needed to adhere to the below restrictions: 
@@ -48,9 +47,19 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
 > So that I can view and create recipes with like minded people.
 
 
-## Instruction
+## Instructions to user
 
-### Installation
+* [Recipe Lovers Site](https://hhop-recipe-blog.herokuapp.com)
+* Login or sign up to create an account
+* Use the search bar to look for publicly available recipes
+* Click to heart icon on a recipe card to add it to your favorites list
+* Use the view icon to see the full recipe.
+* Click "Create" to add a recipe to your account
+* Edit or delete recipes you create 
+* Click to "Home" icon to view recipes you have created or favorited
+* Click the settings icon to change you password
+
+### Installation on a local environment
 
 1. Create database. If you have the database, you can skip this step.
 
