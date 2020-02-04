@@ -46,8 +46,7 @@ module.exports = (sequelize, DataTypes) => {
 
   // hash the password
   User.beforeCreate(hashPassword);
-  // User.beforeUpdate(hashPassword);
-  // User.beforeBulkUpdate(hashPassword);
+  User.beforeUpdate(hashPassword);
 
   // eslint-disable-next-line func-names
   User.associate = (models) => {
