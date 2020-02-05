@@ -18,8 +18,9 @@ const createAlert = (msg) => {
 const alertUser = (messages) => {
   // clean the container
   $("#alert-text").empty();
-
-  return messages.forEach((message) => createAlert(message.msg));
+  messages.forEach((message) => createAlert(message.msg));
+  $(document).scrollTop(0);
+  return null;
 };
 
 /**
