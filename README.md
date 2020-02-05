@@ -74,23 +74,6 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
   npm run generate:style
 ```
 
-3. Migrate/ create tables
-
-```sh
-  npm run migrate
-```
-
-4. Add seeds
-
-```sh
-  npm run seed
-```
-
-5. Add css
-
-```sh
-  npm run generate:style
-```
 ### Usage
 
 ```sh
