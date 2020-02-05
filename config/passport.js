@@ -1,6 +1,5 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const bcrypt = require("bcrypt");
 
 // Load User model
 const USERS = require("../models").user;
@@ -17,8 +16,7 @@ passport.use(
         }
 
         // Check if password is correct
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
+        if (!user.validatePassword(password)) {
           return done(null, false, { message: "Incorrect password." });
         }
         return done(null, user);

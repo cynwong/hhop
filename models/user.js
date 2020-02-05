@@ -46,6 +46,10 @@ module.exports = (sequelize, DataTypes) => {
   User.beforeCreate(hashPassword);
   User.beforeUpdate(hashPassword);
 
+  User.prototype.validatePassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+  };
+
   // eslint-disable-next-line func-names
   User.associate = (models) => {
     User.hasMany(models.recipe, {
