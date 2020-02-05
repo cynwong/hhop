@@ -21,24 +21,25 @@ module.exports = {
     title: ": Register new user",
     isLogin: true,
   },
-  SearchRecipe: {
+  SearchRecipePageSettings: {
     title: "View Search",
+    isMain: true,
     isSearch: true,
   },
   UnauthorizedPageSettings: {
     title: ": Resource Not Found",
     isSearch: true,
   },
-  ViewAllRecipes: {
+  ViewAllRecipesPageSettings: {
     title: ": View my recipes",
     isMain: true,
     isSearch: true,
   },
-  ViewMyFavourites: {
+  ViewMyFavouritesPageSettings: {
     title: ": View favourites",
     isSearch: true,
   },
-  ViewRecipe: {
+  ViewRecipePageSettings: {
     isSearch: true,
   },
 };

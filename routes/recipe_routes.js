@@ -22,9 +22,9 @@ const USERS = models.user;
 // get page settings
 const {
   EditRecipePageSettings,
-  SearchRecipe,
-  ViewRecipe,
-  ViewAllRecipes,
+  SearchRecipePageSettings,
+  ViewRecipePageSettings,
+  ViewAllRecipesPageSettings,
 } = require("../config/page_settings");
 
 const { Op } = Sequelize;
@@ -95,7 +95,7 @@ router.get("/all", checkAuthenticated, async (req, res) => {
       };
     });
     return res.render("view_all_recipes", {
-      ...ViewAllRecipes,
+      ...ViewAllRecipesPageSettings,
       recipes,
       username: userName,
     });
@@ -264,11 +264,7 @@ router.put("/publish/:id", async (req, res) => {
 });
 
 // route /recipe/search
-router.get("/search", (_, res) => res.render("search_recipe", {
-  title: "Recipe Lovers!: View Search",
-  isMain: true,
-  isSearch: true,
-}));
+router.get("/search", (_, res) => res.render("search_recipe", SearchRecipePageSettings));
 
 // post request for recipe search
 router.get("/search/:title", async (req, res) => {
@@ -297,7 +293,7 @@ router.get("/search/:title", async (req, res) => {
   }));
 
   const pageSettings = {
-    ...SearchRecipe,
+    ...SearchRecipePageSettings,
     recipes,
   };
   if (req.user) {
@@ -347,7 +343,7 @@ router.route("/:id")
       // render recipe page.
       const renderRecipePage = () => {
         const pageSettings = {
-          ...ViewRecipe,
+          ...ViewRecipePageSettings,
           recipeId,
           recipeTitle: title,
           ingredients,

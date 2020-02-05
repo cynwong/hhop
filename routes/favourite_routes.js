@@ -3,7 +3,7 @@ const router = require("express").Router();
 
 const { checkAuthenticated } = require("../config/auth");
 const {
-  ViewMyFavourites,
+  ViewMyFavouritesPageSettings,
 } = require("../config/page_settings");
 
 
@@ -60,7 +60,7 @@ router.get("/", checkAuthenticated, async (req, res) => {
 
   // construct view page.
   const pageSettings = {
-    ...ViewMyFavourites,
+    ...ViewMyFavouritesPageSettings,
     username: userName,
     recipes,
   };
