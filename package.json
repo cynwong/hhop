@@ -11,7 +11,7 @@
     "heroku-postbuild": "sass public/assets/scss:public/assets/css",
     "lint": "eslint \"**/*.js\" --quiet",
     "migrate": "sequelize db:migrate",
-    "remote-db-build":  "sequelize db:migrate --env=\"production\" && sequelize-cli db:seed:undo:all --env=\"production\" && sequelize-cli db:seed:all --env=\"production\"",
+    "remote-db-build":  "sequelize db:migrate:undo:all --env=\"production\" && sequelize db:migrate --env=\"production\" && sequelize-cli db:seed:undo:all --env=\"production\" && sequelize-cli db:seed:all --env=\"production\"",
     "seed": "sequelize-cli db:seed:undo:all && sequelize-cli db:seed:all",
     "start": "node index.js",
     "test": "npm run lint"

@@ -144,17 +144,10 @@ router.route("/password")
         });
       }
 
-      // fix BeforeUpdate not getting the data.
-      // not require if that beforeUpdate is fixed.
-      const saltRound = 10;
-      const salt = await bcrypt.genSalt(saltRound);
-      const newPassword = await bcrypt.hash(password, salt);
-
       // update the new password
-      await USERS.update({ password: newPassword },
-        {
-          where: { id },
-        });
+      user.password = password;
+      await user.save();
+
       return res.status(200).json({
         success_msg: "Password is changed.",
       });
