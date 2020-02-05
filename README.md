@@ -1,6 +1,6 @@
 # Recipe lover
 
-Recipe lover is a blogging application used to store recipes.
+Recipe lover is a blogging application used to store recipes. Visit deployed site [here](https://hhop-recipe-blog.herokuapp.com/)
 
 ## Project description 
 This application stands as a site to view, search and create recipes. A user can create an account and utilise this application to house and favorite recipes. 
