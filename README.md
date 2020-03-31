@@ -44,18 +44,18 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
 
 > As a user,
 > I want a database of recipes,
-> So that I can view and create recipes with like minded people.
+> So that I can view and create recipes with like-minded people.
 
 
 ## Instructions to user
 
 * [Recipe Lovers Site](https://hhop-recipe-blog.herokuapp.com)
-* Login or sign up to create an account.
+* Log in or sign up to create an account.
 * Use the search bar to look for publicly available recipes.
 * Click the heart icon on a recipe card to add it to your favorites list.
-* Use view button to see the full recipe.
+* Use the view button to see the full recipe.
 * Click "Create" to add your own recipe.
-* Use Edit or delete delete buttons to modifiy or remove recipes you create.
+* Use Edit or delete buttons to modify or remove recipes you create.
 * Use the "Publish Recipe" button to share your recipe with others! (note: this will make your recipe public)
 * Click the "Home" icon to view a full list of recipes you have created or favorited.
 * Click the settings icon to change you password.
@@ -102,7 +102,7 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
 
 * Ingredient-based search
 * Recipe-sharing
-* Include Prep / Cook time , Number of  Servings and Difficulty to Recipes.
+* Include Prep / Cook time, Number of  Servings and Difficulty to Recipes.
 * Include email verification
 * Comments on recipes
 * Mobile Applications
@@ -110,7 +110,7 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
 ## Quality Assurance Tests:
 
 ### Responsiveness and CSS per browser
-* Chrome browser - base line 
+* Chrome browser - baseline 
 
 * Firefox browser
   * Responsiveness - Y
@@ -143,7 +143,7 @@ This project was managed by utilizing scrum practices. Tasks were broken down by
   * Expected and Actual behavior are the same? Y/N
 
 ## Code test:
-Coding standard were maintained by Travis CI and Eslint.
+The coding standard was ensured by Travis CI and Eslint.
 
 ## Limitations:
 * As the application does not; st this stage have email verification, a user can create an account with a fake email address.
