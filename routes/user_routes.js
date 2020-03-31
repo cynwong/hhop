@@ -1,5 +1,6 @@
 // for /users routes
 const passport = require("passport");
+const bcrypt = require("bcrypt");
 
 const router = require("express").Router();
 
@@ -119,7 +120,7 @@ router.route("/password")
     const { id } = req.user;
     const { password, rePassword } = req.body;
 
-    if (password.length < 8) {
+    if (password.length < 8 || password.length > 16) {
       errors.push({ msg: "Password must be 8-16 characters long." });
     }
 
@@ -132,14 +133,26 @@ router.route("/password")
       });
     }
     try {
-      await USERS.update({ password },
-        {
-          where: { id },
+      const user = await USERS.findOne({
+        where: { id },
+      });
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (isMatch) {
+        return res.json({
+          error: [{ msg: "Cannot use the same password as current one." }],
         });
+      }
+
+      // update the new password
+      user.password = password;
+      await user.save();
+
       return res.status(200).json({
         success_msg: "Password is changed.",
       });
     } catch (error) {
+      console.error(error);
       return res.status(500).json({
         error: [{ msg: "Something went wrong during update. Try again later." }],
       });

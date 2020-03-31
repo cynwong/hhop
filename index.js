@@ -3,6 +3,9 @@ const exphbs = require("express-handlebars");
 const path = require("path");
 const session = require("express-session");
 
+// database
+const db = require("./models");
+
 // get homepage setting
 const {
   HomePageSettings,
@@ -82,5 +85,6 @@ app.use("/404", (req, res) => {
 app.get("/*", (_, res) => res.redirect("/"));
 
 // Run the server
+db.sequelize.authenticate()
 // eslint-disable-next-line no-console
-app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
+  .then(() => app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`)));

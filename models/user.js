@@ -1,10 +1,13 @@
 const bcrypt = require("bcrypt");
 
-const saltRound = 10;
-
-const hashPassword = async (info) => {
-  const u = info;
-  const salt = await bcrypt.genSalt(saltRound);
+/**
+ * Hash user's password
+ * @param {object} user user object
+ */
+const hashPassword = async (user) => {
+  const saltRounds = 10;
+  const u = user;
+  const salt = await bcrypt.genSalt(saltRounds);
   u.password = await bcrypt.hash(u.password, salt);
   return u;
 };
@@ -25,7 +28,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(255),
       allowNull: false,
       validate: {
-        len: [8, 16],
         notEmpty: true,
         notNull: true,
       },
@@ -44,15 +46,19 @@ module.exports = (sequelize, DataTypes) => {
   User.beforeCreate(hashPassword);
   User.beforeUpdate(hashPassword);
 
+  User.prototype.validatePassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+  };
+
   // eslint-disable-next-line func-names
   User.associate = (models) => {
     User.hasMany(models.recipe, {
       foreignKey: "authorId",
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
       onUpdate: "CASCADE",
     });
     User.hasMany(models.favourite, {
-      onDelete: "RESTRICT",
+      onDelete: "CASCADE",
       onUpdate: "CASCADE",
     });
   };
